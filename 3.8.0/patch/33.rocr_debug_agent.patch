@@ -1,0 +1,12 @@
+--- a/src/code_object.cpp
++++ b/src/code_object.cpp
+@@ -312,7 +312,7 @@ get_source_file_index (const std::string &file_name)
+ 
+   std::ifstream file (file_name);
+   if (!file)
+-    return {};
++    return std::nullopt;
+ 
+   auto [it, success]
+       = file_map.emplace (file_name, std::vector<std::string>{});
+
