@@ -17,9 +17,9 @@ cmake $ROCM_GIT_REPO/HIP \
     -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/hip/ \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
-ninja
+sudo ninja
 sudo ninja install
-ninja package
+sudo ninja package
 sudo dpkg -i *.deb
 # make package -j${nproc}
 
