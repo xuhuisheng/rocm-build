@@ -2,7 +2,7 @@
 
 set -e
 
-sudo apt install -y rpm libfile-which-perl kmod
+sudo apt install -y rpm libfile-which-perl kmod doxygen
 
 mkdir -p build/hip
 cd build/hip
