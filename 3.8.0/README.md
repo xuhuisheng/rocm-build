@@ -10,5 +10,5 @@ chmod a+x ~/bin/repo
 mkdir -p ~/ROCm/
 cd ~/ROCm/
 ~/bin/repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.8.x
-repo sync
+~/bin/repo sync
 ```
