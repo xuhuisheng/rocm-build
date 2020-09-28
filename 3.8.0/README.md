@@ -3,12 +3,10 @@
 Download sources using repo.
 
 ```
-mkdir -p ~/bin/
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
+sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-~/bin/repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.8.x
-~/bin/repo sync
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.8.x
+repo sync
 ```
