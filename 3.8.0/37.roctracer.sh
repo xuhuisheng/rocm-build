@@ -25,6 +25,7 @@ cmake \
     -DCMAKE_SHARED_LINKER_FLAGS="$LD_RUNPATH_FLAG" \
     -DHIP_VDI="$HIP_VDI" \
     -DHIP_API_STRING="$HIP_API_STRING" \
+    -G Ninja \
     $ROCTRACER_ROOT
 
 ninja

@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install -y libelf-dev
+
 mkdir -p build/rocr-runtime
 cd build/rocr-runtime
 pushd .

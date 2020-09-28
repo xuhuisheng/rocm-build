@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install -y rpm libfile-which-perl kmod
+
 mkdir -p build/hip
 cd build/hip
 pushd .
