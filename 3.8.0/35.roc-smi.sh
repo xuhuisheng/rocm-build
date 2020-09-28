@@ -11,6 +11,7 @@ cd roc-smi
 pushd .
 
 make deb
+sudo dpkg -i build/deb/*.deb
 
 popd
 

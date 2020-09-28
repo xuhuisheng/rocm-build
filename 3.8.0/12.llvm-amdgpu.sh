@@ -17,6 +17,8 @@ cmake $ROCM_GIT_REPO/llvm_amd-stg-open/llvm \
     -DCPACK_PACKAGE_NAME=llvm-amdgpu \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

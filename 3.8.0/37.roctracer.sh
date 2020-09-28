@@ -2,6 +2,15 @@
 
 set -e
 
+sudo apt install -y software-properties-common
+sudo add-apt-repository universe
+sudo apt update 
+sudo apt install -y python2
+sudo apt install -y curl
+curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+sudo python2 get-pip.py
+pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
+
 mkdir -p build/roctracer
 cd build/roctracer
 pushd .
@@ -29,6 +38,8 @@ cmake \
     $ROCTRACER_ROOT
 
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

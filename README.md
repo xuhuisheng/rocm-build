@@ -9,6 +9,6 @@ My environment is Ubuntu-20.04.1.
 Please download sources using repo <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code> ,
 and change the path of source in 3.8.0/env.sh .
 
-Execute `bash env.sh` to setup environment variables, then execute bash scripts by order number.
+Execute `source env.sh` to setup environment variables, then execute bash scripts by order number.
 
 Good luck.

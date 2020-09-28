@@ -14,6 +14,8 @@ CXX=/opt/rocm/hip/bin/hipcc cmake $ROCM_GIT_REPO/rocSPARSE \
     -DROCM_PATH=/opt/rocm \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

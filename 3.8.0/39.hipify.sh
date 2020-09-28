@@ -14,6 +14,11 @@ cmake $ROCM_GIT_REPO/HIPIFY \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+sudo ninja install
+ninja package_hipify-clang
+sudo dpkg -i *.deb
+# ninja package
+# sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd
