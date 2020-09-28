@@ -14,3 +14,11 @@ repo sync
 Notice: there is no repo package on ubuntu-20.04, because of slow support for python3.
 <https://askubuntu.com/questions/1247103/why-is-the-repo-package-unavailable-in-ubuntu-20-04-how-can-i-install-it>
 
+Download and install repo manually on ubuntu-20.04.
+
+```
+mkdir -p ~/bin/
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+x ~/bin/repo
+export PATH=~/bin:$PATH
+```
