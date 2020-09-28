@@ -20,6 +20,7 @@ cmake $ROCM_GIT_REPO/ROCclr \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+sudo ninja install
 # make package -j${nproc}
 
 popd

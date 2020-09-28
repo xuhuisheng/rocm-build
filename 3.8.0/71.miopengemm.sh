@@ -13,6 +13,8 @@ CXX=/opt/rocm/hip/bin/hipcc cmake $ROCM_GIT_REPO/MIOpenGEMM \
     -DCMAKE_INSTALL_PREFIX=/opt/rocm \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

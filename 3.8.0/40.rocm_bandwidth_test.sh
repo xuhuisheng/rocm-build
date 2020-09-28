@@ -14,6 +14,8 @@ cmake $ROCM_GIT_REPO/rocm_bandwidth_test \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

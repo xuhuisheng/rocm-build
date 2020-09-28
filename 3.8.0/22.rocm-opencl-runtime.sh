@@ -13,6 +13,8 @@ cmake $ROCM_GIT_REPO/ROCm-OpenCL-Runtime \
     -DROCclr_DIR=/opt/rocm/rocclr \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

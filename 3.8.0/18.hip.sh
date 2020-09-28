@@ -18,6 +18,9 @@ cmake $ROCM_GIT_REPO/HIP \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+sudo ninja install
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

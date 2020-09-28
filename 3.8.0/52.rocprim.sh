@@ -13,6 +13,8 @@ CXX=/opt/rocm/bin/hipcc cmake $ROCM_GIT_REPO/rocPRIM \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

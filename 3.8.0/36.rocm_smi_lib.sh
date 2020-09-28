@@ -13,6 +13,8 @@ cmake $ROCM_GIT_REPO/rocm_smi_lib \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd

@@ -12,7 +12,7 @@ CXX=hipcc cmake -lpthread $ROCM_GIT_REPO/rocBLAS \
     -DTensile_ARCHITECTURE=gfx803 \
     -DTensile_CODE_OBJECT_VERSION=V3 \
     -DCMAKE_BUILD_TYPE=Release \
-    -DTensile_TEST_LOCAL_PATH=/home/work/tmp/Tensile \
+    -DTensile_TEST_LOCAL_PATH=/home/work/rocm-deps/Tensile \
     -DBUILD_WITH_TENSILE_HOST=OFF \
     -DTensile_LIBRARY_FORMAT=yaml \
     -DRUN_HEADER_TESTING=OFF \
@@ -23,6 +23,8 @@ CXX=hipcc cmake -lpthread $ROCM_GIT_REPO/rocBLAS \
     -DCPACK_GENERATOR=DEB \
     -G Ninja
 ninja
+ninja package
+sudo dpkg -i *.deb
 # make package -j${nproc}
 
 popd
