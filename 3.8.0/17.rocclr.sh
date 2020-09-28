@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install -y mesa-common-dev
+
 mkdir -p build/rocclr
 cd build/rocclr
 pushd .

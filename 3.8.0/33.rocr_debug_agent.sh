@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install -y libdw-dev
+
 mkdir -p build/rocr_debug_agent
 cd build/rocr_debug_agent
 pushd .
