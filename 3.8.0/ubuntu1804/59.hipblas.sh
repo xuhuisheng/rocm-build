@@ -2,8 +2,8 @@
 
 set -e
 
-mkdir -p $ROCM_BUILD_DIR/rocrand
-cd $ROCM_BUILD_DIR/rocrand
+mkdir -p $ROCM_BUILD_DIR/hipblas
+cd $ROCM_BUILD_DIR/hipblas
 pushd .
 
 CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
@@ -11,12 +11,10 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=hipsparse-install \
-    -G Ninja \
-    $ROCM_GIT_DIR/rocRAND
-ninja
-ninja package
+    $ROCM_GIT_DIR/hipBLAS
+make -j${nproc}
+make package
 sudo dpkg -i *.deb
-# make package -j${nproc}
 
 popd
 
