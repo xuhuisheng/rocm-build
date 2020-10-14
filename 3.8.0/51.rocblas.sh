@@ -2,11 +2,14 @@
 
 set -e
 
-bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
+sudo apt install -y gfortran
 
 mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
+
+cd $ROCM_GIT_DIR/rocBLAS
+bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
