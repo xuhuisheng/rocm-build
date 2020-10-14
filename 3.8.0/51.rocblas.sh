@@ -2,6 +2,10 @@
 
 set -e
 
+echo "|====|"
+echo "|SLOW|"
+echo "|====|"
+
 sudo apt install -y gfortran
 
 mkdir -p $ROCM_BUILD_DIR/rocblas

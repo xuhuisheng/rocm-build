@@ -2,6 +2,10 @@
 
 set -e
 
+echo "|====|"
+echo "|SLOW|"
+echo "|====|"
+
 sudo apt install -y bison flex gcc make ncurses-dev texinfo g++ zlib1g-dev \
   libexpat-dev python3-dev liblzma-dev libbabeltrace-dev \
   libbabeltrace-ctf-dev
