@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir -p build/rocm-device-libs
-cd build/rocm-device-libs
+mkdir -p $ROCM_BUILD_DIR/rocm-device-libs
+cd $ROCM_BUILD_DIR/rocm-device-libs
 pushd .
-cmake $ROCM_GIT_REPO/ROCm-Device-Libs \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
+cmake \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/ROCm-Device-Libs
 ninja
 ninja package
 sudo dpkg -i *.deb

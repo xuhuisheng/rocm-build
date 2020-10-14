@@ -2,16 +2,17 @@
 
 set -e
 
-mkdir -p build/miopengemm
-cd build/miopengemm
+mkdir -p $ROCM_BUILD_DIR/miopengemm
+cd $ROCM_BUILD_DIR/miopengemm
 pushd .
 
-CXX=/opt/rocm/hip/bin/hipcc cmake $ROCM_GIT_REPO/MIOpenGEMM \
+CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm \
-    -G Ninja
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -G Ninja \
+    $ROCM_GIT_DIR/MIOpenGEMM
 ninja
 ninja package
 sudo dpkg -i *.deb

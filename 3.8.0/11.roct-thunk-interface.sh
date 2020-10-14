@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir -p build/roct-thunk-interface
-cd build/roct-thunk-interface
+mkdir -p $ROCM_BUILD_DIR/roct-thunk-interface
+cd $ROCM_BUILD_DIR/roct-thunk-interface
 pushd .
-cmake $ROCM_GIT_REPO/ROCT-Thunk-Interface/ \
+cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/ROCT-Thunk-Interface/
 ninja
 ninja package
 sudo dpkg -i *.deb

@@ -2,8 +2,8 @@
 
 set -e
 
-mkdir -p build/meta
-cd build/meta
+mkdir -p $ROCM_BUILD_DIR/meta
+cd $ROCM_BUILD_DIR/meta
 pushd .
 
 cp ../../rocm-utils-3.8.0_amd64 . -R

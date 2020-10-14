@@ -2,16 +2,17 @@
 
 set -e
 
-mkdir -p build/rocm-cmake
-cd build/rocm-cmake
+mkdir -p $ROCM_BUILD_DIR/rocm-cmake
+cd $ROCM_BUILD_DIR/rocm-cmake
 pushd .
 
-cmake $ROCM_GIT_REPO/rocm-cmake \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm \
+cmake \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR\
     -DCMAKE_BUILD_TYPE=Release \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/rocm-cmake
 ninja
 ninja package
 sudo dpkg -i *.deb

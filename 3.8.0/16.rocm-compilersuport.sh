@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir -p build/rocm-compilersupport
-cd build/rocm-compilersupport
+mkdir -p $ROCM_BUILD_DIR/rocm-compilersupport
+cd $ROCM_BUILD_DIR/rocm-compilersupport
 pushd .
-cmake $ROCM_GIT_REPO/ROCm-CompilerSupport/lib/comgr \
+cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/ROCm-CompilerSupport/lib/comgr
 ninja
 ninja package
 sudo dpkg -i *.deb

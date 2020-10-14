@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir -p build/rccl
-cd build/rccl
+mkdir -p $ROCM_BUILD_DIR/rccl
+cd $ROCM_BUILD_DIR/rccl
 pushd .
 
-CXX=/opt/rocm/bin/hipcc cmake $ROCM_GIT_REPO/rccl \
+CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_TESTS=OFF \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm \
-    -G Ninja
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -G Ninja \
+    $ROCM_GIT_DIR/rccl
 ninja
 ninja package 
 sudo dpkg -i *.deb

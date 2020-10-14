@@ -2,18 +2,19 @@
 
 set -e
 
-mkdir -p build/hipsparse
-cd build/hipsparse
+mkdir -p $ROCM_BUILD_DIR/hipsparse
+cd $ROCM_BUILD_DIR/hipsparse
 pushd .
 
-CXX=/opt/rocm/hip/bin/hipcc cmake $ROCM_GIT_REPO/hipSPARSE \
+CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DBUILD_CUDA=OFF \
     -DCMAKE_INSTALL_PREFIX=hipsparse-install \
-    -DROCM_PATH=/opt/rocm \
-    -G Ninja
+    -DROCM_PATH=$ROCM_INSTALL_DIR \
+    -G Ninja \
+    $ROCM_GIT_DIR/hipSPARSE
 ninja
 ninja package
 sudo dpkg -i *.deb

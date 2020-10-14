@@ -4,15 +4,16 @@ set -e
 
 sudo apt install -y libelf-dev
 
-mkdir -p build/rocr-runtime
-cd build/rocr-runtime
+mkdir -p $ROCM_BUILD_DIR/rocr-runtime
+cd $ROCM_BUILD_DIR/rocr-runtime
 pushd .
-cmake $ROCM_GIT_REPO/ROCR-Runtime/src \
+cmake \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/ROCR-Runtime/src
 ninja
 ninja package
 sudo dpkg -i *.deb

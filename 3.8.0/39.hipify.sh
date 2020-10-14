@@ -2,17 +2,18 @@
 
 set -e
 
-mkdir -p build/hipify
-cd build/hipify
+mkdir -p $ROCM_BUILD_DIR/hipify
+cd $ROCM_BUILD_DIR/hipify
 pushd .
 
-cmake $ROCM_GIT_REPO/HIPIFY \
-    -DCMAKE_PREFIX_PATH=/opt/rocm/llvm/ \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
+cmake \
+    -DCMAKE_PREFIX_PATH=$ROCM_INSTALL_DIR/llvm/ \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/bin \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/bin \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/HIPIFY
 ninja
 sudo ninja install
 ninja package_hipify-clang

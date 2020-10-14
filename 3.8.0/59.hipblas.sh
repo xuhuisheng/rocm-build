@@ -2,16 +2,17 @@
 
 set -e
 
-mkdir -p build/hipblas
-cd build/hipblas
+mkdir -p $ROCM_BUILD_DIR/hipblas
+cd $ROCM_BUILD_DIR/hipblas
 pushd .
 
-CXX=/opt/rocm/hip/bin/hipcc cmake $ROCM_GIT_REPO/hipBLAS \
+CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=hipsparse-install \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/hipBLAS
 ninja
 ninja package
 sudo dpkg -i *.deb

@@ -2,15 +2,16 @@
 
 set -e
 
-mkdir -p build/clang-ocl
-cd build/clang-ocl
+mkdir -p $ROCM_BUILD_DIR/clang-ocl
+cd $ROCM_BUILD_DIR/clang-ocl
 pushd .
 
-cmake $ROCM_GIT_REPO/clang-ocl \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/ \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/ \
+cmake \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/clang-ocl
 ninja
 ninja package
 sudo dpkg -i *.deb

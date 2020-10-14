@@ -4,19 +4,20 @@ set -e
 
 sudo apt install -y rpm libfile-which-perl kmod doxygen
 
-mkdir -p build/hip
-cd build/hip
+mkdir -p $ROCM_BUILD_DIR/hip
+cd $ROCM_BUILD_DIR/hip
 pushd .
 
-cmake $ROCM_GIT_REPO/HIP \
+cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DHIP_COMPILER=clang \
     -DHIP_PLATFORM=rocclr \
-    -DCMAKE_PREFIX_PATH=/opt/rocm/ \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm/hip/ \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm/hip/ \
+    -DCMAKE_PREFIX_PATH=$ROCM_INSTALL_DIR \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/ \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/ \
     -DCPACK_GENERATOR=DEB \
-    -G Ninja
+    -G Ninja \
+    $ROCM_GIT_DIR/HIP \
 sudo ninja
 sudo ninja install
 sudo ninja package

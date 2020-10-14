@@ -4,9 +4,9 @@ set -e
 
 #mkdir -p build/roc-smi
 #cd build/roc-smi
-cd build
+cd $ROCM_BUILD_DIR
 
-git clone file://${ROCM_GIT_REPO}/ROC-smi roc-smi
+git clone file://${ROCM_GIT_DIR}/ROC-smi roc-smi
 cd roc-smi
 pushd .
 

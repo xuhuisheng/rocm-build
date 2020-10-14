@@ -11,16 +11,16 @@ curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 sudo python2 get-pip.py
 pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-mkdir -p build/roctracer
-cd build/roctracer
+mkdir -p $ROCM_BUILD_DIR/roctracer
+cd $ROCM_BUILD_DIR/roctracer
 pushd .
 
-ROCTRACER_ROOT=$ROCM_GIT_REPO/roctracer
+ROCTRACER_ROOT=$ROCM_GIT_DIR/roctracer
 BUILD_TYPE=Release
-PREFIX_PATH=/opt/rocm
-PACKAGE_ROOT=/opt/rocm
-PACKAGE_PREFIX=/opt/rocm
-LD_RUNPATH_FLAG="-Wl,--enable-new-dtags -Wl,--rpath,/opt/rocm/lib:/opt/rocm/lib64"
+PREFIX_PATH=$ROCM_INSTALL_DIR
+PACKAGE_ROOT=$ROCM_INSTALL_DIR
+PACKAGE_PREFIX=$ROCM_INSTALL_DIR
+LD_RUNPATH_FLAG="-Wl,--enable-new-dtags -Wl,--rpath,$ROCM_INSTALL_DIR/lib:$ROCM_INSTALL_DIR/lib64"
 HIP_VDI=1
 HIP_API_STRING=1
 
