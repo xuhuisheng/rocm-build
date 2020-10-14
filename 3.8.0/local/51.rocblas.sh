@@ -2,6 +2,10 @@
 
 set -e
 
+echo "|====|"
+echo "|SLOW|"
+echo "|====|"
+
 sudo apt install -y gfortran
 bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
