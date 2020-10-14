@@ -2,18 +2,24 @@
 
 set -e
 
-sudo apt install -y software-properties-common
-sudo add-apt-repository universe
-sudo apt update 
-sudo apt install -y python2
-sudo apt install -y curl
-curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-sudo python2 get-pip.py
-pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
+#sudo apt install -y software-properties-common
+#sudo add-apt-repository universe
+#sudo apt update 
+#sudo apt install -y python2
+#sudo apt install -y curl
+#curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+#sudo python2 get-pip.py
+#pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
+sudo apt install python3-pip
+pip3 install cppheaderparser
 
 mkdir -p $ROCM_BUILD_DIR/roctracer
 cd $ROCM_BUILD_DIR/roctracer
 pushd .
+
+cd $ROCM_GIT_DIR/roctracer
+patch -p1 < $ROCM_PATCH_DIR/37.roctracer.patch
+cd $ROCM_BUILD_DIR/roctracer
 
 ROCTRACER_ROOT=$ROCM_GIT_DIR/roctracer
 BUILD_TYPE=Release

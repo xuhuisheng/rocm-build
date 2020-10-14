@@ -28,5 +28,5 @@ export PATH=~/bin:$PATH
 Install dependencies
 
 ```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
