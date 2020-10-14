@@ -14,7 +14,7 @@ CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -G Ninja \
-    $ROCM_GIT_REPO/MIOpen
+    $ROCM_GIT_DIR/MIOpen
 ninja
 ninja package
 sudo dpkg -i *.deb
