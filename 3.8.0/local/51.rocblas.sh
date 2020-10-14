@@ -9,9 +9,11 @@ pushd .
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
     -DTensile_LOGIC=asm_full \
-    -DTensile_ARCHITECTURE=all \
+    -DTensile_ARCHITECTURE=gfx803 \
     -DTensile_CODE_OBJECT_VERSION=V3 \
     -DCMAKE_BUILD_TYPE=Release \
+    -DTensile_TEST_LOCAL_PATH=/home/work/rocm-deps/Tensile \
+    -DBUILD_WITH_TENSILE_HOST=OFF \
     -DTensile_LIBRARY_FORMAT=yaml \
     -DRUN_HEADER_TESTING=OFF \
     -DTensile_COMPILER=hipcc \
