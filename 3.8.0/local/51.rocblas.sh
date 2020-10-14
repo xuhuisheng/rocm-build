@@ -7,7 +7,7 @@ echo "|SLOW|"
 echo "|====|"
 
 sudo apt install -y gfortran
-bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
+#bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
