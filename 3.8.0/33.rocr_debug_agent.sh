@@ -9,7 +9,8 @@ cd $ROCM_BUILD_DIR/rocr_debug_agent
 pushd .
 
 cd $ROCM_GIT_DIR/rocr_debug_agent
-patch -p1 < $ROCM_PATCH_DIR/33.rocr_debug_agent.patch
+git reset --hard
+patch -p1 -N < $ROCM_PATCH_DIR/33.rocr_debug_agent.patch
 cd $ROCM_BUILD_DIR/rocr_debug_agent
 
 cmake \

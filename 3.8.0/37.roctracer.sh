@@ -18,7 +18,8 @@ cd $ROCM_BUILD_DIR/roctracer
 pushd .
 
 cd $ROCM_GIT_DIR/roctracer
-patch -p1 < $ROCM_PATCH_DIR/37.roctracer.patch
+git reset --hard
+patch -p1 -N < $ROCM_PATCH_DIR/37.roctracer.patch
 cd $ROCM_BUILD_DIR/roctracer
 
 ROCTRACER_ROOT=$ROCM_GIT_DIR/roctracer
