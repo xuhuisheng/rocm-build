@@ -2,6 +2,8 @@
 
 set -e
 
+sudo apt install python3
+
 #mkdir -p build/roc-smi
 #cd build/roc-smi
 cd $ROCM_BUILD_DIR

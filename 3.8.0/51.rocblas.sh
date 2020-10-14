@@ -2,6 +2,8 @@
 
 set -e
 
+bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
+
 mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
