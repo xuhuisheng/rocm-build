@@ -17,7 +17,7 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/ \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
-    $ROCM_GIT_DIR/HIP \
+    $ROCM_GIT_DIR/HIP
 sudo ninja
 sudo ninja install
 sudo ninja package
