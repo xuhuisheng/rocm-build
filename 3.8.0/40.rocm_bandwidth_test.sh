@@ -6,6 +6,8 @@ mkdir -p $ROCM_BUILD_DIR/rocm_bandwidth_test
 cd $ROCM_BUILD_DIR/rocm_bandwidth_test
 pushd .
 
+START_TIME=`date +%s`
+
 cmake \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_PREFIX_PATH=$ROCM_INSTALL_DIR \
@@ -17,7 +19,10 @@ cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

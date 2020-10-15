@@ -6,6 +6,8 @@ mkdir -p $ROCM_BUILD_DIR/rocm-opencl-runtime
 cd $ROCM_BUILD_DIR/rocm-opencl-runtime
 pushd .
 
+START_TIME=`date +%s`
+
 cmake \
     -DUSE_COMGR_LIBRARY=ON \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR/opencl \
@@ -16,7 +18,10 @@ cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

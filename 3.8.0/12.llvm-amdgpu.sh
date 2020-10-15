@@ -9,6 +9,9 @@ echo "|====|"
 mkdir -p $ROCM_BUILD_DIR/llvm-amdgpu
 cd $ROCM_BUILD_DIR/llvm-amdgpu
 pushd .
+
+START_TIME=`date +%s`
+
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR/llvm/ \
@@ -24,7 +27,10 @@ cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

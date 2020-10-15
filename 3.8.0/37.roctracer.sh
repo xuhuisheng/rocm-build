@@ -17,6 +17,8 @@ mkdir -p $ROCM_BUILD_DIR/roctracer
 cd $ROCM_BUILD_DIR/roctracer
 pushd .
 
+START_TIME=`date +%s`
+
 cd $ROCM_GIT_DIR/roctracer
 git reset --hard
 patch -p1 -N < $ROCM_PATCH_DIR/37.roctracer.patch
@@ -47,7 +49,10 @@ cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

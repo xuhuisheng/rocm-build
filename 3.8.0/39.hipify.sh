@@ -6,6 +6,8 @@ mkdir -p $ROCM_BUILD_DIR/hipify
 cd $ROCM_BUILD_DIR/hipify
 pushd .
 
+START_TIME=`date +%s`
+
 cmake \
     -DCMAKE_PREFIX_PATH=$ROCM_INSTALL_DIR/llvm/ \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR/hip/bin \
@@ -18,9 +20,10 @@ ninja
 sudo ninja install
 ninja package_hipify-clang
 sudo dpkg -i *.deb
-# ninja package
-# sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

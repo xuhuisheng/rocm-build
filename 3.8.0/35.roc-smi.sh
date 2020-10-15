@@ -12,9 +12,14 @@ git clone file://${ROCM_GIT_DIR}/ROC-smi roc-smi
 cd roc-smi
 pushd .
 
+START_TIME=`date +%s`
+
 make deb
 sudo dpkg -i build/deb/*.deb
 
-popd
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
+popd
 

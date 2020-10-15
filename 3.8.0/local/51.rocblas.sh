@@ -13,6 +13,8 @@ mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
 
+START_TIME=`date +%s`
+
 rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
@@ -35,7 +37,10 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

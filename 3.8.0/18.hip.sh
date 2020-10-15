@@ -8,6 +8,8 @@ mkdir -p $ROCM_BUILD_DIR/hip
 cd $ROCM_BUILD_DIR/hip
 pushd .
 
+START_TIME=`date +%s`
+
 cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DHIP_COMPILER=clang \
@@ -22,7 +24,10 @@ sudo ninja
 sudo ninja install
 sudo ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

@@ -10,6 +10,8 @@ mkdir -p $ROCM_BUILD_DIR/rocfft
 cd $ROCM_BUILD_DIR/rocfft
 pushd .
 
+START_TIME=`date +%s`
+
 CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
@@ -20,7 +22,10 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

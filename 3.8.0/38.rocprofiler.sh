@@ -6,6 +6,8 @@ mkdir -p $ROCM_BUILD_DIR/rocprofiler
 cd $ROCM_BUILD_DIR/rocprofiler
 pushd .
 
+START_TIME=`date +%s`
+
 cmake \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release \
@@ -16,7 +18,10 @@ cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

@@ -12,6 +12,8 @@ mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
 
+START_TIME=`date +%s`
+
 cd $ROCM_GIT_DIR/rocBLAS
 bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
@@ -33,7 +35,10 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

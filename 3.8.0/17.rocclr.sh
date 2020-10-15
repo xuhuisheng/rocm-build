@@ -8,6 +8,8 @@ mkdir -p $ROCM_BUILD_DIR/rocclr
 cd $ROCM_BUILD_DIR/rocclr
 pushd .
 
+START_TIME=`date +%s`
+
 # export ROCclr_DIR="$(readlink -f ROCclr)"
 # export OPENCL_DIR="$(readlink -f ROCm-OpenCL-Runtime)"
 export ROCclr_DIR=$ROCM_GIT_DIR/ROCclr
@@ -22,7 +24,10 @@ cmake \
     $ROCM_GIT_DIR/ROCclr
 ninja
 sudo ninja install
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 

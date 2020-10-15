@@ -6,6 +6,8 @@ mkdir -p $ROCM_BUILD_DIR/rocprim
 cd $ROCM_BUILD_DIR/rocprim
 pushd .
 
+START_TIME=`date +%s`
+
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DBUILD_BENCHMARK=OFF \
     -DBUILD_TEST=OFF \
@@ -16,7 +18,10 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
 ninja
 ninja package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$(EXECUTING_TIME)"s"
 
 popd
 
