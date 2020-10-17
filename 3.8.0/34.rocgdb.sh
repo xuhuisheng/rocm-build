@@ -25,7 +25,7 @@ make -j${nproc}
 
 END_TIME=`date +%s`
 EXECUTING_TIME=`expr $END_TIME - $START_TIME`
-echo "elapse : "$(EXECUTING_TIME)"s"
+echo "elapse : "$EXECUTING_TIME"s"
 
 popd
 
