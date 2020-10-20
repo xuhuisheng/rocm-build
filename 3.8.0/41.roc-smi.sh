@@ -4,10 +4,9 @@ set -e
 
 sudo apt install python3
 
-#mkdir -p build/roc-smi
-#cd build/roc-smi
+# mkdir -p $ROCM_BUILD_DIR/roc-smi
 cd $ROCM_BUILD_DIR
-rm -rf *
+rm -rf roc-smi
 
 git clone file://${ROCM_GIT_DIR}/ROC-smi roc-smi
 cd roc-smi
