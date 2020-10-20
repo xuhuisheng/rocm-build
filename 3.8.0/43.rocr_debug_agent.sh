@@ -10,7 +10,7 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocr_debug_agent
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/33.rocr_debug_agent.patch
+patch -p1 -N < $ROCM_PATCH_DIR/43.rocr_debug_agent.patch
 cd $ROCM_BUILD_DIR/rocr_debug_agent
 
 START_TIME=`date +%s`
