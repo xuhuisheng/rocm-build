@@ -20,9 +20,9 @@ cmake \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
     $ROCM_GIT_DIR/HIP
-sudo ninja
+ninja
 sudo ninja install
-sudo ninja package
+ninja package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
