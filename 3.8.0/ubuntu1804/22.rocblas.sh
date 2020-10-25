@@ -16,6 +16,7 @@ cd $ROCM_GIT_DIR/rocBLAS
 bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
+    -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
     -DTensile_LOGIC=asm_full \
     -DTensile_ARCHITECTURE=all \
