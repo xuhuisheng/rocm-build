@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export ROCM_INSTALL_DIR=/opt/rocm
+export ROCM_GIT_DIR=/home/work/ROCm
+export ROCM_BUILD_DIR=/home/work/rocm-build/build
+export ROCM_PATCH_DIR=/home/work/rocm-build/patch
+export PATH=$ROCM_INSTALL_DIR/bin:$ROCM_INSTALL_DIR/llvm/bin:$ROCM_INSTALL_DIR/hip/bin:$PATH
+
