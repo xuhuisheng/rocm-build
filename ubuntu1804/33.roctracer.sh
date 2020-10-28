@@ -16,6 +16,8 @@ mkdir -p $ROCM_BUILD_DIR/roctracer
 cd $ROCM_BUILD_DIR/roctracer
 pushd .
 
+START_TIME=`date +%s`
+
 ROCTRACER_ROOT=$ROCM_GIT_DIR/roctracer
 BUILD_TYPE=Release
 PREFIX_PATH=$ROCM_INSTALL_DIR
@@ -38,10 +40,13 @@ cmake \
     -G Ninja \
     $ROCTRACER_ROOT
 
-ninja
-ninja package
+make -j${nproc}
+make package
 sudo dpkg -i *.deb
-# make package -j${nproc}
+
+END_TIME=`date +%s`
+EXECUTING_TIME=`expr $END_TIME - $START_TIME`
+echo "elapse : "$EXECUTING_TIME"s"
 
 popd
 
