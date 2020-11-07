@@ -14,6 +14,7 @@ START_TIME=`date +%s`
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
+    -DHIP_CLANG_INCLUDE_PATH=$ROCM_INSTALL_DIR/llvm/include \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
     -DCMAKE_INSTALL_PREFIX=rocsparse-install \
