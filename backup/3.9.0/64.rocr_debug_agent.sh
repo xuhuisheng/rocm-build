@@ -2,21 +2,26 @@
 
 set -e
 
-sudo apt install -y libelf-dev
+sudo apt install -y libdw-dev
 
-mkdir -p $ROCM_BUILD_DIR/rocr-runtime
-cd $ROCM_BUILD_DIR/rocr-runtime
+mkdir -p $ROCM_BUILD_DIR/rocr_debug_agent
+cd $ROCM_BUILD_DIR/rocr_debug_agent
 pushd .
+
+#cd $ROCM_GIT_DIR/rocr_debug_agent
+#git reset --hard
+#patch -p1 -N < $ROCM_PATCH_DIR/43.rocr_debug_agent.patch
+#cd $ROCM_BUILD_DIR/rocr_debug_agent
 
 START_TIME=`date +%s`
 
 cmake \
-    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCR-Runtime/src
+    $ROCM_GIT_DIR/rocr_debug_agent
 ninja
 ninja package
 sudo dpkg -i *.deb

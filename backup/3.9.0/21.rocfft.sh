@@ -2,21 +2,24 @@
 
 set -e
 
-sudo apt install -y libelf-dev
+echo "|====|"
+echo "|SLOW|"
+echo "|====|"
 
-mkdir -p $ROCM_BUILD_DIR/rocr-runtime
-cd $ROCM_BUILD_DIR/rocr-runtime
+mkdir -p $ROCM_BUILD_DIR/rocfft
+cd $ROCM_BUILD_DIR/rocfft
 pushd .
 
 START_TIME=`date +%s`
 
-cmake \
+CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
+    -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+    -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
-    -DCPACK_GENERATOR=DEB \
+    -DCMAKE_INSTALL_PREFIX=hipsparse-install \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCR-Runtime/src
+    $ROCM_GIT_DIR/rocFFT
 ninja
 ninja package
 sudo dpkg -i *.deb

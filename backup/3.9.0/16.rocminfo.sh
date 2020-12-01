@@ -2,10 +2,8 @@
 
 set -e
 
-sudo apt install -y libelf-dev
-
-mkdir -p $ROCM_BUILD_DIR/rocr-runtime
-cd $ROCM_BUILD_DIR/rocr-runtime
+mkdir -p $ROCM_BUILD_DIR/rocminfo
+cd $ROCM_BUILD_DIR/rocminfo
 pushd .
 
 START_TIME=`date +%s`
@@ -16,9 +14,9 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCR-Runtime/src
+    $ROCM_GIT_DIR/rocminfo
 ninja
-ninja package
+ninja package 
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
