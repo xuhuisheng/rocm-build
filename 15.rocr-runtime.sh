@@ -16,7 +16,7 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCR-Runtime/src
+    $ROCM_GIT_DIR/ROCR-Runtime/opensrc/hsa-runtime
 ninja
 ninja package
 sudo dpkg -i *.deb
