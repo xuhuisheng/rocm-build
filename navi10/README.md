@@ -10,7 +10,7 @@ No, I didnot have a navi10 GPU yet, So I cannot test it. Currently I can just co
 
 The codes based on ROCm-3.10.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/navi10/README.md> for preparing build environment. OS is Ubuntu-20.04.1.
 
-OK. One thing must say before that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent compiling error.
+OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
 This caused compiling even more slower, but it wont break.
 
 ---
