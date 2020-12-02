@@ -33,8 +33,8 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
     $ROCM_GIT_DIR/rocBLAS
-make -j${nproc}
-make package
+ninja
+ninja package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
