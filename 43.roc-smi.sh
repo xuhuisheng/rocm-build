@@ -14,7 +14,7 @@ pushd .
 
 START_TIME=`date +%s`
 
-make deb
+ROCM_INSTALL_PATH=$ROCM_INSTALL_DIR make deb
 sudo dpkg -i build/deb/*.deb
 
 END_TIME=`date +%s`
