@@ -20,7 +20,8 @@ cd $ROCM_BUILD_DIR/rocblas
 
 cd /home/work/Tensile
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/../navi10/tensile.patch
+patch -p1 -N < $ROCM_PATCH_DIR/../navi10/tensile-0.patch
+patch -p1 -N < $ROCM_PATCH_DIR/../navi10/tensile-1.patch
 cd $ROCM_BUILD_DIR/rocblas
 
 #rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
