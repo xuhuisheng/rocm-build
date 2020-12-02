@@ -23,7 +23,7 @@ cmake \
     -DCPACK_DEBIAN_PACKAGE_MAINTAINER=amd \
     -DCPACK_PACKAGE_NAME=llvm-amdgpu \
     -G Ninja \
-    $ROCM_GIT_DIR/llvm_amd-stg-open/llvm
+    $ROCM_GIT_DIR/llvm-project/llvm
 ninja
 ninja package
 sudo dpkg -i *.deb
