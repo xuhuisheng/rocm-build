@@ -87,3 +87,5 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 
 Finally we got a pytorch-1.7.0 only can run on navi10.
 
+Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
+
