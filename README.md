@@ -22,7 +22,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.9.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.10.x
 repo sync
 ```
 
