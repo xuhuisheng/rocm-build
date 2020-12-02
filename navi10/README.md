@@ -52,6 +52,8 @@ Then execute `bash navi10/22.rocblas.sh` to compile rocBLAS, there will use a pa
 
 Please make sure `Tensile_TEST_LOCAL_PATH` in `navi10/22.rocblas.sh` matches `Tensile` directory.
 
+Other components is more simple, just execute the script to compile and install.
+
 1. execute `bash 21.rocfft.sh` to compile rocFFT. (Extremely slow)
 2. execute `bash 23.rocprim.sh` to compile rocPRIM. (Very fast)
 3. execute `bash 24.rocrand.sh` to compile rocRAND. (Fast)
