@@ -1,5 +1,5 @@
 Package: rocm-utils
-Version: 3.10.0.30900-17
+Version: 3.10.0.31000-27
 Section: devel
 Priority: optional
 Architecture: amd64
