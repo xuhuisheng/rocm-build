@@ -1,10 +1,10 @@
-# navi12
+# navi14
 
-This is experimental scripts for building navi12 GPU, aka RX5500.
+This is experimental scripts for building navi14 GPU, aka RX5500.
 
 **This is NOT offical supporting, Cannot guarantee RX5700XT could run successfully on ROCm, even compiling success.**
 
-No, I didnot have a navi12 GPU yet, So I cannot test it. Currently I can just confirm there is no compiling problems. Anybody who had navi12 GPU can have a try. Appreciate for any feedback.
+No, I didnot have a navi14 GPU yet, So I cannot test it. Currently I can just confirm there is no compiling problems. Anybody who had navi14 GPU can have a try. Appreciate for any feedback.
 
 ---
 
@@ -17,7 +17,7 @@ This caused compiling even more slower, but it wont break.
 
 Now we can start our experiment.
 
-First, install `rocm-dev`. This part already supports navi12, so we neednot re-compiling them. Since llvm-project may cost hours for compiling.
+First, install `rocm-dev`. This part already supports navi14, so we neednot re-compiling them. Since llvm-project may cost hours for compiling.
 
 Then clone `rocm-build`. Switch to `develop` branch.
 For Example, we clone rocm-build to `/home/work/rocm-build`
@@ -33,8 +33,8 @@ source env.sh
 
 ```
 
-Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1012"`, gfx1012 means navi12, RX5500. RX5700XT related gfx1010.
-It will force ROCm to compile for navi12, even there is no matching hardware. Execute `source env.sh` to initialize environment variables.
+Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1012"`, gfx1012 means navi14, RX5500. RX5700XT related gfx1010.
+It will force ROCm to compile for navi14, even there is no matching hardware. Execute `source env.sh` to initialize environment variables.
 
 The rocBLAS is a little complex, it depends Tensile. We need clone Tensile to local, switch to `rocm-3.10.0` tag, and use a patch.
 For Example, we clone Tensile to `/home/work/Tensile`
@@ -48,16 +48,16 @@ git checkout rocm-3.10.0
 
 ```
 
-Then execute `bash navi12/22.rocblas.sh` to compile rocBLAS, there will use a patch for prevent compiling problems. (Very slow)
+Then execute `bash navi14/22.rocblas.sh` to compile rocBLAS, there will use a patch for prevent compiling problems. (Very slow)
 
-Please make sure `Tensile_TEST_LOCAL_PATH` in `navi12/22.rocblas.sh` matches `Tensile` directory.
+Please make sure `Tensile_TEST_LOCAL_PATH` in `navi14/22.rocblas.sh` matches `Tensile` directory.
 
 Other components is more simple, just execute the script to compile and install.
 
 1. execute `bash 21.rocfft.sh` to compile rocFFT. (Extremely slow)
 2. execute `bash 23.rocprim.sh` to compile rocPRIM. (Very fast)
 3. execute `bash 24.rocrand.sh` to compile rocRAND. (Fast)
-4. execute `bash navi12/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
+4. execute `bash navi14/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
 5. execute `bash 26.hipsparse.sh` to compile hipSPARSE. (Fast)
 6. execute `bash 27.rccl.sh` to compile rccl. (Slow)
 7. execute `bash 34.miopen.sh` to compile MIOpen. (Slow)
@@ -87,7 +87,7 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 
 ```
 
-Finally we got a pytorch-1.7.0 only can run on navi12.
+Finally we got a pytorch-1.7.0 only can run on navi14.
 
 Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
 
