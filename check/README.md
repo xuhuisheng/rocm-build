@@ -10,7 +10,7 @@ Collect codes for check rocm-libs
 * rccl
 * MIOpen
 
-Execte `sh check.sh`, will display version information of components.
+Execute `sh check.sh`, will display version information of components.
 
 On gfx803, rocSPARSE report `hipErrorNoBinaryForGpu`, so we know it has issues.
 
