@@ -67,51 +67,57 @@ int test_sgemm_batched()
     rocblas_handle handle;
     if(rocblas_create_handle(&handle) != rocblas_status_success) return EXIT_FAILURE;
 
+    float a_list[8] = {1, 0, 0, 0, 1, 2, 3, 4};
+    float b_list[8] = {1, 2, 3, 4, 1, 2, 3, 4};
+    float c_list[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+    rocblas_int batch_count = 2;
+
+    float *da_list, *db_list, *dc_list;
+    size_t da_pitch, db_pitch, dc_pitch;
+    hipMallocPitch((void**)&da_list, &da_pitch, 4 * sizeof(float), 2);
+    hipMallocPitch((void**)&db_list, &db_pitch, 4 * sizeof(float), 2);
+    hipMallocPitch((void**)&dc_list, &dc_pitch, 4 * sizeof(float), 2);
+    hipMemcpy2D(da_list, da_pitch, a_list, 4 * sizeof(float), 4 * sizeof(float), 2, hipMemcpyHostToDevice);
+    hipMemcpy2D(db_list, db_pitch, b_list, 4 * sizeof(float), 4 * sizeof(float), 2, hipMemcpyHostToDevice);
+    hipMemcpy2D(dc_list, dc_pitch, c_list, 4 * sizeof(float), 4 * sizeof(float), 2, hipMemcpyHostToDevice);
+
     rocblas_operation transA = rocblas_operation_none;
     rocblas_operation transB = rocblas_operation_none;
     rocblas_int m = 2;
     rocblas_int n = 2;
     rocblas_int k = 2;
     float alpha = 1;
-    float A[2][4] = {
-        {1, 0, 0, 0},
-        {1, 0, 0, 0}
-    };
+    float **A = 0;
+    A = (float**) malloc(batch_count * sizeof(float*));
+    A[0] = da_list;
+    A[1] = da_list + da_pitch / sizeof(float);
     rocblas_int lda = 2;
-    float B[2][4] = {
-        {1, 2, 3, 4},
-        {1, 2, 3, 4}
-    };
+    float **B = 0;
+    B = (float**) malloc(batch_count * sizeof(float*));
+    B[0] = db_list;
+    B[1] = db_list + db_pitch / sizeof(float);
     rocblas_int ldb = 2;
     float beta = 0;
-    float C[2][4] = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    };
+    float **C = 0;
+    C = (float**) malloc(batch_count * sizeof(float*));
+    C[0] = dc_list;
+    C[1] = dc_list + dc_pitch / sizeof(float);
     rocblas_int ldc = 2;
-    rocblas_int batch_count = 2;
 
     int size_a = m * k;
     int size_b = k * n;
     int size_c = m * n;
+
     float **da, **db, **dc;
 
     hipMalloc(&da, sizeof(float*) * batch_count);
     hipMalloc(&db, sizeof(float*) * batch_count);
     hipMalloc(&dc, sizeof(float*) * batch_count);
-    hipMalloc(&(da[0]), size_a * sizeof(float));
-    hipMalloc(&(db[0]), size_b * sizeof(float));
-    hipMalloc(&(dc[0]), size_c * sizeof(float));
-    hipMalloc(&(da[1]), size_a * sizeof(float));
-    hipMalloc(&(db[1]), size_b * sizeof(float));
-    hipMalloc(&(dc[1]), size_c * sizeof(float));
 
-    hipMemcpy(da[0], A[0], sizeof(float) * size_a, hipMemcpyHostToDevice);
-    hipMemcpy(db[0], B[0], sizeof(float) * size_b, hipMemcpyHostToDevice);
-    hipMemcpy(dc[0], C[0], sizeof(float) * size_c, hipMemcpyHostToDevice);
-    hipMemcpy(da[1], A[1], sizeof(float) * size_a, hipMemcpyHostToDevice);
-    hipMemcpy(db[1], B[1], sizeof(float) * size_b, hipMemcpyHostToDevice);
-    hipMemcpy(dc[1], C[1], sizeof(float) * size_c, hipMemcpyHostToDevice);
+    hipMemcpy(da, A, sizeof(float*) * batch_count, hipMemcpyHostToDevice);
+    hipMemcpy(db, B, sizeof(float*) * batch_count, hipMemcpyHostToDevice);
+    hipMemcpy(dc, C, sizeof(float*) * batch_count, hipMemcpyHostToDevice);
 
     rocblas_status ret = rocblas_sgemm_batched(
             handle,
@@ -132,15 +138,12 @@ int test_sgemm_batched()
 
     printf("%s\n", rocblas_status_to_string(ret));
 
-    hipMemcpy(C[0], dc[0], sizeof(float) * size_c, hipMemcpyDeviceToHost);
-    hipMemcpy(C[1], dc[1], sizeof(float) * size_c, hipMemcpyDeviceToHost);
+    float result_list[] = {0, 0, 0, 0, 0, 0, 0, 0};
+    hipMemcpy2D(result_list, 4 * sizeof(float), dc_list, dc_pitch, 4 * sizeof(float), 2, hipMemcpyDeviceToHost);
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 8; i++)
     {
-        for (int j = 0; j < 4; j++)
-        {
-            printf("sgemm %f\n", C[i][j]);
-        }
+        printf("sgemm %f\n", result_list[i]);
     }
 
     if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
@@ -217,15 +220,55 @@ int test_sgemm_strided_batched()
     return 0;
 }
 
+void test_pitch()
+{
+    printf("start\n");
+
+    float a_list[] = {0, 1, 2, 3, 4, 5};
+    float *da_list;
+    size_t da_pitch;
+
+    hipMallocPitch((void**)&da_list, &da_pitch, 3 * sizeof(float), 2);
+
+    hipMemcpy2D(da_list, da_pitch, a_list, 3 * sizeof(float), 3 * sizeof(float), 2, hipMemcpyHostToDevice);
+
+    printf("pitch : %zu\n", da_pitch);
+
+    float b_list[] = {0, 0, 0, 0, 0, 0};
+
+    printf("before");
+    for (int i = 0; i < 6; i++)
+    {
+        printf(" %f", b_list[i]);
+    }
+    printf("\n");
+
+    hipMemcpy2D(b_list, 3 * sizeof(float), da_list, da_pitch, 3 * sizeof(float), 2, hipMemcpyDeviceToHost);
+
+    printf("after ");
+    for (int i = 0; i < 6; i++)
+    {
+        printf(" %f", b_list[i]);
+    }
+    printf("\n");
+
+    printf("end\n");
+}
+
 int main()
 {
+    // test_pitch();
+
+
     printf(" ########## start sgemm\n");
     test_sgemm();
     printf(" ########## end   sgemm\n");
 
+
     printf(" ########## start sgemm-batched\n");
-    // test_sgemm_batched();
+    test_sgemm_batched();
     printf(" ########## end   sgemm-batched\n");
+
 
     printf(" ########## start sgemm-strided-batched\n");
     test_sgemm_strided_batched();
