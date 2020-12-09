@@ -32,3 +32,7 @@ hipcc -D__HIP_PLATFORM_HCC__ -lMIOpen -L/opt/rocm/lib src/hello_miopen.cpp -o bu
 
 ./build/hello_miopen
 
+hipcc -D__HIP_PLATFORM_HCC__ -lrocsolver -L/opt/rocm/lib src/hello_solver.cpp -o build/hello_solver
+
+./build/hello_solver
+
