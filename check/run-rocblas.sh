@@ -2,8 +2,10 @@
 
 export PATH=/opt/rocm/bin:$PATH
 
-hipcc -D__HIP_PLATFORM_HCC__ -lrocblas -L/opt/rocm/lib test_rocblas.cpp -o test_rocblas
+mkdir -p build
 
-ROCBLAS_LAYER=0xf TENSILE_DB=0xffff ./test_rocblas
+hipcc -D__HIP_PLATFORM_HCC__ -lrocblas -L/opt/rocm/lib test_rocblas.cpp -o build/test_rocblas
+
+ROCBLAS_LAYER=0xf TENSILE_DB=0xffff ./build/test_rocblas
 
 
