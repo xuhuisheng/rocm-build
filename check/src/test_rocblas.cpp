@@ -4,7 +4,15 @@
 int test_sgemm()
 {
     rocblas_handle handle;
-    if(rocblas_create_handle(&handle) != rocblas_status_success) return EXIT_FAILURE;
+
+    rocblas_status ret;
+
+    ret = rocblas_destroy_handle(handle);
+    if(ret != rocblas_status_success)
+    {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     rocblas_operation transA = rocblas_operation_none;
     rocblas_operation transB = rocblas_operation_none;
@@ -57,7 +65,11 @@ int test_sgemm()
         printf("sgemm %f\n", C[i]);
     }
 
-    if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
+    ret = rocblas_destroy_handle(handle);
+    if (ret != rocblas_status_success) {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }
@@ -65,7 +77,15 @@ int test_sgemm()
 int test_sgemm_batched()
 {
     rocblas_handle handle;
-    if(rocblas_create_handle(&handle) != rocblas_status_success) return EXIT_FAILURE;
+
+    rocblas_status ret;
+
+    ret = rocblas_destroy_handle(handle);
+    if(ret != rocblas_status_success)
+    {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     float a_list[8] = {1, 0, 0, 0, 1, 2, 3, 4};
     float b_list[8] = {1, 2, 3, 4, 1, 2, 3, 4};
@@ -146,7 +166,11 @@ int test_sgemm_batched()
         printf("sgemm %f\n", result_list[i]);
     }
 
-    if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
+    ret = rocblas_destroy_handle(handle);
+    if (ret != rocblas_status_success) {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }
@@ -154,7 +178,15 @@ int test_sgemm_batched()
 int test_sgemm_strided_batched()
 {
     rocblas_handle handle;
-    if(rocblas_create_handle(&handle) != rocblas_status_success) return EXIT_FAILURE;
+
+    rocblas_status ret;
+
+    ret = rocblas_destroy_handle(handle);
+    if(ret != rocblas_status_success)
+    {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     rocblas_operation transA = rocblas_operation_none;
     rocblas_operation transB = rocblas_operation_none;
@@ -215,7 +247,11 @@ int test_sgemm_strided_batched()
         printf("sgemm %f\n", C[i]);
     }
 
-    if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
+    ret = rocblas_destroy_handle(handle);
+    if (ret != rocblas_status_success) {
+        printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }
@@ -263,7 +299,7 @@ int main()
 
     printf(" ########## start sgemm\n");
     ret_val = test_sgemm();
-    if (ret_val == EXIT_SUCCESS)
+    if (ret_val != EXIT_SUCCESS)
     {
         printf("sgemm failure\n");
     }
@@ -272,7 +308,7 @@ int main()
 
     printf(" ########## start sgemm-batched\n");
     ret_val = test_sgemm_batched();
-    if (ret_val == EXIT_SUCCESS)
+    if (ret_val != EXIT_SUCCESS)
     {
         printf("sgemm batched failure\n");
     }
@@ -281,7 +317,7 @@ int main()
 
     printf(" ########## start sgemm-strided-batched\n");
     ret_val = test_sgemm_strided_batched();
-    if (ret_val == EXIT_SUCCESS)
+    if (ret_val != EXIT_SUCCESS)
     {
         printf("sgemm strided batched failure\n");
     }
