@@ -40,7 +40,7 @@ int test_sgemm()
     hipMemcpy(db, B, sizeof(float) * size_b, hipMemcpyHostToDevice);
     hipMemcpy(dc, C, sizeof(float) * size_c, hipMemcpyHostToDevice);
 
-    rocblas_status ret = rocblas_sgemm(
+    ret = rocblas_sgemm(
             handle,
             transA,
             transB,
@@ -139,7 +139,7 @@ int test_sgemm_batched()
     hipMemcpy(db, B, sizeof(float*) * batch_count, hipMemcpyHostToDevice);
     hipMemcpy(dc, C, sizeof(float*) * batch_count, hipMemcpyHostToDevice);
 
-    rocblas_status ret = rocblas_sgemm_batched(
+    ret = rocblas_sgemm_batched(
             handle,
             transA,
             transB,
@@ -218,7 +218,7 @@ int test_sgemm_strided_batched()
     hipMemcpy(db, B, sizeof(float) * size_b, hipMemcpyHostToDevice);
     hipMemcpy(dc, C, sizeof(float) * size_c, hipMemcpyHostToDevice);
 
-    rocblas_status ret = rocblas_sgemm_strided_batched(
+    ret = rocblas_sgemm_strided_batched(
             handle,
             transA,
             transB,
