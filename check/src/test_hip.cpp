@@ -3,6 +3,15 @@
 
 #include <hip/hip_runtime.h>
 
+#define CHECK(cmd) \
+{\
+    hipError_t error  = cmd;\
+    if (error != hipSuccess) { \
+        fprintf(stderr, "error: '%s'(%d) at %s:%d\n", hipGetErrorString(error), error,__FILE__, __LINE__); \
+        exit(EXIT_FAILURE);\
+          }\
+}
+
 template <typename T>
 __global__ void
 vector_square(T *C_d, T *A_d, size_t N)
@@ -14,7 +23,6 @@ vector_square(T *C_d, T *A_d, size_t N)
         C_d[i] = A_d[i] * A_d[i];
     }
 }
-
 
 int main()
 {
