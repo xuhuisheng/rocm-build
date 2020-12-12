@@ -7,7 +7,7 @@ int test_sgemm()
 
     rocblas_status ret;
 
-    ret = rocblas_destroy_handle(handle);
+    ret = rocblas_create_handle(handle);
     if(ret != rocblas_status_success)
     {
         printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
@@ -80,7 +80,7 @@ int test_sgemm_batched()
 
     rocblas_status ret;
 
-    ret = rocblas_destroy_handle(handle);
+    ret = rocblas_create_handle(handle);
     if(ret != rocblas_status_success)
     {
         printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
@@ -181,7 +181,7 @@ int test_sgemm_strided_batched()
 
     rocblas_status ret;
 
-    ret = rocblas_destroy_handle(handle);
+    ret = rocblas_create_handle(handle);
     if(ret != rocblas_status_success)
     {
         printf("[rocBLAS]   %s\n", rocblas_status_to_string(ret));
