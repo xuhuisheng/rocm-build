@@ -59,7 +59,7 @@ int test_sgemm()
 
     if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int test_sgemm_batched()
@@ -148,7 +148,7 @@ int test_sgemm_batched()
 
     if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int test_sgemm_strided_batched()
@@ -217,7 +217,7 @@ int test_sgemm_strided_batched()
 
     if(rocblas_destroy_handle(handle) != rocblas_status_success) return EXIT_FAILURE;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 void test_pitch()
@@ -259,19 +259,32 @@ int main()
 {
     // test_pitch();
 
+    int ret_val = EXIT_SUCCESS;
 
     printf(" ########## start sgemm\n");
-    test_sgemm();
+    ret_val = test_sgemm();
+    if (ret_val == EXIT_SUCCESS)
+    {
+        printf("sgemm failure\n");
+    }
     printf(" ########## end   sgemm\n");
 
 
     printf(" ########## start sgemm-batched\n");
-    test_sgemm_batched();
+    ret_val = test_sgemm_batched();
+    if (ret_val == EXIT_SUCCESS)
+    {
+        printf("sgemm batched failure\n");
+    }
     printf(" ########## end   sgemm-batched\n");
 
 
     printf(" ########## start sgemm-strided-batched\n");
-    test_sgemm_strided_batched();
+    ret_val = test_sgemm_strided_batched();
+    if (ret_val == EXIT_SUCCESS)
+    {
+        printf("sgemm strided batched failure\n");
+    }
     printf(" ########## end   sgemm-strided-batched\n");
 
 }
