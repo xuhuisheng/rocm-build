@@ -29,6 +29,7 @@ cd /home/work
 
 git clone https://github.com/xuhuisheng/rocm-build
 cd rocm-build
+
 git checkout develop
 
 source env.sh
@@ -36,6 +37,7 @@ source env.sh
 ```
 
 Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1010"`, gfx1010 means navi10, RX5700XT. RX5500 related gfx1012.
+
 It will force ROCm to compile for navi10, even there is no matching hardware. Execute `source env.sh` to initialize environment variables.
 
 The rocBLAS is a little complex, it depends Tensile. We need clone Tensile to local, switch to `rocm-3.10.0` tag, and use a patch.
