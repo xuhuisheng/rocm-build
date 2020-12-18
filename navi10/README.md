@@ -11,7 +11,6 @@ No, I didnot have a navi10 GPU yet, So I cannot test it. Currently I can just co
 The codes based on ROCm-3.10.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/develop/README.md> for preparing build environment. OS is Ubuntu-20.04.1.
 
 OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
-
 This caused compiling even more slower, but it wont break.
 
 ---
@@ -21,7 +20,6 @@ Now we can start our experiment.
 First, install `rocm-dev`. This part already supports navi10, so we neednot re-compiling them. Since llvm-project may cost hours for compiling.
 
 Then clone `rocm-build`. Switch to `develop` branch.
-
 For Example, we clone rocm-build to `/home/work/rocm-build`
 
 ```
@@ -29,7 +27,6 @@ cd /home/work
 
 git clone https://github.com/xuhuisheng/rocm-build
 cd rocm-build
-
 git checkout develop
 
 source env.sh
@@ -37,7 +34,6 @@ source env.sh
 ```
 
 Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1010"`, gfx1010 means navi10, RX5700XT. RX5500 related gfx1012.
-
 It will force ROCm to compile for navi10, even there is no matching hardware. Execute `source env.sh` to initialize environment variables.
 
 The rocBLAS is a little complex, it depends Tensile. We need clone Tensile to local, switch to `rocm-3.10.0` tag, and use a patch.
@@ -69,8 +65,6 @@ Other components is more simple, just execute the script to compile and install.
 9. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
 
 Final step is Pytorch-1.7.0 (Extremely Slow)
-
-source env.sh
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python
