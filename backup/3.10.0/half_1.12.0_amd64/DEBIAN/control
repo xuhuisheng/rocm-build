@@ -1,0 +1,8 @@
+Architecture: amd64
+Description: HALF-PRECISION FLOATING POINT LIBRARY
+Maintainer: Paul Fultz II <paul.fultz@amd.com>
+Package: half
+Priority: optional
+Section: devel
+Version: 1.12.0
+Installed-Size: 158

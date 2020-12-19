@@ -8,11 +8,11 @@ pushd .
 
 START_TIME=`date +%s`
 
-# cp ../../rocm-utils-3.8.0_amd64 . -R
-cp ../../rocm-dev_4.0.0_amd64 . -R
+cp ../../rocm-utils_3.10.0_amd64 . -R
+# cp ../../rocm-dev-3.8.0_amd64 . -R
 
-# dpkg -b rocm-utils-3.8.0_amd64
-dpkg -b rocm-dev_4.0.0_amd64
+dpkg -b rocm-utils_3.10.0_amd64
+# dpkg -b rocm-dev-3.8.0_amd64
 
 sudo dpkg -i *.deb
 

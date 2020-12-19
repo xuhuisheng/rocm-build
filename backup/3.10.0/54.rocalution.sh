@@ -2,19 +2,20 @@
 
 set -e
 
-mkdir -p $ROCM_BUILD_DIR/rocdbgapi
-cd $ROCM_BUILD_DIR/rocdbgapi
+mkdir -p $ROCM_BUILD_DIR/rocalution
+cd $ROCM_BUILD_DIR/rocalution
 pushd .
 
 START_TIME=`date +%s`
 
-cmake \
-    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
+CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
+    -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
-    -DCPACK_GENERATOR=DEB \
+    -DCMAKE_INSTALL_PREFIX=hipsparse-install \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCdbgapi
+    $ROCM_GIT_DIR/rocALUTION
 ninja
 ninja package
 sudo dpkg -i *.deb

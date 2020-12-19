@@ -2,8 +2,7 @@
 
 set -e
 
-sudo apt install -y libpci3 libpci-dev doxygen unzip cmake git libpciaccess-dev
-sudo ln -f -s /usr/bin/python3 /usr/bin/python
+sudo apt install -y libpci3 libpci-dev doxygen unzip cmake git libpciaccess-dev python-is-python3
 
 mkdir -p $ROCM_BUILD_DIR/rocmvalidationsuite
 cd $ROCM_BUILD_DIR/rocmvalidationsuite
