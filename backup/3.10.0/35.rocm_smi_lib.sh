@@ -2,8 +2,8 @@
 
 set -e
 
-mkdir -p $ROCM_BUILD_DIR/rocdbgapi
-cd $ROCM_BUILD_DIR/rocdbgapi
+mkdir -p $ROCM_BUILD_DIR/rocm_smi_lib
+cd $ROCM_BUILD_DIR/rocm_smi_lib
 pushd .
 
 START_TIME=`date +%s`
@@ -14,7 +14,7 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
-    $ROCM_GIT_DIR/ROCdbgapi
+    $ROCM_GIT_DIR/rocm_smi_lib
 ninja
 ninja package
 sudo dpkg -i *.deb

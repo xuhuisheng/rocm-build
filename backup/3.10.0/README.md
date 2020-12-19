@@ -1,4 +1,4 @@
-# rocm-build 4.0.0
+# rocm-build 3.10.0
 
 Thanks [rigtorp](https://github.com/rigtorp) providing intial build steps <https://gist.github.com/rigtorp/d9483af100fb77cee57e4c9fa3c74245> , which contains build steps for HIP on ROCm-3.6.
 
@@ -22,7 +22,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.0.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-3.10.x
 repo sync
 ```
 

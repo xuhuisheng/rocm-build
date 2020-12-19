@@ -15,6 +15,8 @@ pushd .
 
 START_TIME=`date +%s`
 
+export CPACK_DEBIAN_PACKAGE_RELEASE=local
+
 cmake \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release \
