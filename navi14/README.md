@@ -71,7 +71,7 @@ sudo ln -f -s /usr/bin/python3 /usr/bin/python
 
 git clone https://github.com/pytorch/pytorch
 cd pytorch
-git checkout v1.7.0
+git checkout v1.7.1
 git submodule update --init --recursive
 
 sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
@@ -87,7 +87,10 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 
 ```
 
-Finally we got a pytorch-1.7.0 only can run on navi14.
+Finally we got a pytorch-1.7.1 only can run on navi14.
 
 Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
+
+vdrhtc had test ROCm-4.0 on RX 5500
+<https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751230911>
 
