@@ -91,6 +91,9 @@ Finally we got a pytorch-1.7.1 only can run on navi10.
 
 Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
 
+---
+
+2020-12-27
 spacefish had test ROCm-4.0 on RX 5700, and find there is an 'unchange loss' problem.
 https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751414407
 
