@@ -64,7 +64,7 @@ Other components is more simple, just execute the script to compile and install.
 8. execute `bash 52.rocthrust.sh` to compile rocThrust. (Very fast)
 9. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
 
-Final step is Pytorch-1.7.0 (Extremely Slow)
+Final step is Pytorch-1.7.1 (Extremely Slow)
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python

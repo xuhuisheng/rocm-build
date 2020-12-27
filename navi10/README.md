@@ -64,14 +64,14 @@ Other components is more simple, just execute the script to compile and install.
 8. execute `bash 52.rocthrust.sh` to compile rocThrust. (Very fast)
 9. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
 
-Final step is Pytorch-1.7.0 (Extremely Slow)
+Final step is Pytorch-1.7.1 (Extremely Slow)
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python
 
 git clone https://github.com/pytorch/pytorch
 cd pytorch
-git checkout v1.7.0
+git checkout v1.7.1
 git submodule update --init --recursive
 
 sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
@@ -87,7 +87,10 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 
 ```
 
-Finally we got a pytorch-1.7.0 only can run on navi10.
+Finally we got a pytorch-1.7.1 only can run on navi10.
 
 Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
+
+spacefish had test ROCm-4.0 on RX 5700, and find there is an 'unchange loss' problem.
+https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751414407
 
