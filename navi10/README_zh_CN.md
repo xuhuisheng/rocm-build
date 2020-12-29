@@ -96,6 +96,6 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 ---
 
 2020-12-27
-spacefish 测试了 RX 5700，发现mnist能训练，但是loss不变，所以说还是有问题。
+spacefish 测试了 RX 5700，发现mnist能训练，但是loss没减小，所以说还是有问题。
 https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751414407
 
