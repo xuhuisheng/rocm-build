@@ -13,13 +13,13 @@
 
 执行 `source env.sh` 设置环境变量。
 
-然后按照序号顺序执行脚本。
-
 安装依赖
 
 ```
 sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
+
+然后按照序号顺序执行脚本。
 
 祝你好运。
 
