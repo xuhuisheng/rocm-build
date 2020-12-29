@@ -1,8 +1,8 @@
-# check
+# 检查代码
 
-[中文版](README_zh_CN.md)
+[English Version](README.md)
 
-Collect codes for check rocm-libs
+整理了一些用于检测rocm-libs的代码
 
 * rocBLAS
 * rocFFT
@@ -12,9 +12,9 @@ Collect codes for check rocm-libs
 * rccl
 * MIOpen
 
-Execute `sh check.sh`, will display version information of components.
+执行 `sh check.sh`，会显示各个组件的版本。
 
-On gfx803, rocSPARSE report `hipErrorNoBinaryForGpu`, so we know it has issues.
+在gfx803显卡下，rocSPARSE会报错 `hipErrorNoBinaryForGpu`，我们就知道是它的问题了。
 
 ```
 [rocBLAS]   2.32.0.2844-cc18d25f
