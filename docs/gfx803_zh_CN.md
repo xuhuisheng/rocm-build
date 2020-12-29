@@ -1,17 +1,17 @@
 
-# ROCm-3.7及其以后版本在gfx803系列显卡上有很多问题
+# ROCm-3.7及其以后版本，在gfx803系列显卡上有很多问题
 
-(English Version)[gfx803.md]
+[English Version](gfx803.md)
 
-Date: 2020-11-21
+创建时间: 2020-11-21
 
-|software       |description   |
+|软件           |备注   |
 |---------------|--------------|
 |OS             |Ubuntu-20.04.1|
 |Python         |3.8.5         |
 |Tensorflow-rocm|2.4.0         |
 
-|hardware|Product Name|ISA              |CHIP IP|
+|硬件    |产品名称    |指令集           |芯片   |
 |--------|------------|-----------------|-------|
 |CPU     |Xeon 2620v3 |                 |       |
 |GPU     |RX580 8G    |gfx803(Polaris10)|0x67df |
