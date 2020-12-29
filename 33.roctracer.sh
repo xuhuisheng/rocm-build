@@ -10,7 +10,7 @@ set -e
 #curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 #sudo python2 get-pip.py
 #pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
-sudo apt install -y python3-pip
+sudo apt install -y python3-pip python-is-python3
 pip3 install cppheaderparser
 
 mkdir -p $ROCM_BUILD_DIR/roctracer
