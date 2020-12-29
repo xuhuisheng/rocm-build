@@ -1,5 +1,7 @@
 # navi14
 
+[中文版](README_zh_CN.md)
+
 This is experimental scripts for building navi14 GPU, aka RX5500.
 
 **This is NOT offical supporting, Cannot guarantee RX5700XT could run successfully on ROCm, even compiling success.**

@@ -1,5 +1,7 @@
 # navi10
 
+[中文版](README_zh_CN.md)
+
 This is experimental scripts for building navi10 GPU, aka RX5700XT.
 
 **This is NOT offical supporting, Cannot guarantee RX5700XT could run successfully on ROCm, even compiling success.**
