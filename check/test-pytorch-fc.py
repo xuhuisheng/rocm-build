@@ -13,11 +13,11 @@ true_w = [2, -3.4]
 true_b = 4.2
 features = torch.tensor(np.random.normal(0, 1, (num_examples, num_inputs)), dtype = torch.float)
 labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b
-labels += torch.tensor(np.random.normal(0, 0.01, size=labels.size()), dtype = torch.float)
+labels += torch.tensor(np.random.normal(0, 0.01, size = labels.size()), dtype = torch.float)
 
 batch_size = 32
 dataset = Data.TensorDataset(features, labels)
-data_iter = Data.DataLoader(dataset, batch_size, shuffle=True)
+data_iter = Data.DataLoader(dataset, batch_size, shuffle = True)
 
 device = torch.device("cuda")
 
@@ -27,12 +27,12 @@ net = nn.Sequential(
 
 print(net)
 
-init.normal_(net[0].weight, mean=0, std=0.01)
-init.constant_(net[0].bias, val=0)
+init.normal_(net[0].weight, mean = 0, std = 0.01)
+init.constant_(net[0].bias, val = 0)
 
 loss = nn.MSELoss()
 
-optimizer = optim.SGD(net.parameters(), lr=0.03)
+optimizer = optim.SGD(net.parameters(), lr = 0.03)
 print(optimizer)
 
 num_epochs = 10
