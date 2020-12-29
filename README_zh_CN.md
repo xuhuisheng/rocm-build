@@ -11,9 +11,17 @@
 首先使用 repo 下载项目源码 <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>，
 然后根据你当前的环境修改 `env.sh` 里的路径。
 
-执行 `source env.sh` 设置户籍安静变量，然后按照序号顺序执行脚本。
+执行 `source env.sh` 设置环境变量。
 
-剩下就是祈祷一切顺利吧。
+然后按照序号顺序执行脚本。
+
+安装依赖
+
+```
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
+```
+
+祝你好运。
 
 ---
 
@@ -38,13 +46,5 @@ mkdir -p ~/bin/
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
 export PATH=~/bin:$PATH
-```
-
----
-
-安装依赖
-
-```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
 
