@@ -68,10 +68,10 @@ rocSPARSE的CMakeLists.txt配置文件里，把AMDGPU_TARGETS放到了Dependenci
 
 ### 解决方法
 
-因为rocSPARSE的开发分支太新了，为了避免兼容个问题，建议使用rocm-4.0.0分支，再对CMakeLists.txt打补丁，
-其实就是把AMDGPU_TARGETS放到Dependencies.cmake前面，避免被覆盖
+因为rocSPARSE的开发分支太新了，为了避免兼容个问题，建议使用rocm-4.0.x分支，再对CMakeLists.txt打补丁，
+其实就是把AMDGPU_TARGETS放到Dependencies.cmake前面，避免被覆盖。
 
-我创建了一个rocSPARSE镜像，已经把gfx803的补丁打到了默认分支上，可以直接使用。
+我把rocSPARSE复制了一份，已经把gfx803的补丁打到了默认分支上，可以直接使用。
 
 1. 首先安装 <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#ubuntu>
 2. 至少要安装 rocm-dev 和 rocm-libs `sudo apt install rocm-dev rocm-libs`
