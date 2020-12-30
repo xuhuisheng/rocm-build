@@ -2,7 +2,7 @@
 
 [English Version](README.md)
 
-感谢 [rigtorp](https://github.com/rigtorp) 提供了最初的构建步骤 <https://gist.github.com/rigtorp/d9483af100fb77cee57e4c9fa3c74245> ，包含了编译HIP的构建步骤。
+感谢 [rigtorp](https://github.com/rigtorp) 提供的 <https://gist.github.com/rigtorp/d9483af100fb77cee57e4c9fa3c74245> ，包含了编译HIP的构建步骤。
 
 感谢 [jlgreathouse](https://github.com/jlgreathouse) 提供的 <https://github.com/RadeonOpenCompute/Experimental_ROC> ，包含了ROCm-2.0的构建步骤。
 
