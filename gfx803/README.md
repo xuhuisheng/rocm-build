@@ -1,7 +1,7 @@
 
 # So many gfx803 issues on ROCm-3.7+
 
-[中文版](gfx803_zh_CN.md)
+[中文版](README_zh_CN.md)
 
 Date: 2020-11-21
 

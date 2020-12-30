@@ -1,7 +1,7 @@
 
 # ROCm-3.7及其以后版本，在gfx803系列显卡上有很多问题
 
-[English Version](gfx803.md)
+[English Version](README.md)
 
 创建时间: 2020-11-21
 
