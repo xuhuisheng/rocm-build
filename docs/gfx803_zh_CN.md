@@ -18,6 +18,13 @@
 
 ---
 
+## 自ROCm-4.0开始，AMD不再提供对gfx803的官方支持
+
+* 2020-12-19，gfx803被从ROCm-4.0的官方支持名单中删除
+* <https://github.com/RadeonOpenCompute/ROCm/commit/2b7f806b106f2b19036bf8e7af4f3dad7bc6222e#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5L408>
+
+---
+
 ## ROCm-3.7及以后，使用gfx803系列显卡会遇到各种训练失败的问题
 
 ### 问题描述
