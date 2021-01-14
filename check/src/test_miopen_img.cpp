@@ -94,7 +94,12 @@ void process_conv()
                                            in_shape[3]));  // NCHW
 
   // filter tensor
-  const int filt_shape[4] = {3, 3, 3, 3};  // KCHW
+  const int filt_shape[4] = {
+    3, // out_shape[1]
+    3, // in_shape[1]
+    3, // height
+    3  // width
+  };   // KCHW
 
   miopenTensorDescriptor_t filt_desc;
   CHECK_MIOPEN(miopenCreateTensorDescriptor(&filt_desc));
