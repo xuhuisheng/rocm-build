@@ -52,7 +52,7 @@ export PATH=~/bin:$PATH
 
 更多文档:
 
-* [gfx803](gfx803/README_zh_CN.md) - ROCm-4.0不再支持gfx803显卡，只有一块RX580的我，要研究怎么让gfx803继续用下去。
+* [gfx803](gfx803/README_zh_CN.md) - ROCm-4.0不再支持gfx803显卡，我只有一块RX580，要研究怎么让gfx803苟延残喘。
 * [navi10](navi10/README_zh_CN.md) - 构建navi10的试验脚本。
 * [navi14](navi14/README_zh_CN.md) - 构建navi14的试验脚本。
 * [check](check/README_zh_CN.md) - 检查ROCm能否正常运行的一些代码。

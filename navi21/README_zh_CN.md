@@ -1,12 +1,12 @@
-# navi10
+# navi21
 
 [English Version](README.md)
 
-这里是针对navi10 GPU - RX5700XT的实验性构建脚本。
+这里是针对navi21 GPU - RX6800的实验性构建脚本。
 
-**AMD官方还不支持navi10，就算编译成功也无法保证ROCm能支持RX5700XT。**
+**AMD官方还不支持navi21，就算编译成功也无法保证ROCm能支持RX6800。**
 
-我也没有navi10 GPU，本地无法测试。目前只能确认没有编译错误。如果你有navi10 GPU可以尝试一下。欢迎各种反馈。
+我也没有navi21 GPU，本地无法测试。目前只能确认没有编译错误。如果你有navi21 GPU可以尝试一下。欢迎各种反馈。
 
 ---
 
@@ -19,7 +19,7 @@
 
 现在可以开始实验了。
 
-首先安装`rocm-dev`。这部分已经支持navi10了，不用重新编译。主要也是因为llvm-project编译太慢，可能要花几个小时。
+首先安装`rocm-dev`。这部分已经支持navi21了，不用重新编译。主要也是因为llvm-project编译太慢，可能要花几个小时。
 
 然后获取`rocm-build`。切换到`develop`分支。
 比如，我们把rocm-build放在`/home/work/rocm-build`目录下。
@@ -35,8 +35,8 @@ source env.sh
 
 ```
 
-修改`env.sh`，找到`AMDGPU_TARGETS`，改为`AMDGPU_TARGETS="gfx1010"`，gfx1010对应navi10，RX5700XT，gfx1012对应RX5500。
-我们强制ROCm对navi10进行编译，这一步不需要实际的硬件。执行`source env.sh`初始化环境变量。
+修改`env.sh`，找到`AMDGPU_TARGETS`，改为`AMDGPU_TARGETS="gfx1030"`，gfx1030对应navi21，RX6800。
+我们强制ROCm对navi21进行编译，这一步不需要实际的硬件。执行`source env.sh`初始化环境变量。
 
 首先编译rocBLAS，因为它有一点儿复杂，因为它依赖另一个名叫Tensile项目。需要先把Tensile复制到本地，切换到`rocm-4.0.0`标签，然后打一个补丁。
 比如，我们把Tensile放到`/home/work/Tensile`目录下。
@@ -50,16 +50,16 @@ git checkout rocm-4.0.0
 
 ```
 
-然后执行`bash navi10/22.rocblas.sh`编译rocBLAS，脚本里会自动打好补丁。（非常慢）
+然后执行`bash navi21/22.rocblas.sh`编译rocBLAS，脚本里会自动打好补丁。（非常慢）
 
-要确认`navi10/22.rocblas.sh`里的`Tensile_TEST_LOCAL_PATH`与Tensile的目录位置一致。
+要确认`navi21/22.rocblas.sh`里的`Tensile_TEST_LOCAL_PATH`与Tensile的目录位置一致。
 
 其他组件就比较简单了。直接执行脚本进行编译和安装。
 
 1. 执行 `bash 21.rocfft.sh` 编译 rocFFT。 (超级超级慢)
 2. 执行 `bash 23.rocprim.sh` 编译 rocPRIM。 (飞快)
 3. 执行 `bash 24.rocrand.sh` 编译 rocRAND。 (很快)
-4. 执行 `bash navi10/25.rocsparse.sh` 编译 rocSPARSE，需要打个补丁。(很慢)
+4. 执行 `bash navi21/25.rocsparse.sh` 编译 rocSPARSE，需要打个补丁。(很慢)
 5. 执行 `bash 26.hipsparse.sh` 编译 hipSPARSE。 (很快)
 6. 执行 `bash 27.rccl.sh` 编译 rccl. (很慢)
 7. 执行 `bash 34.miopen.sh` 编译 MIOpen。 (很慢)
@@ -81,7 +81,7 @@ pip3 install -r requirements.txt
 export PATH=/opt/rocm/bin:$PATH \
     ROCM_PATH=/opt/rocm \
     HIP_PATH=/opt/rocm/hip 
-export PYTORCH_ROCM_ARCH=gfx1010
+export PYTORCH_ROCM_ARCH=gfx1030
 python3 tools/amd_build/build_amd.py
 USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
 
@@ -89,13 +89,12 @@ pip3 install dist/torch-1.7.0a0-cp38-cp38-linux_x86_64.whl
 
 ```
 
-这样，我们就得到了一个只能在navi10下运行的pytorch。
+这样，我们就得到了一个只能在navi21下运行的pytorch。
 
 我本地没有测试的硬件，现在至少没有编译错误了。有啥问题，敬请告知。多谢多谢。
 
 ---
 
-2020-12-27
-spacefish 测试了 RX 5700，发现mnist能训练，但是loss没减小，所以说还是有问题。
+很有可能像navi10一样，支持全连接层，不支持卷积层。
 <https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751414407>
 

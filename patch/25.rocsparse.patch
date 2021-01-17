@@ -7,7 +7,7 @@ index 8a4ccda..12aeac8 100644
  }
  
 -#ifndef __HIP_ARCH_GFX1030__
-+#if ( !defined(__HIP_ARCH_GFX1030__) && !defined(__gfx1010__) && !defined(__gfx1012__) )
++#if ( !defined(__gfx1010__) && !defined(__gfx1012__) && !defined(__gfx1030__) )
  // DPP-based wavefront reduction maximum
  template <unsigned int WFSIZE>
  __device__ __forceinline__ void rocsparse_wfreduce_max(int* maximum)
@@ -20,7 +20,7 @@ index 9e8c8cf..f883de1 100644
      if(trans == rocsparse_operation_none)
      {
 -#ifndef __HIP_ARCH_GFX1030__
-+#if ( !defined(__HIP_ARCH_GFX1030__) && !defined(__gfx1010__) && !defined(__gfx1012__) )
++#if ( !defined(__gfx1010__) && !defined(__gfx1012__) && !defined(__gfx1030__) )
          if(bsr_dim == 2)
          {
              bsrmvn_2x2(handle,
