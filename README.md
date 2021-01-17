@@ -16,7 +16,7 @@ Execute `source env.sh` to setup environment variables.
 Install dependencies
 
 ```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip python-is-python3
 ```
 
 Then execute bash scripts by order number.
@@ -55,5 +55,6 @@ Additional documentations:
 * [gfx803](gfx803) - AMD drop gfx803 offical support on ROCm-4.0, since gfx803 is my only GPU, I need find a way to let it work longer.
 * [navi10](navi10) - Experiment scripts for building navi10 GPU.
 * [navi14](navi14) - Experiment scripts for building navi14 GPU.
+* [navi21](navi21) - Experiment scripts for building navi21 GPU.
 * [check](check) - Codes for check whether ROCm can run successfully.
 
