@@ -44,6 +44,10 @@ cp $ROCM_GIT_DIR/ROCK-Kernel-Driver/include/uapi/linux/kfd_ioctl.h $TARGET_DIR/i
 mkdir -p $TARGET_DIR/amd/amdkcl/dma-buf
 cp $ROCM_GIT_DIR/ROCK-Kernel-Driver/drivers/dma-buf/dma-resv.c $TARGET_DIR/amd/amdkcl/dma-buf/
 
+cd $TARGET_DIR/amd/dkms/
+bash autogen.sh
+cd ../..
+
 cd ../../..
 cp ../../rock-dkms_4.0-23_all . -R
 cp -R usr rock-dkms_4.0-23_all/
