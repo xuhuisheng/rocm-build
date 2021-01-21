@@ -1,0 +1,1 @@
+KERNEL=="kfd", GROUP=="video", MODE="0660"
