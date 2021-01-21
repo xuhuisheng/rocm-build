@@ -1,0 +1,2 @@
+/etc/modprobe.d/blacklist-radeon.conf
+/etc/udev/rules.d/70-amdgpu.rules
