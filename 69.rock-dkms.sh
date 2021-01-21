@@ -39,8 +39,10 @@ cp -R $ROCM_GIT_DIR/ROCK-Kernel-Driver/include/linux/dma-resv.h $TARGET_DIR/incl
 cp -R $ROCM_GIT_DIR/ROCK-Kernel-Driver/include/kcl/reservation.h $TARGET_DIR/include/linux/
 mkdir -p $TARGET_DIR/include/uapi/drm
 cp $ROCM_GIT_DIR/ROCK-Kernel-Driver/include/uapi/drm/amdgpu_drm.h $TARGET_DIR/include/uapi/drm/
-mkdir -p TARGET_DIR/include/uapi/linux
+mkdir -p $TARGET_DIR/include/uapi/linux
 cp $ROCM_GIT_DIR/ROCK-Kernel-Driver/include/uapi/linux/kfd_ioctl.h $TARGET_DIR/include/uapi/linux/
+mkdir -p $TARGET_DIR/amd/amdkcl/dma-buf
+cp $ROCM_GIT_DIR/ROCK-Kernel-Driver/drivers/dma-buf/dma-resv.c $TARGET_DIR/amd/amdkcl/dma-buf/
 
 cd ../../..
 cp ../../rock-dkms_4.0-23_all . -R
