@@ -12,9 +12,9 @@ START_TIME=`date +%s`
 
 cp -R ../../half_1.12.0_amd64 $ROCM_BUILD_DIR/half/
 
-# mkdir -p $ROCM_BUILD_DIR/half/half_1.12.0_amd64/opt/rocm/
+mkdir -p $ROCM_BUILD_DIR/half/half_1.12.0_amd64/opt/rocm/include/
 
-# cp -R $ROCM_BUILD_DIR/half/half/include $ROCM_BUILD_DIR/half/half_1.12.0_amd64/opt/rocm/
+cp -R $ROCM_GIT_DIR/half/include/half.hpp $ROCM_BUILD_DIR/half/half_1.12.0_amd64/opt/rocm/include/
 
 dpkg -b half_1.12.0_amd64
 
