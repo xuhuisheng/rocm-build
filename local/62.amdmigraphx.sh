@@ -10,7 +10,7 @@ pushd .
 
 cd $ROCM_GIT_DIR/AMDMIGraphX
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/68.amdmigraphx.patch
+patch -p1 -N < $ROCM_PATCH_DIR/62.amdmigraphx.patch
 cd $ROCM_BUILD_DIR/amdmigraphx
 
 START_TIME=`date +%s`
