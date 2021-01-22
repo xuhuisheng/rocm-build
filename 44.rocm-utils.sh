@@ -2,17 +2,15 @@
 
 set -e
 
-mkdir -p $ROCM_BUILD_DIR/meta
-cd $ROCM_BUILD_DIR/meta
+mkdir -p $ROCM_BUILD_DIR/rocm-utils
+cd $ROCM_BUILD_DIR/rocm-utils
 pushd .
 
 START_TIME=`date +%s`
 
-cp ../../rocm-utils_4.0.0_amd64 . -R
-# cp ../../rocm-dev-3.8.0_amd64 . -R
+cp -R ../../meta/rocm-utils_4.0.0.40000-23_amd64 .
 
-dpkg -b rocm-utils_4.0.0_amd64
-# dpkg -b rocm-dev-3.8.0_amd64
+dpkg -b rocm-utils_4.0.0.40000-23_amd64
 
 sudo dpkg -i *.deb
 

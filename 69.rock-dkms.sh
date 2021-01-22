@@ -49,10 +49,8 @@ bash autogen.sh
 cd ../..
 
 cd ../../..
-cp ../../rock-dkms_4.0-23_all . -R
+cp ../../meta/rock-dkms_4.0-23_all . -R
 cp -R usr rock-dkms_4.0-23_all/
 
 dpkg -b rock-dkms_4.0-23_all
-
-
 
