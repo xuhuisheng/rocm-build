@@ -1,0 +1,11 @@
+Package: rocm-libs
+Version: 4.0.0.40000-23
+Section: devel
+Priority: optional
+Architecture: amd64
+Depends: hipblas, hipcub, hipsparse, miopen-hip, rocalution, rocblas, rocfft, rocprim, rocrand, rocsolver, rocsparse, rocthrust
+Homepage: https://github.com/RadeonOpenCompute/ROCm
+Installed-Size: 13
+Maintainer: Advanced Micro Devices, Inc.
+Description: Radeon Open Compute (ROCm) Runtime software stack
+
