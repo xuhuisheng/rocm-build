@@ -15,12 +15,12 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocBLAS
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/22.rocblas.patch
+git apply $ROCM_PATCH_DIR/22.rocblas.patch
 cd $ROCM_BUILD_DIR/rocblas
 
 cd /home/work/Tensile
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/../navi14/tensile.patch
+git apply $ROCM_PATCH_DIR/../navi14/tensile.patch
 cd $ROCM_BUILD_DIR/rocblas
 
 #rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
