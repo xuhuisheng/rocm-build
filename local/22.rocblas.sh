@@ -13,11 +13,11 @@ mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
 
-# cd $ROCM_GIT_DIR/rocBLAS
+cd $ROCM_GIT_DIR/rocBLAS
 git reset --hard
-git apply --directory=$ROCM_GIT_DIR/rocBLAS/ $ROCM_PATCH_DIR/22.rocblas-1.patch
-git apply --directory=$ROCM_GIT_DIR/rocBLAS/ $ROCM_PATCH_DIR/22.rocblas-2.patch
-# cd $ROCM_BUILD_DIR/rocblas
+git apply $ROCM_PATCH_DIR/22.rocblas-1.patch
+git apply $ROCM_PATCH_DIR/22.rocblas-2.patch
+cd $ROCM_BUILD_DIR/rocblas
 
 rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
