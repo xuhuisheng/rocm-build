@@ -31,7 +31,7 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DCMAKE_INSTALL_PREFIX=rocblas-install \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G Unix Makefiles \
+    -G "Unix Makefiles" \
     $ROCM_GIT_DIR/rocBLAS
 make -j
 make package
