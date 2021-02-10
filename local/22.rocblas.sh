@@ -23,6 +23,8 @@ rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 START_TIME=`date +%s`
 
+export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
@@ -39,7 +41,6 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DCPACK_SET_DESTDIR=OFF \
     -DCMAKE_PREFIX_PATH=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=rocblas-install \
-    -DCPACK_DEBIAN_PACKAGE_RELEASE=93c82939 \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
