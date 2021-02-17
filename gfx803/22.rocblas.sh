@@ -16,7 +16,6 @@ pushd .
 cd $ROCM_GIT_DIR/rocBLAS
 git reset --hard
 git apply $ROCM_PATCH_DIR/22.rocblas-1.patch
-git apply $ROCM_PATCH_DIR/22.rocblas-2.patch
 cd $ROCM_BUILD_DIR/rocblas
 
 # cd /home/work/Tensile
