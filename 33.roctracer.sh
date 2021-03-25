@@ -10,7 +10,7 @@ set -e
 #curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
 #sudo python2 get-pip.py
 #pip install CppHeaderParser -i https://pypi.tuna.tsinghua.edu.cn/simple
-sudo apt install -y python3-pip
+sudo apt install -y python3-pip python-is-python3
 pip3 install cppheaderparser
 
 mkdir -p $ROCM_BUILD_DIR/roctracer
@@ -18,11 +18,6 @@ cd $ROCM_BUILD_DIR/roctracer
 pushd .
 
 START_TIME=`date +%s`
-
-cd $ROCM_GIT_DIR/roctracer
-git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/33.roctracer.patch
-cd $ROCM_BUILD_DIR/roctracer
 
 ROCTRACER_ROOT=$ROCM_GIT_DIR/roctracer
 BUILD_TYPE=Release

@@ -1,0 +1,26 @@
+diff --git a/library/src/include/common.h b/library/src/include/common.h
+index 8a4ccda..12aeac8 100644
+--- a/library/src/include/common.h
++++ b/library/src/include/common.h
+@@ -148,7 +148,7 @@ __device__ __forceinline__ void rocsparse_blockreduce_min(int i, T* data)
+     if(BLOCKSIZE >   1) { if(i <   1 && i +   1 < BLOCKSIZE) { data[i] = min(data[i], data[i +   1]); } __syncthreads(); }
+ }
+ 
+-#ifndef __HIP_ARCH_GFX1030__
++#if ( !defined(__gfx1010__) && !defined(__gfx1012__) && !defined(__gfx1030__) )
+ // DPP-based wavefront reduction maximum
+ template <unsigned int WFSIZE>
+ __device__ __forceinline__ void rocsparse_wfreduce_max(int* maximum)
+diff --git a/library/src/level2/rocsparse_bsrmv.hpp b/library/src/level2/rocsparse_bsrmv.hpp
+index 9e8c8cf..f883de1 100644
+--- a/library/src/level2/rocsparse_bsrmv.hpp
++++ b/library/src/level2/rocsparse_bsrmv.hpp
+@@ -1941,7 +1941,7 @@ rocsparse_status rocsparse_bsrmv_template(rocsparse_handle          handle,
+     // Run different bsrmv kernels
+     if(trans == rocsparse_operation_none)
+     {
+-#ifndef __HIP_ARCH_GFX1030__
++#if ( !defined(__gfx1010__) && !defined(__gfx1012__) && !defined(__gfx1030__) )
+         if(bsr_dim == 2)
+         {
+             bsrmvn_2x2(handle,

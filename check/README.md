@@ -1,5 +1,7 @@
 # check
 
+[中文版](README_zh_CN.md)
+
 Collect codes for check rocm-libs
 
 * rocBLAS

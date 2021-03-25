@@ -12,7 +12,7 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocSPARSE
 git reset --hard
-patch -p1 -N < $ROCM_PATCH_DIR/../navi14/25.rocsparse.patch
+git apply $ROCM_PATCH_DIR/../patch/25.rocsparse.patch
 cd $ROCM_BUILD_DIR/rocsparse
 
 START_TIME=`date +%s`
