@@ -1,15 +1,25 @@
-# rocm-build 4.0.0
+# rocm-build 4.1.0
+
+[中文版](README_zh_CN.md)
 
 Thanks [rigtorp](https://github.com/rigtorp) providing intial build steps <https://gist.github.com/rigtorp/d9483af100fb77cee57e4c9fa3c74245> , which contains build steps for HIP on ROCm-3.6.
 
 Thanks [jlgreathouse](https://github.com/jlgreathouse) providing <https://github.com/RadeonOpenCompute/Experimental_ROC> , which contains build steps for ROCm-2.0.
 
-My environment is Ubuntu-20.04.1.
+My environment is Ubuntu-20.04.2.
 
 Please download sources using repo <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>,
 and change the path of source in `env.sh`.
 
-Execute `source env.sh` to setup environment variables, then execute bash scripts by order number.
+Execute `source env.sh` to setup environment variables.
+
+Install dependencies
+
+```
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip python-is-python3
+```
+
+Then execute bash scripts by order number.
 
 Good luck.
 
@@ -22,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.0.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.1.x
 repo sync
 ```
 
@@ -40,9 +50,11 @@ export PATH=~/bin:$PATH
 
 ---
 
-Install dependencies
+Additional documentations:
 
-```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
-```
+* [gfx803](gfx803) - AMD drop gfx803 offical support on ROCm-4.0, since gfx803 is my only GPU, I need find a way to let it work longer.
+* [navi10](navi10) - Experiment scripts for building navi10 GPU.
+* [navi14](navi14) - Experiment scripts for building navi14 GPU.
+* [navi21](navi21) - Experiment scripts for building navi21 GPU.
+* [check](check) - Codes for check whether ROCm can run successfully.
 
