@@ -6,10 +6,13 @@ import torch.nn as nn
 import torch.utils.data as Data
 import torch.optim as optim
 from torch.nn import init
+import time
+
+index = 0
 
 num_inputs = 2
 # num_examples = 1000
-num_examples = 800
+num_examples = 6
 true_w = [1, 1]
 true_b = 10
 # features = torch.tensor(np.random.normal(0, 1, (num_examples, num_inputs)), dtype = torch.float)
@@ -17,7 +20,7 @@ features = torch.tensor(np.ones((num_examples, num_inputs)), dtype = torch.float
 labels = true_w[0] * features[:, 0] + true_w[1] * features[:, 1] + true_b
 # labels += torch.tensor(np.random.normal(0, 0.01, size = labels.size()), dtype = torch.float)
 
-batch_size = 32
+batch_size = 2
 dataset = Data.TensorDataset(features, labels)
 data_iter = Data.DataLoader(dataset, batch_size, shuffle = True)
 
@@ -48,20 +51,46 @@ for epoch in range(1, num_epochs + 1):
         Y = Y.to(device)
         output = net(X)
         l = loss(output, Y.view(-1, 1))
+        
         if l.item() > 0:
+            print("       ###########################")
             print("     X %s" % X)
             print("     Y %s" % Y)
             print("weight %s" % net[0].weight.data)
             print("  bias %s" % net[0].bias.data)
             print("output %s" % output)
             print("     l %s" % l)
-        #print("before %s, %s, %s" % (l.item(), net[0].weight.data, net[0].bias.data))
+
+        time.sleep(1)
+        # print("before %s, %s, %s" % (l.item(), net[0].weight.data, net[0].bias.data))
         print("before %s" % l.item())
+        print("   before zero grad")
         optimizer.zero_grad()
+        print("   before backward")
         l.backward()
-        #print("after %s, %s, %s" % (l.item(), net[0].weight.data, net[0].bias.data))
-        print("after %s" % l.item())
+        # print("after %s, %s, %s" % (l.item(), net[0].weight.data, net[0].bias.data))
+        # print("after %s" % l.item())
+        print("   before opti step")
         optimizer.step()
+        index += 1
+        if index == 2:
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("     X %s" % X)
+            print("     Y %s" % Y)
+            print("weight %s %s" % (net[0].weight.data, net[0].weight.grad))
+            print("  bias %s %s" % (net[0].bias.data, net[0].bias.grad))
+            print("output %s" % output)
+            print("     l %s" % l)
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+
     print('epoch %d, loss: %f' % (epoch, l.item()))
 
 dense = net[0]

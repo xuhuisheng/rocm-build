@@ -8,7 +8,7 @@ int main()
 {
     int v = 0;
     rocrand_get_version(&v);
-    printf("[rocRAND]   %d\n", v);
+    printf("[rocRAND]    %d\n", v);
     return 0;
 }
 
