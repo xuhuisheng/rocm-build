@@ -3,7 +3,7 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2020-11-21
+Date: 2021-03-27
 
 |software       |description   |
 |---------------|--------------|
@@ -42,53 +42,59 @@ Date: 2020-11-21
 
 ### Workaround
 
-* **Workaround 1**: I rebuild rocBLAS with BUILD_WITH_TENSILE_HOST=false, and the problem dispeared, Maybe the gfx803 r9nano_*.yml is out-of-date? This way caused compiling failure on ROCm-3.9.
-* **Workaround 2**: keep BUILD_WITH_TENSILE_HOST=true, delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*_SB.yaml from rocBLAS, and issue resolved. If I just keep one solution of this file, issue reproduced.
+Delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml from rocBLAS, rebuild rocBLAS, issue resolved. If I just keep one solution of this file, issue reproduced.
 
 ---
 
-## ROCm-3.9+ crashed with gfx803
+## ROCm-4.1 crashed with gfx803
 
 ### Description
 
-If you installed ROCm-3.9+ with gfx803, you will crash on very beginning of running tensorflow or pytorch.
+If you installed ROCm-4.1 with gfx803, you will crash on very beginning of running tensorflow or pytorch.
 Error info as follows:
 
 ```
-work@0b7758c3094d:~/test/examples/mnist$ python3 main.py
-/src/external/hip-on-vdi/rocclr/hip_code_object.cpp:120: guarantee(false && "hipErrorNoBinaryForGpu: Coudn't find binary for current devices!")
+work@d70a3f3f5916:~/test/examples/mnist$ python main.py
+"hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
 Aborted (core dumped)
+
 ```
 
 ### Reason of problem
 
-rocSPARSE placed CACHED AMDGPU_TARGETS after include Dependencies.cmake, so it is always skipped.
-The AMDGPU_TARGETS from include Dependencies.cmake is "gfx900;gfx906;gfx908", not including gfx803.
-So rocSPARSE didnot compile gfx803 binary image.
+The rocRAND removed gfx803 from AMDGPU_TARGETS. So rocRAND didnot compile gfx803 binary image.
 
 ### Issue (closed)
 
-<https://github.com/RadeonOpenCompute/ROCm/issues/1269>
+-
 
 ### Pull request (merged)
 
-<https://github.com/ROCmSoftwarePlatform/rocSPARSE/pull/213>
+* merged <https://github.com/ROCmSoftwarePlatform/rocRAND/pull/170>
+* closed <https://github.com/ROCmSoftwarePlatform/rocRAND/pull/159>
 
 ### Workaround
 
-There are other issues on develop branch of rocSPARSE.
-We have to switch to rocm-4.0.x branch then update CMakeLists.txt with the patch.
-<https://github.com/ROCmSoftwarePlatform/rocSPARSE/commit/f8791e9b09c4ac6d72f56fb3c6663273dce2aea5#commitcomment-43334853>
+Rebuild rocRAND with AMDGPU_TARGETS=gfx803
 
-The issue of develop branch fixed for gfx803 <https://github.com/ROCmSoftwarePlatform/rocSPARSE/commit/7de15942cf9fe0fb7db80e0c45ebb4d1e3086668>
+```
+git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
+mkdir rocRAND/build
+cd rocRAND/build
 
-If you want to compile rocSPARSE manually, can use my forked rocSPARSE repository, the patch had be commited to the default branch.
+CXX=/opt/rocm/hip/bin/hipcc cmake \
+    -DAMDGPU_TARGETS="gfx803" \
+    -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
+    -DCMAKE_PREFIX_PATH="/opt/rocm/;/opt/rocm/llvm \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCPACK_SET_DESTDIR=OFF \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCMAKE_INSTALL_PREFIX=/opt/rocm \
+    -G "Unix Makefiles" \
+    ..
+make -j
+make package
+sudo dpkg -i *.deb
 
-1. Install ROCm <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#ubuntu>
-2. At least install rocm-dev and rocm-libs `sudo apt install rocm-dev rocm-libs`
-3. `git clone https://github.com/xuhuisheng/rocSPARSE`
-4. `cd rocSPARSE`
-5. `bash install.sh -di`
-
----
+```
 
