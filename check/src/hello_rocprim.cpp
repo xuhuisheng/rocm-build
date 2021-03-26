@@ -4,7 +4,7 @@
 int main()
 {
     int v = rocprim::version();
-    printf("[rocPRIM]   %d\n", v);
+    printf("[rocPRIM]    %d\n", v);
     return 0;
 }
 
