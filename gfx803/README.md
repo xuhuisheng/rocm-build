@@ -44,6 +44,47 @@ Date: 2021-03-27
 
 Delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml from rocBLAS, rebuild rocBLAS, issue resolved. If I just keep one solution of this file, issue reproduced.
 
+```
+git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
+cd rocBLAS
+git checkout rocm-4.1.x
+
+bash install.sh -d
+
+rm -rf library/src/blas3/Tensile/Logic/asm_full/r9nano*
+
+mkdir build
+cd build
+
+export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+export CPACK_RPM_PACKAGE_RELEASE=93c82939
+
+CXX=/opt/rocm/bin/hipcc cmake -lpthread \
+    -DAMDGPU_TARGETS=gfx803 \
+    -DROCM_PATH=/opt/rocm \
+    -DTensile_LOGIC=asm_full \
+    -DTensile_ARCHITECTURE=all \
+    -DTensile_CODE_OBJECT_VERSION=V3 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_WITH_TENSILE_HOST=ON \
+    -DTensile_LIBRARY_FORMAT=yaml \
+    -DRUN_HEADER_TESTING=OFF \
+    -DTensile_COMPILER=hipcc \
+    -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
+    -DCPACK_SET_DESTDIR=OFF \
+    -DCMAKE_PREFIX_PATH=/opt/rocm \
+    -DCMAKE_INSTALL_PREFIX=rocblas-install \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCPACK_GENERATOR=DEB \
+    -G "Unix Makefiles" \
+    ..
+
+make -j
+make package
+sudo dpkg -i *.deb
+
+```
+
 ---
 
 ## ROCm-4.1 crashed with gfx803
@@ -79,8 +120,13 @@ Rebuild rocRAND with AMDGPU_TARGETS=gfx803
 
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
-mkdir rocRAND/build
-cd rocRAND/build
+cd rocRAND
+git checkout rocm-4.1.x
+
+bash install -d
+
+mkdir build
+cd build
 
 CXX=/opt/rocm/hip/bin/hipcc cmake \
     -DAMDGPU_TARGETS="gfx803" \
