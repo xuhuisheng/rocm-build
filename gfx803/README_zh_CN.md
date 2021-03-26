@@ -44,6 +44,48 @@
 
 删除rocBLAS中的 library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml ，重新编译rocBLAS，就能解决问题。即使只保留一个r9nano的文件也会重现问题。
 
+```
+git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
+cd rocBLAS
+git checkout rocm-4.1.x
+
+bash install.sh -d
+
+rm -rf library/src/blas3/Tensile/Logic/asm_full/r9nano*
+
+mkdir build
+cd build
+
+export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+export CPACK_RPM_PACKAGE_RELEASE=93c82939
+
+CXX=/opt/rocm/bin/hipcc cmake -lpthread \
+    -DAMDGPU_TARGETS=gfx803 \
+    -DROCM_PATH=/opt/rocm \
+    -DTensile_LOGIC=asm_full \
+    -DTensile_ARCHITECTURE=all \
+    -DTensile_CODE_OBJECT_VERSION=V3 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_WITH_TENSILE_HOST=ON \
+    -DTensile_LIBRARY_FORMAT=yaml \
+    -DRUN_HEADER_TESTING=OFF \
+    -DTensile_COMPILER=hipcc \
+    -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
+    -DCPACK_SET_DESTDIR=OFF \
+    -DCMAKE_PREFIX_PATH=/opt/rocm \
+    -DCMAKE_INSTALL_PREFIX=rocblas-install \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCPACK_GENERATOR=DEB \
+    -G "Unix Makefiles" \
+    ..
+
+make -j
+make package
+sudo dpkg -i *.deb
+
+```
+
+
 ---
 
 ## ROCm-4.1版本下使用gfx803显卡会直接崩溃
@@ -79,8 +121,13 @@ rocRAND删除了AMDGPU_TARGETS中的gfx803。rocRAND就不会为gfx803编译对�
 
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
-mkdir rocRAND/build
-cd rocRAND/build
+cd rocRAND
+git checkout rocm-4.1.x
+
+bash install -d
+
+mkdir build
+cd build
 
 CXX=/opt/rocm/hip/bin/hipcc cmake \
     -DAMDGPU_TARGETS="gfx803" \
