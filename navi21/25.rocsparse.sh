@@ -12,14 +12,18 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocSPARSE
 git reset --hard
-git apply $ROCM_PATCH_DIR/../patch/25.rocsparse.patch
+git apply $ROCM_PATCH_DIR/25.rocsparse-gfx10-1.patch
 cd $ROCM_BUILD_DIR/rocsparse
 
 START_TIME=`date +%s`
 
+export CPACK_DEBIAN_PACKAGE_RELEASE=f9aa90e
+export CPACK_RPM_PACKAGE_RELEASE=f9aa90e
+
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DHIP_CLANG_INCLUDE_PATH=$ROCM_INSTALL_DIR/llvm/include \
+    -DBUILD_CLIENTS_SAMPLES=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
     -DCMAKE_INSTALL_PREFIX=rocsparse-install \
