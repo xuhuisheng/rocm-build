@@ -6,7 +6,7 @@ echo "|====|"
 echo "|SLOW|"
 echo "|====|"
 
-sudo apt install -y gfortran python3-venv
+sudo apt install -y gfortran python3-venv libtinfo-dev
 #bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 mkdir -p $ROCM_BUILD_DIR/rocblas
@@ -15,17 +15,20 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocBLAS
 git reset --hard
-git apply $ROCM_PATCH_DIR/22.rocblas-1.patch
+git apply $ROCM_PATCH_DIR/22.rocblas-ninja-1.patch
 cd $ROCM_BUILD_DIR/rocblas
 
-# cd /home/work/Tensile
-# git reset --hard
-# git apply $ROCM_PATCH_DIR/../navi10/tensile.patch
-# cd $ROCM_BUILD_DIR/rocblas
+cd $ROCM_GIT_DIR/Tensile
+git reset --hard
+git apply $ROCM_PATCH_DIR/22.tensile-gfx803-1.patch
+cd $ROCM_BUILD_DIR/rocblas
 
 rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 START_TIME=`date +%s`
+
+export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
@@ -34,6 +37,7 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DTensile_ARCHITECTURE=gfx803 \
     -DTensile_CODE_OBJECT_VERSION=V3 \
     -DCMAKE_BUILD_TYPE=Release \
+    -DTensile_TEST_LOCAL_PATH=$ROCM_GIT_DIR/Tensile \
     -DBUILD_WITH_TENSILE_HOST=ON \
     -DTensile_LIBRARY_FORMAT=yaml \
     -DRUN_HEADER_TESTING=OFF \
