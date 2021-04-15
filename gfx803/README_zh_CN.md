@@ -23,6 +23,8 @@
 * 2020-12-19，gfx803被从ROCm-4.0的官方支持名单中删除
 * <https://github.com/RadeonOpenCompute/ROCm/commit/2b7f806b106f2b19036bf8e7af4f3dad7bc6222e#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5L408>
 
+不想自己编译ROCm，也可以降级到ROCm-3.5.1，这儿有一份文档<https://github.com/boriswinner/RX580-rocM-tensorflow-ubuntu20.4-guide>。
+
 ---
 
 ## ROCm-3.7及以后，使用gfx803系列显卡会遇到各种训练失败的问题
@@ -85,7 +87,6 @@ sudo dpkg -i *.deb
 
 ```
 
-
 ---
 
 ## ROCm-4.1版本下使用gfx803显卡会直接崩溃
@@ -142,6 +143,59 @@ CXX=/opt/rocm/hip/bin/hipcc cmake \
 make -j
 make package
 sudo dpkg -i *.deb
+
+```
+
+---
+
+## Pytorch-1.8.1在gfx803下崩溃
+
+### 问题描述
+
+pytorch官方网站提供了一个beta版的Pytorch-1.8.1。 
+<https://pytorch.org/get-started/locally/>
+
+一运行就会报错。
+
+```
+/data/jenkins_workspace/centos_pipeline_job_4.0/rocm-rel-4.0/rocm-4.0-26-20210119/7.7/external/hip-on-vdi/rocclr/hip_code_object.cpp:120: guarantee(false && "hipErrorNoBinaryForGpu: Coudn't find binary for current devices!") 
+
+```
+
+### 问题原因
+
+官方pytorch-1.8.1没有提供gfx803二进制镜像。
+
+### 关联问题
+
+-
+
+### 关联补丁
+
+-
+
+### 解决方法
+
+使用PYTORCH_ROCM_ARCH=gfx803重新编译pytorch
+
+```
+sudo ln -f -s /usr/bin/python3 /usr/bin/python
+
+git clone https://github.com/pytorch/pytorch
+cd pytorch
+git checkout v1.8.1
+git submodule update --init --recursive
+
+sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
+pip3 install -r requirements.txt
+export PATH=/opt/rocm/bin:$PATH \
+    ROCM_PATH=/opt/rocm \
+    HIP_PATH=/opt/rocm/hip 
+export PYTORCH_ROCM_ARCH=gfx803
+python3 tools/amd_build/build_amd.py
+USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
+
+pip3 install dist/torch-1.8.0a0+56b43f4-cp38-cp38-linux_x86_64.whl
 
 ```
 
