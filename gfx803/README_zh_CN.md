@@ -133,7 +133,7 @@ cd build
 CXX=/opt/rocm/hip/bin/hipcc cmake \
     -DAMDGPU_TARGETS="gfx803" \
     -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
-    -DCMAKE_PREFIX_PATH="/opt/rocm/;/opt/rocm/llvm \
+    -DCMAKE_PREFIX_PATH="/opt/rocm/;/opt/rocm/llvm" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
