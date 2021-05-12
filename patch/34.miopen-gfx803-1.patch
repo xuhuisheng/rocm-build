@@ -1,0 +1,14 @@
+diff --git a/src/include/miopen/hip_build_utils.hpp b/src/include/miopen/hip_build_utils.hpp
+index ce7cbee7a..b3edbceb2 100644
+--- a/src/include/miopen/hip_build_utils.hpp
++++ b/src/include/miopen/hip_build_utils.hpp
+@@ -68,7 +68,7 @@ struct LcOptionTargetStrings
+     const std::string targetId;
+     LcOptionTargetStrings(const TargetProperties& target)
+         : device(target.Name()),
+-          xnack(std::string{":xnack"} + (target.Xnack() ? "+" : "-")),
++          xnack(target.Name() == std::string("gfx803") ? "" : (target.Xnack() ? ":xnack+" : ":xnack-")),
+           sramecc(std::string{":sramecc"} + (target.Sramecc() ? "+" : "-")),
+ #if MIOPEN_USE_COMGR
+           targetId(device + (std::string{":sramecc"} + (target.SrameccReported() ? "+" : "-")) +
+
