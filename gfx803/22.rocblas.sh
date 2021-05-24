@@ -27,8 +27,8 @@ rm -rf $ROCM_GIT_DIR/rocBLAS/library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 START_TIME=`date +%s`
 
-export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
-export CPACK_RPM_PACKAGE_RELEASE=93c82939
+#export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+#export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
@@ -59,4 +59,3 @@ EXECUTING_TIME=`expr $END_TIME - $START_TIME`
 echo "elapse : "$EXECUTING_TIME"s"
 
 popd
-
