@@ -1,8 +1,8 @@
 diff --git a/Tensile/Common.py b/Tensile/Common.py
-index 0c8fe9c4..fc557839 100644
+index 1534d48b..77bba3e4 100644
 --- a/Tensile/Common.py
 +++ b/Tensile/Common.py
-@@ -196,7 +196,7 @@ globalParameters["MaxDepthU"] = 256               # max DepthU value to allow
+@@ -201,7 +201,7 @@ globalParameters["MaxDepthU"] = 256               # max DepthU value to allow
  globalParameters["ShortNames"] = False            # on windows kernel names can get too long; =True will convert solution/kernel names to serial ids
  globalParameters["MergeFiles"] = True             # F=store every solution and kernel in separate file; T=store all solutions in single file
  globalParameters["MaxFileName"] = 128             # If a file name would be longer than this, shorten it with a hash.
@@ -12,10 +12,10 @@ index 0c8fe9c4..fc557839 100644
  globalParameters["ClientBuildPath"] = "0_Build"                   # subdirectory for host code build directory.
  globalParameters["NewClient"] = 2                                 # 1=Run old+new client, 2=run new client only (All In)
 diff --git a/Tensile/TensileCreateLibrary.py b/Tensile/TensileCreateLibrary.py
-index bd5de810..5b235ff4 100644
+index acf63c8e..ef96d22c 100644
 --- a/Tensile/TensileCreateLibrary.py
 +++ b/Tensile/TensileCreateLibrary.py
-@@ -264,7 +264,7 @@ def prepAsmOldClient():
+@@ -238,7 +238,7 @@ def prepAsmOldClient():
      assemblerFile.write("shift\n")
      assemblerFile.write("ASM=%s\n"%globalParameters["AssemblerPath"])
      # cannot use globalParameters["CurrentISA"] because it might be (0,0,0)
@@ -24,9 +24,9 @@ index bd5de810..5b235ff4 100644
      assemblerFile.write( \
        "${ASM} -x assembler -target amdgcn-amd-amdhsa %s $@ -c -o $f.o $f.s\n" % \
        ("-mllvm --amdhsa-code-object-version=2" if \
-@@ -1338,7 +1338,7 @@ def TensileCreateLibrary():
-   argParser.add_argument("RuntimeLanguage", help="Which runtime language?", choices=["OCL", "HIP", "HSA"])
-   argParser.add_argument("--cxx-compiler",           dest="CxxCompiler",       choices=["hcc", "hipcc"],       action="store", default="hipcc")
+@@ -1303,7 +1303,7 @@ def TensileCreateLibrary():
+   argParser.add_argument("--cxx-compiler",           dest="CxxCompiler",       choices=["hipcc"],       action="store", default="hipcc")
+   argParser.add_argument("--cmake-cxx-compiler",     dest="CmakeCxxCompiler",  action="store")
    argParser.add_argument("--code-object-version",    dest="CodeObjectVersion", choices=["V2", "V3"], action="store", default="V3")
 -  argParser.add_argument("--architecture",           dest="Architecture",      choices=["all", "gfx000", "gfx803", "gfx900", "gfx906:xnack-", "gfx908:xnack-"], action="store", default="all")
 +  argParser.add_argument("--architecture",           dest="Architecture",      choices=["all", "gfx000", "gfx803", "gfx900", "gfx906:xnack-", "gfx908:xnack-", "gfx1010", "gfx1012", "gfx1030"], action="store", default="all")
