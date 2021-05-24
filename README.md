@@ -1,4 +1,4 @@
-# rocm-build 4.1.0
+# rocm-build 4.2
 
 [中文版](README_zh_CN.md)
 
@@ -16,7 +16,7 @@ Execute `source env.sh` to setup environment variables.
 Install dependencies
 
 ```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip python-is-python3
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
 
 Then execute bash scripts by order number.
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.1.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.2.x
 repo sync
 ```
 

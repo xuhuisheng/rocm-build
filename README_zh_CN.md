@@ -1,4 +1,4 @@
-# rocm-build 4.1.0
+# rocm-build 4.2
 
 [English Version](README.md)
 
@@ -16,7 +16,7 @@
 安装依赖
 
 ```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip python-is-python3
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
 
 然后按照序号顺序执行脚本。
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.1.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.2.x
 repo sync
 ```
 
