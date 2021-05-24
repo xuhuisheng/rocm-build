@@ -48,6 +48,11 @@ chmod a+x ~/bin/repo
 export PATH=~/bin:$PATH
 ```
 
+注意：从ROCm-4.2开始，编译rocBLAS需要cmake-3.16.8。ubuntu-20.04默认的cmake版本是cmake-3.16.3。
+需要下载<https://cmake.org/files/v3.16/cmake-3.16.8-Linux-x86_64.tar.gz>，解压到`/home/work/local`目录，
+再执行`source env.sh`将这个cmake加入PATH环境变量。
+如果想要使用其他路径，可以修改`env.sh`。
+
 ---
 
 更多文档:
