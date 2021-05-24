@@ -59,9 +59,7 @@ export PATH=~/bin:$PATH
 再执行`source env.sh`将这个cmake加入PATH环境变量。
 如果想要使用其他路径，可以修改`env.sh`。
 
----
-
-更多文档:
+### 更多文档:
 
 * [gfx803](gfx803/README_zh_CN.md) - ROCm-4.0不再支持gfx803显卡，我只有一块RX580，要研究怎么让gfx803苟延残喘。
 * [navi10](navi10/README_zh_CN.md) - 构建navi10的试验脚本。

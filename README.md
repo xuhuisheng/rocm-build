@@ -59,9 +59,7 @@ We have to download <https://cmake.org/files/v3.16/cmake-3.16.8-Linux-x86_64.tar
 and execute `source env.sh` to add custom cmake to PATH environment variables.
 If you want to use other location, please modify `env.sh`.
 
----
-
-Additional documentations:
+### Additional documentations:
 
 * [gfx803](gfx803) - AMD drop gfx803 offical support on ROCm-4.0, since gfx803 is my only GPU, I need find a way to let it work longer.
 * [navi10](navi10) - Experiment scripts for building navi10 GPU.
