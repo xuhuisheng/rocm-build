@@ -10,7 +10,7 @@
 
 ---
 
-代码基于 ROCm-4.1.0，请参考 <https://github.com/xuhuisheng/rocm-build/blob/master/README_zh_CN.md> 准备构建环境，OS是 Ubuntu-20.04.2。
+代码基于 ROCm-4.2.0，请参考 <https://github.com/xuhuisheng/rocm-build/blob/master/README_zh_CN.md> 准备构建环境，OS是 Ubuntu-20.04.2。
 
 提前说一句，构建ROCm很花时间，而且需要大内存。如果内存小于32G，建议使用swap交换内存，避免内存不足。
 虽然swap交换内存会让构建花费更长时间，但是至少不会崩。

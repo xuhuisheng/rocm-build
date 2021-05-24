@@ -10,7 +10,7 @@ No, I didnot have a navi21 GPU yet, So I cannot test it. Currently I can just co
 
 ---
 
-The codes based on ROCm-4.1.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.2.
+The codes based on ROCm-4.2.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.2.
 
 OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
 This caused compiling even more slower, but it wont break.
