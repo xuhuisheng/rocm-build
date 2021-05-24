@@ -1,11 +1,10 @@
 Architecture: amd64
-Depends: rocminfo, rocm-clang-ocl
+Depends: hipblas, hipcub, hipsparse, miopen-hip, rccl, rocalution, rocblas, rocfft, rocprim, rocrand, rocsolver, rocsparse, rocthrust
 Description: Radeon Open Compute (ROCm) Runtime software stack
 Homepage: https://github.com/RadeonOpenCompute/ROCm
 Maintainer: Advanced Micro Devices, Inc.
-Package: rocm-utils
+Package: rocm-libs
 Priority: optional
 Section: devel
-Version: 4.1.0.40100-26
+Version: 4.2.0.40200-21
 Installed-Size: 13
-

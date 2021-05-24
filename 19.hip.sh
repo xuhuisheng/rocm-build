@@ -3,6 +3,7 @@
 set -e
 
 sudo apt install -y rpm libfile-which-perl kmod doxygen
+sudo apt install -y libfile-basedir-perl libfile-copy-recursive-perl libfile-listing-perl libhttp-date-perl libipc-system-simple-perl libtimedate-perl liburi-encode-perl
 
 mkdir -p $ROCM_BUILD_DIR/hip
 cd $ROCM_BUILD_DIR/hip

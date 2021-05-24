@@ -6,7 +6,7 @@ echo "|====|"
 echo "|SLOW|"
 echo "|====|"
 
-sudo apt install -y gfortran python3-venv
+sudo apt install -y gfortran python3-venv libtinfo-dev
 #bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 mkdir -p $ROCM_BUILD_DIR/rocblas
@@ -27,8 +27,8 @@ cd $ROCM_BUILD_DIR/rocblas
 
 START_TIME=`date +%s`
 
-export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
-export CPACK_RPM_PACKAGE_RELEASE=93c82939
+# export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+# export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
 CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \

@@ -3,13 +3,13 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2021-03-27
+Date: 2021-05-24
 
 |software       |description   |
 |---------------|--------------|
-|OS             |Ubuntu-20.04.1|
+|OS             |Ubuntu-20.04.2|
 |Python         |3.8.5         |
-|Tensorflow-rocm|2.4.0         |
+|Tensorflow-rocm|2.4.3         |
 
 |hardware|Product Name|ISA              |CHIP IP|
 |--------|------------|-----------------|-------|
@@ -50,7 +50,7 @@ Delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml from rocBLAS, rebu
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout rocm-4.1.x
+git checkout rocm-4.2.x
 
 bash install.sh -d
 
@@ -58,9 +58,6 @@ rm -rf library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 mkdir build
 cd build
-
-export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
-export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
 CXX=/opt/rocm/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=gfx803 \
@@ -90,15 +87,15 @@ sudo dpkg -i *.deb
 
 ---
 
-## ROCm-4.1 crashed with gfx803
+## ROCm-4.1 and ROCm-4.2 crashed with gfx803
 
 ### Description
 
-If you installed ROCm-4.1 with gfx803, you will crash on very beginning of running tensorflow or pytorch.
+If you installed ROCm-4.1 and ROCm-4.2 with gfx803, you will crash on very beginning of running tensorflow or pytorch.
 Error info as follows:
 
 ```
-work@d70a3f3f5916:~/test/examples/mnist$ python main.py
+work@d70a3f3f5916:~/test/examples/mnist$ python3 main.py
 "hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
 Aborted (core dumped)
 
@@ -124,7 +121,7 @@ Rebuild rocRAND with AMDGPU_TARGETS=gfx803
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
 cd rocRAND
-git checkout rocm-4.1.x
+git checkout rocm-4.2.x
 
 bash install -d
 
@@ -146,6 +143,41 @@ make package
 sudo dpkg -i *.deb
 
 ```
+
+---
+
+## ROCm-4.2 crashed with gfx803
+
+### Description
+
+If you installed ROCm-4.2 with gfx803, you will crash on very beginning of running pytorch.
+Error info as follows:
+
+```
+warning: xnack 'Off' was requested for a processor that does not support it!
+warning: xnack 'Off' was requested for a processor that does not support it!
+"hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
+Aborted (core dumped)
+
+```
+
+### Reason of problem
+
+There are three possible for xnack: On, Off, Default. gfx803 only support Default because it didn't support xnack feature.
+But the MIOpen only provide On, Off. So There is a mismatch issue.
+
+### Issue
+
+-
+
+### Pull request
+
+-
+
+### Workaround
+
+Rebuild MIOpen with patch.
+Please refer `34.miopen.sh`.
 
 ---
 

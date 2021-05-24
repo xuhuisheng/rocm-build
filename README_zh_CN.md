@@ -1,10 +1,14 @@
-# rocm-build 4.1.0
+# rocm-build 4.2
 
 [English Version](README.md)
+
+### 感谢
 
 感谢 [rigtorp](https://github.com/rigtorp) 提供的 <https://gist.github.com/rigtorp/d9483af100fb77cee57e4c9fa3c74245> ，包含了编译HIP的构建步骤。
 
 感谢 [jlgreathouse](https://github.com/jlgreathouse) 提供的 <https://github.com/RadeonOpenCompute/Experimental_ROC> ，包含了ROCm-2.0的构建步骤。
+
+### 开始
 
 我的构建环境是 Ubuntu-20.04.2 。
 
@@ -16,7 +20,7 @@
 安装依赖
 
 ```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip python-is-python3
+sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
 ```
 
 然后按照序号顺序执行脚本。
@@ -25,14 +29,14 @@ sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 py
 
 ---
 
-使用repo下载源码
+### 使用repo下载源码
 
 ```
 sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.1.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.2.x
 repo sync
 ```
 
@@ -48,9 +52,14 @@ chmod a+x ~/bin/repo
 export PATH=~/bin:$PATH
 ```
 
----
+### cmake版本
 
-更多文档:
+**注意**：从ROCm-4.2开始，编译rocBLAS需要cmake-3.16.8。ubuntu-20.04默认的cmake版本是cmake-3.16.3。
+需要下载<https://cmake.org/files/v3.16/cmake-3.16.8-Linux-x86_64.tar.gz>，解压到`/home/work/local`目录，
+再执行`source env.sh`将这个cmake加入PATH环境变量。
+如果想要使用其他路径，可以修改`env.sh`。
+
+### 更多文档:
 
 * [gfx803](gfx803/README_zh_CN.md) - ROCm-4.0不再支持gfx803显卡，我只有一块RX580，要研究怎么让gfx803苟延残喘。
 * [navi10](navi10/README_zh_CN.md) - 构建navi10的试验脚本。

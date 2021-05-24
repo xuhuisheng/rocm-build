@@ -3,13 +3,13 @@
 
 [English Version](README.md)
 
-更新时间: 2021-03-27
+更新时间: 2021-05-24
 
-|软件           |备注   |
+|软件           |备注          |
 |---------------|--------------|
-|OS             |Ubuntu-20.04.1|
+|OS             |Ubuntu-20.04.2|
 |Python         |3.8.5         |
-|Tensorflow-rocm|2.4.0         |
+|Tensorflow-rocm|2.4.3         |
 
 |硬件    |产品名称    |指令集           |芯片   |
 |--------|------------|-----------------|-------|
@@ -49,7 +49,7 @@
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout rocm-4.1.x
+git checkout rocm-4.2.x
 
 bash install.sh -d
 
@@ -57,9 +57,6 @@ rm -rf library/src/blas3/Tensile/Logic/asm_full/r9nano*
 
 mkdir build
 cd build
-
-export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
-export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
 CXX=/opt/rocm/bin/hipcc cmake -lpthread \
     -DAMDGPU_TARGETS=gfx803 \
@@ -89,11 +86,11 @@ sudo dpkg -i *.deb
 
 ---
 
-## ROCm-4.1版本下使用gfx803显卡会直接崩溃
+## ROCm-4.1或ROCm-4.2版本下使用gfx803显卡会直接崩溃
 
 ### 问题描述
 
-如果在gfx803显卡环境安装ROCm-4.1，会在执行tensorflow或pytorch时直接崩溃。
+如果在gfx803显卡环境安装ROCm-4.1或ROCm-4.2，会在执行tensorflow或pytorch时直接崩溃。
 错误信息如下：
 
 ```
@@ -123,7 +120,7 @@ rocRAND删除了AMDGPU_TARGETS中的gfx803。rocRAND就不会为gfx803编译对�
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
 cd rocRAND
-git checkout rocm-4.1.x
+git checkout rocm-4.2.x
 
 bash install -d
 
@@ -145,6 +142,41 @@ make package
 sudo dpkg -i *.deb
 
 ```
+
+---
+
+## ROCm-4.2版本下使用gfx803显卡会直接崩溃
+
+### Description
+
+如果在gfx803显卡环境安装ROCm-4.2，会在执行pytorch时直接崩溃。
+错误信息如下：
+
+```
+warning: xnack 'Off' was requested for a processor that does not support it!
+warning: xnack 'Off' was requested for a processor that does not support it!
+"hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
+Aborted (core dumped)
+
+```
+
+### Reason of problem
+
+对于xnack参数可以设置三个值On(启用), Off(关闭), Default(默认)。gfx803不支持xnack所以只能用default(默认)。
+但是MIOpen只提供了On(启用), Off(关闭)两个选项。所以匹配失败。
+
+### Issue
+
+-
+
+### Pull request
+
+-
+
+### Workaround
+
+使用补丁重新编译MIOpen。
+请参考`34.miopen.sh`。
 
 ---
 
