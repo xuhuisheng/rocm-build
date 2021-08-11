@@ -1,16 +1,16 @@
-# navi14
+# navi10
 
 [中文版](README_zh_CN.md)
 
 This is experimental scripts for building navi14 GPU, aka RX5500.
 
-**This is NOT offical supporting, Cannot guarantee RX5700XT could run successfully on ROCm, even compiling success.**
+**This is NOT offical supporting, Cannot guarantee RX5500 could run successfully on ROCm, even compiling success.**
 
 No, I didnot have a navi14 GPU yet, So I cannot test it. Currently I can just confirm there is no compiling problems. Anybody who had navi14 GPU can have a try. Appreciate for any feedback.
 
 ---
 
-The codes based on ROCm-4.2.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.2.
+The codes based on ROCm-4.3.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.2.
 
 OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
 This caused compiling even more slower, but it wont break.
@@ -37,7 +37,7 @@ source env.sh
 
 ```
 
-Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1012"`, gfx1012 means navi14, RX5500. RX5700XT related gfx1010.
+Modify `env.sh`, find `AMDGPU_TARGETS`, change it to `AMDGPU_TARGETS="gfx1012"`, gfx1012 means navi14, RX5500.
 It will force ROCm to compile for navi14, even there is no matching hardware. Execute `source env.sh` to initialize environment variables.
 
 The rocBLAS is a little complex, it depends Tensile. Tensile had already included in ROCm source repo. We need use a patch.
@@ -55,19 +55,22 @@ Other components is more simple, just execute the script to compile and install.
 4. execute `bash navi14/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
 5. execute `bash 26.hipsparse.sh` to compile hipSPARSE. (Fast)
 6. execute `bash 27.rccl.sh` to compile rccl. (Slow)
-7. execute `bash 34.miopen.sh` to compile MIOpen. (Slow)
-8. execute `bash 52.rocthrust.sh` to compile rocThrust. (Very fast)
-9. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
+7. execute `bash 28.hipfft.sh` to compile hipfft. (Very fast)
+8. execute `bash 34.miopen.sh` to compile MIOpen. (Slow)
+9. execute `bash 52.rocthrust.sh` to compile rocThrust. (Very fast)
+10. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
 
-Final step is Pytorch-1.8.1 (Extremely Slow)
+Final step is Pytorch-1.9.0 (Extremely Slow)
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python
 
 git clone https://github.com/pytorch/pytorch
 cd pytorch
-git checkout v1.8.1
+git checkout v1.9.0
 git submodule update --init --recursive
+
+git apply /home/work/rocm-build/patch/pytorch-rocm43-1.patch
 
 sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
 pip3 install -r requirements.txt
@@ -78,11 +81,11 @@ export PYTORCH_ROCM_ARCH=gfx1012
 python3 tools/amd_build/build_amd.py
 USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
 
-pip3 install dist/torch-1.8.0a0+56b43f4-cp38-cp38-linux_x86_64.whl
+pip3 install dist/torch-1.9.0a0+gitd69c22d-cp38-cp38-linux_x86_64.whl
 
 ```
 
-Finally we got a pytorch-1.8.1 only can run on navi14.
+Finally we got a pytorch-1.9.0 only can run on navi14.
 
 Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
 

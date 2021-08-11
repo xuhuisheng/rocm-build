@@ -3,18 +3,22 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2021-05-24
+Date: 2021-08-06
 
 |software       |description   |
 |---------------|--------------|
 |OS             |Ubuntu-20.04.2|
-|Python         |3.8.5         |
+|Python         |3.8.10        |
 |Tensorflow-rocm|2.4.3         |
 
 |hardware|Product Name|ISA              |CHIP IP|
 |--------|------------|-----------------|-------|
 |CPU     |Xeon 2620v3 |                 |       |
 |GPU     |RX580 8G    |gfx803(Polaris10)|0x67df |
+
+---
+
+ROCm-4.3 may be the best release for gfx803 from ROCm-3.7, we only need patch rocBLAS and gfx803 can run properly.
 
 ---
 
@@ -50,7 +54,7 @@ Delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml from rocBLAS, rebu
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout rocm-4.2.x
+git checkout rocm-4.3.x
 
 bash install.sh -d
 
@@ -87,84 +91,24 @@ sudo dpkg -i *.deb
 
 ---
 
-## ROCm-4.1 and ROCm-4.2 crashed with gfx803
+## Pytorch-1.9.0 crashed on gfx803
 
 ### Description
 
-If you installed ROCm-4.1 and ROCm-4.2 with gfx803, you will crash on very beginning of running tensorflow or pytorch.
+There is a beta version Pytorch-1.9.0 on pytorch offical website. 
+<https://pytorch.org/get-started/locally/>
+
+And it will crash on very beginning of running pytorch.
 Error info as follows:
 
 ```
-work@d70a3f3f5916:~/test/examples/mnist$ python3 main.py
 "hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
-Aborted (core dumped)
 
 ```
 
 ### Reason of problem
 
-The rocRAND removed gfx803 from AMDGPU_TARGETS. So rocRAND didnot compile gfx803 binary image.
-
-### Issue (closed)
-
--
-
-### Pull request (merged)
-
-* merged <https://github.com/ROCmSoftwarePlatform/rocRAND/pull/170>
-* closed <https://github.com/ROCmSoftwarePlatform/rocRAND/pull/159>
-
-### Workaround
-
-Rebuild rocRAND with AMDGPU_TARGETS=gfx803
-
-```
-git clone https://github.com/ROCmSoftwarePlatform/rocRAND.git
-cd rocRAND
-git checkout rocm-4.2.x
-
-bash install -d
-
-mkdir build
-cd build
-
-CXX=/opt/rocm/hip/bin/hipcc cmake \
-    -DAMDGPU_TARGETS="gfx803" \
-    -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
-    -DCMAKE_PREFIX_PATH="/opt/rocm/;/opt/rocm/llvm" \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCPACK_SET_DESTDIR=OFF \
-    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
-    -DCMAKE_INSTALL_PREFIX=/opt/rocm \
-    -G "Unix Makefiles" \
-    ..
-make -j
-make package
-sudo dpkg -i *.deb
-
-```
-
----
-
-## ROCm-4.2 crashed with gfx803
-
-### Description
-
-If you installed ROCm-4.2 with gfx803, you will crash on very beginning of running pytorch.
-Error info as follows:
-
-```
-warning: xnack 'Off' was requested for a processor that does not support it!
-warning: xnack 'Off' was requested for a processor that does not support it!
-"hipErrorNoBinaryForGpu: Unable to find code object for all current devices!"
-Aborted (core dumped)
-
-```
-
-### Reason of problem
-
-There are three possible for xnack: On, Off, Default. gfx803 only support Default because it didn't support xnack feature.
-But the MIOpen only provide On, Off. So There is a mismatch issue.
+Offical pytorch-1.9.0 didn't provide fatbin for gfx803.
 
 ### Issue
 
@@ -176,49 +120,19 @@ But the MIOpen only provide On, Off. So There is a mismatch issue.
 
 ### Workaround
 
-Rebuild MIOpen with patch.
-Please refer `34.miopen.sh`.
+Rebuild Pytorch with PYTORCH_ROCM_ARCH=gfx803.
 
----
-
-## Pytorch-1.8.1 crashed on gfx803
-
-### Description
-
-There is a beta version Pytorch-1.8.1 on pytorch offical website. 
-<https://pytorch.org/get-started/locally/>
-
-And it will crash on very beginning of running pytorch.
-Error info as follows:
-
-```
-/data/jenkins_workspace/centos_pipeline_job_4.0/rocm-rel-4.0/rocm-4.0-26-20210119/7.7/external/hip-on-vdi/rocclr/hip_code_object.cpp:120: guarantee(false && "hipErrorNoBinaryForGpu: Coudn't find binary for current devices!") 
-
-```
-
-### Reason of problem
-
-Offical pytorch-1.8.1 didn't provide fatbin for gfx803.
-
-### Issue (closed)
-
--
-
-### Pull request (merged)
-
--
-
-### Workaround
-
-Rebuild Pytorch with PYTORCH_ROCM_ARCH=gfx803
+Pytorch-1.9.0 need do a patch for ROCm-4.3 HIP version updating.
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python
 
 git clone https://github.com/pytorch/pytorch
 cd pytorch
-git checkout v1.8.1
+git checkout v1.9.0
 git submodule update --init --recursive
+
+git apply /home/work/rocm-build/patch/pytorch-rocm43-1.patch
 
 sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
 pip3 install -r requirements.txt
@@ -229,7 +143,26 @@ export PYTORCH_ROCM_ARCH=gfx803
 python3 tools/amd_build/build_amd.py
 USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
 
-pip3 install dist/torch-1.8.0a0+56b43f4-cp38-cp38-linux_x86_64.whl
+pip3 install dist/torch-1.9.0a0+gitd69c22d-cp38-cp38-linux_x86_64.whl
+
+```
+
+PS: The pytorch-1.9.0 for ROCm-4.2 report cannot find libtinfo.so.5.
+
+```
+Traceback (most recent call last):
+  File "test-pytorch-rocblas.py", line 4, in <module>
+    import torch
+  File "/home/work/.local/lib/python3.8/site-packages/torch/__init__.py", line 197, in <module>
+    from torch._C import *  # noqa: F403
+ImportError: libtinfo.so.5: cannot open shared object file: No such file or directory
+
+```
+
+Create a symblic link for libtinfo.so, the current version of tinfo is 6, not 5.
+
+```
+sudo ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
 ```
 

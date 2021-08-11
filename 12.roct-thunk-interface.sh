@@ -13,10 +13,10 @@ cmake \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
-    -G "Unix Makefiles" \
+    -G "Ninja" \
     $ROCM_GIT_DIR/ROCT-Thunk-Interface/
-make -j
-make package
+ninja
+ninja package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

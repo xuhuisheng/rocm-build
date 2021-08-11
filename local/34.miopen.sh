@@ -9,11 +9,6 @@ cd $ROCM_BUILD_DIR/miopen
 pushd .
 pushd .
 
-cd $ROCM_GIT_DIR/MIOpen
-git reset --hard
-git apply $ROCM_PATCH_DIR/34.miopen-gfx803-1.patch
-cd $ROCM_BUILD_DIR/miopen
-
 START_TIME=`date +%s`
 
 CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \

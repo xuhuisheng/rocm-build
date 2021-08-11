@@ -1,4 +1,4 @@
-# rocm-build 4.2
+# rocm-build 4.3
 
 [English Version](README.md)
 
@@ -36,7 +36,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.2.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.3.x
 repo sync
 ```
 
