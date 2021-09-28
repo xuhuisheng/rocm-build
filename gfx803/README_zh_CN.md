@@ -31,6 +31,63 @@ ROCm-4.3算是3.7后最好的发布版本了，只需要给rocBLAS打一个补�
 
 ---
 
+## ROCm-3.7以及后续版本使用gfx803运行报错
+
+### 问题描述
+
+* ROCm-3.7以及后续版本使用gfx803都会报错，比如，运行tensorflow的文本分类实例。Tensorflow官方实例可以90%概率复现问题。 <https://www.tensorflow.org/tutorials/keras/text_classification>
+* 其他用户也遇到了同类问题： <https://github.com/RadeonOpenCompute/ROCm/issues/1265>
+
+### 问题原因
+
+* 还不清楚
+
+### 关联问题
+
+<https://github.com/ROCmSoftwarePlatform/rocBLAS/issues/1172>
+
+### 解决方法
+
+删除rocBLAS的`library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml`，重新编译rocBLAS。保留r9nano对应的任意一个文件都有可能重现问题。
+
+```
+git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
+cd rocBLAS
+git checkout rocm-4.3.x
+
+bash install.sh -d
+
+rm -rf library/src/blas3/Tensile/Logic/asm_full/r9nano*
+
+mkdir build
+cd build
+
+CXX=/opt/rocm/bin/hipcc cmake -lpthread \
+    -DAMDGPU_TARGETS=gfx803 \
+    -DROCM_PATH=/opt/rocm \
+    -DTensile_LOGIC=asm_full \
+    -DTensile_ARCHITECTURE=all \
+    -DTensile_CODE_OBJECT_VERSION=V3 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_WITH_TENSILE_HOST=ON \
+    -DTensile_LIBRARY_FORMAT=yaml \
+    -DRUN_HEADER_TESTING=OFF \
+    -DTensile_COMPILER=hipcc \
+    -DHIP_CLANG_INCLUDE_PATH=/opt/rocm/llvm/include \
+    -DCPACK_SET_DESTDIR=OFF \
+    -DCMAKE_PREFIX_PATH=/opt/rocm \
+    -DCMAKE_INSTALL_PREFIX=rocblas-install \
+    -DCPACK_PACKAGING_INSTALL_PREFIX=/opt/rocm \
+    -DCPACK_GENERATOR=DEB \
+    -G "Unix Makefiles" \
+    ..
+
+make -j
+make package
+sudo dpkg -i *.deb
+
+```
+
 ## Pytorch-1.9.0在gfx803下崩溃
 
 ### 问题描述

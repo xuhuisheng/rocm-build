@@ -49,7 +49,7 @@ You can downgrade to ROCm-3.5.1, here is the documents <https://github.com/boris
 
 ### Workaround
 
-Delete library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml from rocBLAS, rebuild rocBLAS, issue resolved. If I just keep one solution of this file, issue reproduced.
+Delete `library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml` from rocBLAS, rebuild rocBLAS, issue resolved. If I just keep one solution of this file, issue reproduced.
 
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
