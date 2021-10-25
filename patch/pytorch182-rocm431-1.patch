@@ -1,0 +1,261 @@
+diff --git a/aten/src/ATen/cuda/CUDABlas.cpp b/aten/src/ATen/cuda/CUDABlas.cpp
+index 2ba9894e0c..6a8c1ab90e 100644
+--- a/aten/src/ATen/cuda/CUDABlas.cpp
++++ b/aten/src/ATen/cuda/CUDABlas.cpp
+@@ -325,7 +325,7 @@ void bgemm<at::BFloat16>(CUDABLAS_BGEMM_ARGTYPES(at::BFloat16)) {
+   float fbeta = beta;
+   _cublasAdjustLdLevel3(transa, transb, m, n, k, &lda, &ldb, &ldc);
+ 
+-  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+     cudaDeviceProp* prop = at::cuda::getCurrentDeviceProperties();
+     TORCH_CUDABLAS_CHECK(cublasGemmStridedBatchedExFix(handle,
+                                     opa, opb, (int)m, (int)n, (int)k,
+@@ -538,7 +538,7 @@ void gemm<at::BFloat16>(CUDABLAS_GEMM_ARGTYPES(at::BFloat16)) {
+ }
+ #endif
+ 
+-#if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+ template <>
+ void gemm<at::BFloat16>(CUDABLAS_GEMM_ARGTYPES(at::BFloat16)) {
+   globalContext().alertCuBLASConfigNotDeterministic();
+@@ -719,7 +719,7 @@ void dot<c10::complex<float>>(CUDABLAS_DOT_ARGTYPES(c10::complex<float>)) {
+ 
+ template <>
+ void dot<at::Half>(CUDABLAS_DOT_ARGTYPES(at::Half)) {
+-#if CUDA_VERSION >= 8000
++#if CUDA_VERSION >= 8000 && !defined(__HIP_PLATFORM_HCC__)
+   TORCH_CUDABLAS_CHECK(cublasDotEx(
+       handle,
+       n,
+diff --git a/aten/src/ATen/cuda/CUDAGraph.cpp b/aten/src/ATen/cuda/CUDAGraph.cpp
+index 74cc5ca097..08fcb22cb1 100644
+--- a/aten/src/ATen/cuda/CUDAGraph.cpp
++++ b/aten/src/ATen/cuda/CUDAGraph.cpp
+@@ -25,13 +25,13 @@ namespace cuda {
+ CUDAGraph::CUDAGraph()
+   // CUDAStreams may not be default-constructed.
+   : capture_stream_(at::cuda::getCurrentCUDAStream()) {
+-#if CUDA_VERSION < 11000
++#if CUDA_VERSION < 11000 && !defined(__HIP_PLATFORM_HCC__)
+   TORCH_CHECK(false, "CUDA graphs may only be used in Pytorch built with CUDA >= 11.0");
+ #endif
+ }
+ 
+ void CUDAGraph::capture_begin() {
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   TORCH_CHECK(!has_graph_exec_,
+               "This CUDAGraph instance already owns a captured graph. "
+               "To capture a new graph, create a new instance.");
+@@ -74,7 +74,7 @@ void CUDAGraph::capture_begin() {
+ }
+ 
+ void CUDAGraph::capture_end() {
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   auto stream = at::cuda::getCurrentCUDAStream();
+ 
+   TORCH_CHECK(stream == capture_stream_,
+@@ -108,7 +108,7 @@ void CUDAGraph::capture_end() {
+ }
+ 
+ void CUDAGraph::replay() {
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   TORCH_CHECK(has_graph_exec_,
+               "Called CUDAGraph::replay without a preceding successful capture.");
+ 
+@@ -134,7 +134,7 @@ void CUDAGraph::replay() {
+ }
+ 
+ void CUDAGraph::reset() {
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   // I'd prefer these checks throw exceptions, not print warnings,
+   // but the destructor calls reset(), and at least one CI build
+   // refuses to compile with a throwing destructor.
+diff --git a/aten/src/ATen/cuda/CUDAGraph.h b/aten/src/ATen/cuda/CUDAGraph.h
+index b2ec26206c..dd5e1d3ca3 100644
+--- a/aten/src/ATen/cuda/CUDAGraph.h
++++ b/aten/src/ATen/cuda/CUDAGraph.h
+@@ -16,7 +16,7 @@ struct TORCH_CUDA_CPP_API CUDAGraph {
+   void reset();
+ 
+   protected:
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   cudaGraph_t graph_ = NULL;
+   cudaGraphExec_t graph_exec_ = NULL;
+ #endif
+diff --git a/aten/src/ATen/cuda/CUDAGraphsUtils.cuh b/aten/src/ATen/cuda/CUDAGraphsUtils.cuh
+index 4b2d09ad74..6d8fbc4aad 100644
+--- a/aten/src/ATen/cuda/CUDAGraphsUtils.cuh
++++ b/aten/src/ATen/cuda/CUDAGraphsUtils.cuh
+@@ -25,7 +25,7 @@ unpack(at::PhiloxCudaState arg) {
+ 
+ } // namespace philox
+ 
+-#if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++#if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+ // Protects against enum cudaStreamCaptureStatus implementation changes.
+ // Some compilers seem not to like static_assert without the messages.
+ static_assert(int(cudaStreamCaptureStatus::cudaStreamCaptureStatusNone) == 0,
+@@ -37,7 +37,7 @@ static_assert(int(cudaStreamCaptureStatus::cudaStreamCaptureStatusInvalidated) =
+ #endif
+ 
+ enum class CaptureStatus: int {
+-  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   None = int(cudaStreamCaptureStatus::cudaStreamCaptureStatusNone),
+   Active = int(cudaStreamCaptureStatus::cudaStreamCaptureStatusActive),
+   Invalidated = int(cudaStreamCaptureStatus::cudaStreamCaptureStatusInvalidated)
+@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& os, CaptureStatus status) {
+     case CaptureStatus::None:
+       os << "cudaStreamCaptureStatusNone";
+       break;
+-    #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++    #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+     case CaptureStatus::Active:
+       os << "cudaStreamCaptureStatusActive";
+       break;
+@@ -68,7 +68,7 @@ inline std::ostream& operator<<(std::ostream& os, CaptureStatus status) {
+ }
+ 
+ inline CaptureStatus currentStreamCaptureStatus() {
+-  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000
++  #if defined(CUDA_VERSION) && CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   // don't create a context if we don't have to
+   if (at::detail::getCUDAHooks().hasPrimaryContext(c10::cuda::current_device())) {
+     cudaStreamCaptureStatus is_capturing;
+diff --git a/aten/src/ATen/cuda/CublasHandlePool.cpp b/aten/src/ATen/cuda/CublasHandlePool.cpp
+index effe86fd64..a73dc57e7c 100644
+--- a/aten/src/ATen/cuda/CublasHandlePool.cpp
++++ b/aten/src/ATen/cuda/CublasHandlePool.cpp
+@@ -41,7 +41,7 @@ cublasHandle_t getCurrentCUDABlasHandle() {
+   auto handle = myPoolWindow->reserve(device);
+   auto stream = c10::cuda::getCurrentCUDAStream();
+   TORCH_CUDABLAS_CHECK(cublasSetStream(handle, stream));
+-#if CUDA_VERSION >= 11000
++#if CUDA_VERSION >= 11000 && !defined(__HIP_PLATFORM_HCC__)
+   // On CUDA >= 11, and architecture >= Ampere, cuBLAS can use TF32 to speedup
+   // FP32 data type calculations based on the value of the allow_tf32 flag.
+   // To enable TF32, set the math mode of the handle to CUBLAS_TF32_TENSOR_OP_MATH.
+diff --git a/aten/src/ATen/cuda/detail/CUDAHooks.cpp b/aten/src/ATen/cuda/detail/CUDAHooks.cpp
+index b75ef8219b..bcb307e5f7 100644
+--- a/aten/src/ATen/cuda/detail/CUDAHooks.cpp
++++ b/aten/src/ATen/cuda/detail/CUDAHooks.cpp
+@@ -97,7 +97,7 @@ bool CUDAHooks::isPinnedPtr(void* data) const {
+     return false;
+   }
+ #endif
+-#if CUDA_VERSION >= 10000
++#if CUDA_VERSION >= 10000 && !defined(__HIP_PLATFORM_HCC__)
+   return attr.type == cudaMemoryTypeHost;
+ #else
+   return attr.memoryType == cudaMemoryTypeHost;
+diff --git a/aten/src/ATen/cuda/nvrtc_stub/ATenNVRTC.h b/aten/src/ATen/cuda/nvrtc_stub/ATenNVRTC.h
+index 8fac2145a9..349e551bd4 100644
+--- a/aten/src/ATen/cuda/nvrtc_stub/ATenNVRTC.h
++++ b/aten/src/ATen/cuda/nvrtc_stub/ATenNVRTC.h
+@@ -54,7 +54,7 @@ namespace at { namespace cuda {
+   _(cuLinkAddData)                               \
+   _(cuLinkComplete)
+ 
+-#if CUDA_VERSION >= 11010
++#if CUDA_VERSION >= 11010 && !defined(__HIP_PLATFORM_HCC__)
+ #define AT_FORALL_NVRTC(_) \
+   AT_FORALL_NVRTC_BASE(_)  \
+   _(nvrtcGetCUBINSize)     \
+diff --git a/aten/src/ATen/native/cuda/KernelUtils.cuh b/aten/src/ATen/native/cuda/KernelUtils.cuh
+index cdf2f39f11..c0c7956e51 100644
+--- a/aten/src/ATen/native/cuda/KernelUtils.cuh
++++ b/aten/src/ATen/native/cuda/KernelUtils.cuh
+@@ -15,7 +15,7 @@ __device__ __forceinline__ void fastSpecializedAtomicAdd(
+     const size_t numel,
+     scalar_t value) {
+ #if (                         \
+-    (CUDA_VERSION < 10000) || \
++    (CUDA_VERSION < 10000 || defined(__HIP_PLATFORM_HCC__)) || \
+     (defined(__CUDA_ARCH__) && (__CUDA_ARCH__ < 700)))
+   gpuAtomicAdd(
+       reinterpret_cast<at::Half*>(tensor) + index,
+diff --git a/aten/src/THC/THCAtomics.cuh b/aten/src/THC/THCAtomics.cuh
+index eb1a4f34d3..2117a6e5ef 100644
+--- a/aten/src/THC/THCAtomics.cuh
++++ b/aten/src/THC/THCAtomics.cuh
+@@ -182,7 +182,7 @@ static inline __device__ void gpuAtomicAdd(bool *address, bool val) {
+ }
+ 
+ static inline  __device__ at::Half gpuAtomicAdd(at::Half *address, at::Half val) {
+-#if ((CUDA_VERSION < 10000) || (defined(__CUDA_ARCH__) && (__CUDA_ARCH__ < 700)))
++#if ((CUDA_VERSION < 10000 || defined(__HIP_PLATFORM_HCC__)) || (defined(__CUDA_ARCH__) && (__CUDA_ARCH__ < 700)))
+   return AtomicFPOp<at::Half>()(address, val,
+                                 [](at::Half hsum, at::Half val) {
+                                   return THCNumerics<at::Half>::add(hsum, val);
+diff --git a/caffe2/core/common_gpu.h b/caffe2/core/common_gpu.h
+index b9b43dea83..2b4485c317 100644
+--- a/caffe2/core/common_gpu.h
++++ b/caffe2/core/common_gpu.h
+@@ -85,7 +85,7 @@ namespace caffe2 {
+ class TensorCoreEngine {};
+ #endif // __HIP_PLATFORM_HCC__
+ 
+-#if CUDA_VERSION >= 10000
++#if CUDA_VERSION >= 10000 && !defined(__HIP_PLATFORM_HCC__)
+ #define CAFFE2_CUDA_PTRATTR_MEMTYPE type
+ #else
+ #define CAFFE2_CUDA_PTRATTR_MEMTYPE memoryType
+diff --git a/caffe2/sgd/adagrad_fused_op_gpu.cuh b/caffe2/sgd/adagrad_fused_op_gpu.cuh
+index e695dac37e..f97cf1389f 100644
+--- a/caffe2/sgd/adagrad_fused_op_gpu.cuh
++++ b/caffe2/sgd/adagrad_fused_op_gpu.cuh
+@@ -108,7 +108,7 @@ static inline __device__ void gpuAtomicAdd(float* address, float val) {
+ 
+ static inline __device__ void gpuAtomicAdd(c10::Half* address, c10::Half val) {
+ #if (                         \
+-    (CUDA_VERSION < 10000) || \
++    (CUDA_VERSION < 10000 || defined(__HIP_PLATFORM_HCC__)) || \
+     (defined(__CUDA_ARCH__) && (__CUDA_ARCH__ < 700)))
+   unsigned int* address_as_ui =
+       (unsigned int*)((char*)address - ((size_t)address & 2));
+diff --git a/torch/csrc/jit/codegen/cuda/executor_utils.cpp b/torch/csrc/jit/codegen/cuda/executor_utils.cpp
+index 78e6fbd03f..cc4b2a084f 100644
+--- a/torch/csrc/jit/codegen/cuda/executor_utils.cpp
++++ b/torch/csrc/jit/codegen/cuda/executor_utils.cpp
+@@ -357,7 +357,7 @@ NvrtcFunction nvrtcCompile(
+ 
+   {
+     FUSER_PERF_SCOPE("get PTX");
+-#if CUDA_VERSION >= 11010
++#if CUDA_VERSION >= 11010 && !defined(__HIP_PLATFORM_HCC__)
+     // compile_to_sass determines whether we are generating SASS or PTX, hence
+     // the different API.
+     const auto getSize = compile_to_sass
+diff --git a/torch/csrc/jit/codegen/fuser/cuda/fused_kernel.cpp b/torch/csrc/jit/codegen/fuser/cuda/fused_kernel.cpp
+index 1201cef8e5..287c0bfed9 100644
+--- a/torch/csrc/jit/codegen/fuser/cuda/fused_kernel.cpp
++++ b/torch/csrc/jit/codegen/fuser/cuda/fused_kernel.cpp
+@@ -155,7 +155,7 @@ FusedKernelCUDA::FusedKernelCUDA(
+       [&] { AT_CUDA_NVRTC_CHECK(nvrtc().nvrtcDestroyProgram(&program)); });
+   AT_CUDA_NVRTC_CHECK(result);
+   size_t ptx_size;
+-#if CUDA_VERSION >= 11010
++#if CUDA_VERSION >= 11010 && !defined(__HIP_PLATFORM_HCC__)
+   // compile_to_sass determines whether we are generating SASS or PTX, hence
+   // the different API.
+   const auto getSize = compile_to_sass
+diff --git a/torch/csrc/jit/tensorexpr/cuda_codegen.cpp b/torch/csrc/jit/tensorexpr/cuda_codegen.cpp
+index 371d7bd8ea..a48a46f614 100644
+--- a/torch/csrc/jit/tensorexpr/cuda_codegen.cpp
++++ b/torch/csrc/jit/tensorexpr/cuda_codegen.cpp
+@@ -1241,7 +1241,7 @@ void CudaCodeGen::CompileToNVRTC(
+   AT_CUDA_NVRTC_CHECK(result);
+   size_t ptx_size;
+   std::vector<char> ptx;
+-#if CUDA_VERSION >= 11010
++#if CUDA_VERSION >= 11010 && !defined(__HIP_PLATFORM_HCC__)
+   // compile_to_sass determines whether we are generating SASS or PTX, hence
+   // the different API.
+   const auto getSize = compile_to_sass
