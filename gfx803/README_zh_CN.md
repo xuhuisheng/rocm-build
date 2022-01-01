@@ -3,11 +3,11 @@
 
 [English Version](README.md)
 
-更新时间: 2021-08-06
+更新时间: 2022-01-01
 
 |软件           |备注          |
 |---------------|--------------|
-|OS             |Ubuntu-20.04.2|
+|OS             |Ubuntu-20.04.3|
 |Python         |3.8.10        |
 |Tensorflow-rocm|2.4.3         |
 
@@ -53,7 +53,7 @@ ROCm-4.3算是3.7后最好的发布版本了，只需要给rocBLAS打一个补�
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout rocm-4.3.x
+git checkout release/rocm-rel-4.3
 
 bash install.sh -d
 
