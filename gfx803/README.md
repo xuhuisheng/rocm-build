@@ -3,11 +3,11 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2021-08-06
+Date: 2022-01-01
 
 |software       |description   |
 |---------------|--------------|
-|OS             |Ubuntu-20.04.2|
+|OS             |Ubuntu-20.04.3|
 |Python         |3.8.10        |
 |Tensorflow-rocm|2.4.3         |
 
@@ -18,7 +18,7 @@ Date: 2021-08-06
 
 ---
 
-ROCm-4.3 may be the best release for gfx803 from ROCm-3.7, we only need patch rocBLAS and gfx803 can run properly.
+ROCm-4.5 may be the best release for gfx803 from ROCm-3.7, we only need patch rocBLAS and gfx803 can run properly.
 
 ---
 
@@ -54,7 +54,7 @@ Delete `library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml` from rocBLAS, re
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout rocm-4.3.x
+git checkout release/rocm-rel-4.5
 
 bash install.sh -d
 

@@ -21,7 +21,7 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR/llvm/ \
     -DCPACK_GENERATOR=DEB \
     -DCPACK_DEBIAN_PACKAGE_MAINTAINER=amd \
-    -DCPACK_PACKAGE_NAME=llvm-amdgpu \
+    -DCPACK_PACKAGE_NAME=rocm-llvm \
     -G Ninja \
     $ROCM_GIT_DIR/llvm-project/llvm
 ninja

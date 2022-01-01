@@ -13,7 +13,7 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
-    -DCMAKE_INSTALL_PREFIX=hipsparse-install \
+    -DCMAKE_INSTALL_PREFIX=rocthrust-install \
     -G Ninja \
     $ROCM_GIT_DIR/rocThrust
 ninja

@@ -2,15 +2,15 @@
 
 set -e
 
-mkdir -p $ROCM_BUILD_DIR/rocm-dev
-cd $ROCM_BUILD_DIR/rocm-dev
+mkdir -p $ROCM_BUILD_DIR/rocm-libs
+cd $ROCM_BUILD_DIR/rocm-libs
 pushd .
 
 START_TIME=`date +%s`
 
-cp -R ../../meta/rocm-dev_4.5.2.40502-164_amd64 .
+cp -R ../../meta/rocm-libs_4.5.2.40502-164_amd64 .
 
-dpkg -b rocm-dev_4.5.2.40502-164_amd64
+dpkg -b rocm-libs_4.5.2.40502-164_amd64
 
 sudo dpkg -i *.deb
 

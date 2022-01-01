@@ -2,24 +2,20 @@
 
 set -e
 
-echo "|====|"
-echo "|SLOW|"
-echo "|====|"
-
-mkdir -p $ROCM_BUILD_DIR/rocfft
-cd $ROCM_BUILD_DIR/rocfft
+mkdir -p $ROCM_BUILD_DIR/hipfft
+cd $ROCM_BUILD_DIR/hipfft
 pushd .
 
 START_TIME=`date +%s`
 
-CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
+CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
-    -DCMAKE_INSTALL_PREFIX=rocfft-install \
+    -DCMAKE_INSTALL_PREFIX=hipfft-install \
     -G Ninja \
-    $ROCM_GIT_DIR/rocFFT
+    $ROCM_GIT_DIR/hipFFT
 ninja
 ninja package
 sudo dpkg -i *.deb

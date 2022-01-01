@@ -6,6 +6,11 @@ mkdir -p $ROCM_BUILD_DIR/rocm-compilersupport
 cd $ROCM_BUILD_DIR/rocm-compilersupport
 pushd .
 
+cd $ROCM_GIT_DIR/ROCm-CompilerSupport
+git reset --hard
+git apply $ROCM_PATCH_DIR/17.rocm-compilersupport-ubuntu2004-1.patch
+cd $ROCM_BUILD_DIR/rocm-compilersupport
+
 START_TIME=`date +%s`
 
 cmake \

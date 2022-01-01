@@ -1,4 +1,4 @@
-# rocm-build 4.3
+# rocm-build 4.5
 
 [English Version](README.md)
 
@@ -10,7 +10,7 @@
 
 ### 开始
 
-我的构建环境是 Ubuntu-20.04.2 。
+我的构建环境是 Ubuntu-20.04.3 。
 
 首先使用 repo 下载项目源码 <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>，
 然后根据你当前的环境修改 `env.sh` 里的路径。
@@ -36,7 +36,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.3.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.5.x
 repo sync
 ```
 

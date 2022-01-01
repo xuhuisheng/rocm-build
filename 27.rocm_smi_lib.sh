@@ -6,6 +6,11 @@ mkdir -p $ROCM_BUILD_DIR/rocm_smi_lib
 cd $ROCM_BUILD_DIR/rocm_smi_lib
 pushd .
 
+cd $ROCM_GIT_DIR/rocm_smi_lib
+git reset --hard
+git apply $ROCM_PATCH_DIR/27.rocm_smi_lib-version-1.patch
+cd $ROCM_BUILD_DIR/rocm_smi_lib
+
 START_TIME=`date +%s`
 
 cmake \

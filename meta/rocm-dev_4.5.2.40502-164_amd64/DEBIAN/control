@@ -1,10 +1,10 @@
 Architecture: amd64
-Depends: comgr, hip-base, hip-doc, hip-rocclr, hip-samples, hsakmt-roct, llvm-amdgpu, rocm-cmake, rocm-dbgapi, rocm-device-libs, rocm-smi-lib, rocm-utils, hsa-rocr-dev, hsakmt-roct-dev, rocprofiler-dev, roctracer-dev
+Depends: comgr, hip-base, hip-doc, hip-rocclr, hip-samples, hsakmt-roct, rocm-llvm, rocm-cmake, rocm-dbgapi, rocm-device-libs, rocm-smi-lib, rocm-utils, hsa-rocr-dev, hsakmt-roct-dev, rocprofiler-dev, roctracer-dev
 Description: Radeon Open Compute (ROCm) Runtime software stack
 Homepage: https://github.com/RadeonOpenCompute/ROCm
 Maintainer: Advanced Micro Devices, Inc.
 Package: rocm-dev
 Priority: optional
 Section: devel
-Version: 4.3.0.40300-52
+Version: 4.5.2.40502-164
 Installed-Size: 13

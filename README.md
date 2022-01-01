@@ -1,4 +1,4 @@
-# rocm-build 4.3
+# rocm-build 4.5.2
 
 [中文版](README_zh_CN.md)
 
@@ -10,7 +10,7 @@ Thanks [jlgreathouse](https://github.com/jlgreathouse) providing <https://github
 
 ### Start
 
-My environment is Ubuntu-20.04.2.
+My environment is Ubuntu-20.04.3.
 
 Please download sources using repo <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>,
 and change the path of source in `env.sh`.
@@ -36,7 +36,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.3.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-4.5.x
 repo sync
 ```
 
