@@ -6,6 +6,8 @@ echo "|====|"
 echo "|SLOW|"
 echo "|====|"
 
+sudo apt install -y python3-dev
+
 mkdir -p $ROCM_BUILD_DIR/rocfft
 cd $ROCM_BUILD_DIR/rocfft
 pushd .

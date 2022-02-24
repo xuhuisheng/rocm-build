@@ -25,7 +25,7 @@ START_TIME=`date +%s`
 #export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
 #export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
-CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
+CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
     -DTensile_LOGIC=asm_full \
@@ -33,7 +33,6 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
     -DTensile_CODE_OBJECT_VERSION=V3 \
     -DCMAKE_BUILD_TYPE=Release \
     -DTensile_TEST_LOCAL_PATH=$ROCM_GIT_DIR/Tensile \
-    -DBUILD_WITH_TENSILE_HOST=ON \
     -DTensile_LIBRARY_FORMAT=yaml \
     -DRUN_HEADER_TESTING=OFF \
     -DTensile_COMPILER=hipcc \

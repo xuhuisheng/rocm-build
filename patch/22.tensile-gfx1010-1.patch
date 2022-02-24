@@ -1,28 +1,14 @@
 diff --git a/Tensile/Common.py b/Tensile/Common.py
-index fc32f642..29980c09 100644
+index 6dfd4730..26b198db 100644
 --- a/Tensile/Common.py
 +++ b/Tensile/Common.py
-@@ -200,7 +200,8 @@ globalParameters["ShortNames"] = False            # on windows kernel names can
- globalParameters["MergeFiles"] = True             # F=store every solution and kernel in separate file; T=store all solutions in single file
+@@ -198,7 +198,7 @@ globalParameters["MergeFiles"] = True             # F=store every solution and k
+ globalParameters["NumMergedFiles"] = 1            # The number of files that kernels should be split between when merging
  
  globalParameters["MaxFileName"] = 64              # If a file name would be longer than this, shorten it with a hash.
 -globalParameters["SupportedISA"] = [(8,0,3), (9,0,0), (9,0,6), (9,0,8), (9,0,10), (10,1,0), (10,1,1), (10,1,2), (10,3,0)] # assembly kernels writer supports these architectures
-+# globalParameters["SupportedISA"] = [(8,0,3), (9,0,0), (9,0,6), (9,0,8), (9,0,10), (10,1,0), (10,1,1), (10,1,2), (10,3,0)] # assembly kernels writer supports these architectures
-+globalParameters["SupportedISA"] = [(10,1,0)]
++globalParameters["SupportedISA"] = [(10,1,1)] # assembly kernels writer supports these architectures
  
  globalParameters["GenerateManifestAndExit"] = False               # Output manifest file with list of expected library objects and exit
- globalParameters["ClientBuildPath"] = "0_Build"                   # subdirectory for host code build directory
-diff --git a/Tensile/TensileCreateLibrary.py b/Tensile/TensileCreateLibrary.py
-index 80806fc0..9da7b292 100644
---- a/Tensile/TensileCreateLibrary.py
-+++ b/Tensile/TensileCreateLibrary.py
-@@ -242,7 +242,8 @@ def prepAsmOldClient():
-     assemblerFile.write("shift\n")
-     assemblerFile.write("ASM=%s\n"%globalParameters["AssemblerPath"])
-     # cannot use globalParameters["CurrentISA"] because it might be (0,0,0)
--    defaultIsa = (9,0,0)
-+    # defaultIsa = (9,0,0)
-+    defaultIsa = (10,1,0)
-     assemblerFile.write( \
-       "${ASM} -x assembler -target amdgcn-amd-amdhsa %s $@ -c -o $f.o $f.s\n" % \
-       ("-mcode-object-version=2" if \
+ globalParameters["NewClient"] = 2                                 # Old client deprecated: NewClient must be set to 2.
+ 

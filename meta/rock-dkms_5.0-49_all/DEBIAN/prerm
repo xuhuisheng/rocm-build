@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NAME=amdgpu
-VERSION=4.5-75
+VERSION=5.0-49
 
 set -e
 

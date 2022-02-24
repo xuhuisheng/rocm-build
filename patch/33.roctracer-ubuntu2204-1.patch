@@ -1,0 +1,13 @@
+diff --git a/src/core/memory_pool.h b/src/core/memory_pool.h
+index 5b036d0..75b66b3 100644
+--- a/src/core/memory_pool.h
++++ b/src/core/memory_pool.h
+@@ -152,7 +152,7 @@ class MemoryPool {
+   }
+
+   static void sync_reader(const consumer_arg_t* arg) {
+-    while(arg->valid.load() == true) PTHREAD_CALL(pthread_yield());
++    while(arg->valid.load() == true) PTHREAD_CALL(sched_yield());
+   }
+
+   static void* reader_fun(void* consumer_arg) {

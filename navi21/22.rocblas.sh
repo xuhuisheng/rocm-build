@@ -13,11 +13,6 @@ mkdir -p $ROCM_BUILD_DIR/rocblas
 cd $ROCM_BUILD_DIR/rocblas
 pushd .
 
-cd $ROCM_GIT_DIR/rocBLAS
-git reset --hard
-git apply $ROCM_PATCH_DIR/22.rocblas-ninja-1.patch
-cd $ROCM_BUILD_DIR/rocblas
-
 cd $ROCM_GIT_DIR/Tensile
 git reset --hard
 git apply $ROCM_PATCH_DIR/22.tensile-gfx1030-1.patch
@@ -27,10 +22,10 @@ cd $ROCM_BUILD_DIR/rocblas
 
 START_TIME=`date +%s`
 
-export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
-export CPACK_RPM_PACKAGE_RELEASE=93c82939
+#export CPACK_DEBIAN_PACKAGE_RELEASE=93c82939
+#export CPACK_RPM_PACKAGE_RELEASE=93c82939
 
-CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake -lpthread \
+CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
     -DTensile_LOGIC=asm_full \
@@ -59,4 +54,3 @@ EXECUTING_TIME=`expr $END_TIME - $START_TIME`
 echo "elapse : "$EXECUTING_TIME"s"
 
 popd
-

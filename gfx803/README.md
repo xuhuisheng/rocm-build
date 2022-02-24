@@ -3,7 +3,7 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2022-01-01
+Date: 2022-02-24
 
 |software       |description   |
 |---------------|--------------|
@@ -18,7 +18,7 @@ Date: 2022-01-01
 
 ---
 
-ROCm-4.5 may be the best release for gfx803 from ROCm-3.7, we only need patch rocBLAS and gfx803 can run properly.
+On ROCm-4.5, we only need patch rocBLAS and gfx803 can run properly.
 
 ---
 
@@ -54,7 +54,7 @@ Delete `library/src/blas3/Tensile/Logic/asm_full/r9nano_*.yaml` from rocBLAS, re
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout release/rocm-rel-4.5
+git checkout release/rocm-rel-5.0
 
 bash install.sh -d
 
@@ -119,6 +119,8 @@ Offical pytorch-1.9.0 didn't provide fatbin for gfx803.
 -
 
 ### Workaround
+
+(Waiting for Pytorch-1.11.0 to support ROCm-5.0.)
 
 Rebuild Pytorch with PYTORCH_ROCM_ARCH=gfx803.
 

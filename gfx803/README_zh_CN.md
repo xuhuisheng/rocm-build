@@ -3,7 +3,7 @@
 
 [English Version](README.md)
 
-更新时间: 2022-01-01
+更新时间: 2022-02-24
 
 |软件           |备注          |
 |---------------|--------------|
@@ -18,7 +18,7 @@
 
 ---
 
-ROCm-4.3算是3.7后最好的发布版本了，只需要给rocBLAS打一个补丁，就可以正常跑起来。
+使用ROCm-5.0，只需要给rocBLAS打一个补丁，就可以正常跑起来。
 
 ---
 
@@ -53,7 +53,7 @@ ROCm-4.3算是3.7后最好的发布版本了，只需要给rocBLAS打一个补�
 ```
 git clone https://github.com/ROCmSoftwarePlatform/rocBLAS.git
 cd rocBLAS
-git checkout release/rocm-rel-4.3
+git checkout release/rocm-rel-5.0
 
 bash install.sh -d
 
@@ -115,6 +115,8 @@ pytorch官方网站提供了一个beta版的Pytorch-1.9.0。
 -
 
 ### 解决方法
+
+(等待Pytorch-1.11.0支持ROCm-5.0。)
 
 使用PYTORCH_ROCM_ARCH=gfx803重新编译pytorch。
 

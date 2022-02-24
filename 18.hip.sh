@@ -5,6 +5,7 @@ set -e
 sudo apt install -y mesa-common-dev
 sudo apt install -y dpkg-dev rpm doxygen libelf-dev rename liburi-encode-perl \
                     libfile-basedir-perl libfile-copy-recursive-perl libfile-listing-perl libfile-which-perl
+sudo apt install -y file
 
 mkdir -p $ROCM_BUILD_DIR/hip
 cd $ROCM_BUILD_DIR/hip
@@ -17,6 +18,7 @@ HIP_DIR=$ROCM_GIT_DIR/HIP
 START_TIME=`date +%s`
 
 cmake \
+    -DOFFLOAD_ARCH_STR="$AMDGPU_TARGETS" \
     -DHIP_COMMON_DIR="$HIP_DIR" \
     -DAMD_OPENCL_PATH="$OPENCL_DIR" \
     -DROCCLR_PATH="$ROCCLR_DIR" \
@@ -28,7 +30,8 @@ cmake \
 ninja
 sudo ninja install
 ninja package
-sudo dpkg -i *.deb
+# sudo dpkg -i *.deb
+sudo dpkg -i hip-dev*.deb hip-doc*.deb hip-runtime-amd*.deb hip-samples*.deb
 
 END_TIME=`date +%s`
 EXECUTING_TIME=`expr $END_TIME - $START_TIME`

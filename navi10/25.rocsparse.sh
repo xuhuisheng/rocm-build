@@ -13,7 +13,6 @@ pushd .
 cd $ROCM_GIT_DIR/rocSPARSE
 git reset --hard
 git apply $ROCM_PATCH_DIR/25.rocsparse-gfx10-1.patch
-git apply $ROCM_PATCH_DIR/25.rocsparse-amdgpu-1.patch
 cd $ROCM_BUILD_DIR/rocsparse
 
 START_TIME=`date +%s`

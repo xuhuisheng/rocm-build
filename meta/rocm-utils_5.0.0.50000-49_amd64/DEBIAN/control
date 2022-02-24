@@ -6,6 +6,6 @@ Maintainer: Advanced Micro Devices, Inc.
 Package: rocm-utils
 Priority: optional
 Section: devel
-Version: 4.5.2.40502-164
+Version: 5.0.0.50000-49
 Installed-Size: 13
 
