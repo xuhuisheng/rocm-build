@@ -6,7 +6,6 @@ echo "|====|"
 echo "|SLOW|"
 echo "|====|"
 
-sudo apt install -y gfortran python3-venv libtinfo-dev
 #bash $ROCM_GIT_DIR/rocBLAS/install.sh -d
 
 mkdir -p $ROCM_BUILD_DIR/rocblas

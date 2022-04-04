@@ -2,8 +2,6 @@
 
 set -e
 
-sudo apt install -y pkg-config
-
 mkdir -p $ROCM_BUILD_DIR/miopen
 cd $ROCM_BUILD_DIR/miopen
 pushd .

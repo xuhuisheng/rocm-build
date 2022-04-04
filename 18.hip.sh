@@ -2,11 +2,6 @@
 
 set -e
 
-sudo apt install -y mesa-common-dev
-sudo apt install -y dpkg-dev rpm doxygen libelf-dev rename liburi-encode-perl \
-                    libfile-basedir-perl libfile-copy-recursive-perl libfile-listing-perl libfile-which-perl
-sudo apt install -y file
-
 mkdir -p $ROCM_BUILD_DIR/hip
 cd $ROCM_BUILD_DIR/hip
 pushd .
@@ -24,11 +19,14 @@ cmake \
     -DROCCLR_PATH="$ROCCLR_DIR" \
     -DCMAKE_PREFIX_PATH="$ROCM_INSTALL_DIR" \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCPACK_GENERATOR=DEB \
+    -DROCM_PATCH_VERSION=50100 \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_BUILD_DIR/hip/install \
     -G Ninja \
     $ROCM_GIT_DIR/hipamd
 
 ninja
-sudo ninja install
+# sudo ninja install
 ninja package
 # sudo dpkg -i *.deb
 sudo dpkg -i hip-dev*.deb hip-doc*.deb hip-runtime-amd*.deb hip-samples*.deb

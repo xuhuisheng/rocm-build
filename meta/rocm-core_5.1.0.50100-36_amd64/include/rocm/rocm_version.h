@@ -1,3 +1,3 @@
 #define ROCM_VERSION_MAJOR   5
-#define ROCM_VERSION_MINOR   0
+#define ROCM_VERSION_MINOR   1
 /* #undef ROCM_VERSION_PATCH */

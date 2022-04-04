@@ -8,9 +8,9 @@ pushd .
 
 START_TIME=`date +%s`
 
-cp -R ../../meta/rocm-libs_5.0.0.50000-49_amd64 .
+cp -R ../../meta/rocm-libs_5.1.0.50100-36_amd64 .
 
-dpkg -b rocm-libs_5.0.0.50000-49_amd64
+dpkg -b rocm-libs_5.1.0.50100-36_amd64
 
 sudo dpkg -i *.deb
 

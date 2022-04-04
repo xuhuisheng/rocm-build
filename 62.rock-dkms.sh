@@ -1,9 +1,7 @@
 
 set -e
 
-sudo apt -y install autoconf
-
-TARGET_DIR=$ROCM_BUILD_DIR/rock-dkms/usr/src/amdgpu-5.0-49
+TARGET_DIR=$ROCM_BUILD_DIR/rock-dkms/usr/src/amdgpu-5.1-36
 
 mkdir -p $TARGET_DIR
 
@@ -51,8 +49,8 @@ bash autogen.sh
 cd ../..
 
 cd ../../..
-cp ../../meta/rock-dkms_5.0-49_all . -R
-cp -R usr rock-dkms_5.0-49_all/
+cp ../../meta/rock-dkms_5.1-36_all . -R
+cp -R usr rock-dkms_5.1-36_all/
 
-dpkg -b rock-dkms_5.0-49_all
+dpkg -b rock-dkms_5.1-36_all
 

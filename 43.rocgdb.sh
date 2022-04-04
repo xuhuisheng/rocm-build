@@ -6,10 +6,6 @@ echo "|====|"
 echo "|SLOW|"
 echo "|====|"
 
-sudo apt install -y bison flex gcc make ncurses-dev texinfo g++ zlib1g-dev \
-  libexpat-dev python3-dev liblzma-dev libbabeltrace-dev \
-  libbabeltrace-ctf-dev
-
 mkdir -p $ROCM_BUILD_DIR/rocgdb
 cd $ROCM_BUILD_DIR/rocgdb
 pushd .

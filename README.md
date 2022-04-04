@@ -1,4 +1,4 @@
-# rocm-build 5.0
+# rocm-build 5.1
 
 [中文版](README_zh_CN.md)
 
@@ -17,11 +17,7 @@ and change the path of source in `env.sh`.
 
 Execute `source env.sh` to setup environment variables.
 
-Install dependencies
-
-```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
-```
+Execute `bash install-dependency.sh` to install dependencies
 
 Then execute bash scripts by order number.
 
@@ -36,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.0.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.1.x
 repo sync
 ```
 

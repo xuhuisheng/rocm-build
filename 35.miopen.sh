@@ -3,7 +3,6 @@
 set -e
 
 sudo cmake -P $ROCM_GIT_DIR/MIOpen/install_deps.cmake --minimum --prefix /usr/local
-# sudo apt install -y pkg-config libsqlite3-dev libboost-filesystem-dev libbz2-dev
 
 mkdir -p $ROCM_BUILD_DIR/miopen
 cd $ROCM_BUILD_DIR/miopen

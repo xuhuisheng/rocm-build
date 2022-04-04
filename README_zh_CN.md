@@ -1,4 +1,4 @@
-# rocm-build 5.0
+# rocm-build 5.1
 
 [English Version](README.md)
 
@@ -17,11 +17,7 @@
 
 执行 `source env.sh` 设置环境变量。
 
-安装依赖
-
-```
-sudo apt -y install git cmake build-essential libnuma-dev ninja-build python3 python3-pip
-```
+执行 `bash install-dependency.sh` 安装依赖。
 
 然后按照序号顺序执行脚本。
 
@@ -36,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.0.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.1.x
 repo sync
 ```
 
