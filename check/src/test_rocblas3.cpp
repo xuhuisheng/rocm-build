@@ -1,7 +1,7 @@
 
 #include "rocblas.h"
 
-#include "device_vector.hpp"
+#include "device_vector2.hpp"
 
 #include <iostream>
 
@@ -49,7 +49,8 @@ int test_sgemm(float * a, float * b , float * c, float alpha, float beta)
     int size_a = m * k;
     int size_b = k * n;
     int size_c = m * n;
-    device_vector<float> db{9, 1, false};
+    // device_vector<float> db(9, 1, false);
+    device_vector2 db(9);
     float * da;
     // float * db;
     float * dc;
