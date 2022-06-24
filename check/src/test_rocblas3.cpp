@@ -77,7 +77,7 @@ int test_sgemm(float * a, float * b , float * c, float alpha, float beta)
     hipMemcpy(d_alpha + 1, guard, sizeof(float) * 8192, hipMemcpyHostToDevice);
     hipMemcpy(d_beta + 1, guard, sizeof(float) * 8192, hipMemcpyHostToDevice);
 
-    hipMemcpy(da, A, sizeof(float) * size_c, hipMemcpyHostToDevice);
+    hipMemcpy(da, A, sizeof(float) * size_a, hipMemcpyHostToDevice);
     hipMemcpy(db, B, sizeof(float) * size_b, hipMemcpyHostToDevice);
     hipMemcpy(dc, C, sizeof(float) * size_c, hipMemcpyHostToDevice);
     hipMemcpy(d_alpha, &alpha, sizeof(float), hipMemcpyHostToDevice);
@@ -171,6 +171,25 @@ int test_sgemm(float * a, float * b , float * c, float alpha, float beta)
 
     printf("\n\nend\n\n");
 
+
+
+    hipMemcpy(A, da, sizeof(float) * size_a, hipMemcpyDeviceToHost);
+    hipMemcpy(B, db, sizeof(float) * size_b, hipMemcpyDeviceToHost);
+    hipMemcpy(C, dc, sizeof(float) * size_c, hipMemcpyDeviceToHost);
+
+
+    
+    std::cout << A[0] << " " << A[1] << " " << A[2] << " "
+            << A[3] << " " << A[4] << " " << A[5] << " "
+            << A[6] << " " << A[7] << " " << A[8] << std::endl;
+
+    std::cout << B[0] << " " << B[1] << " " << B[2] << " "
+            << B[3] << " " << B[4] << " " << B[5] << " "
+            << B[6] << " " << B[7] << " " << B[8] << std::endl;
+
+    std::cout << C[0] << " " << C[1] << " " << C[2] << " "
+	    << C[3] << " " << C[4] << " " << C[5] << " "
+	    << C[6] << " " << C[7] << " " << C[8] << std::endl;
 
 
     ret = rocblas_destroy_handle(handle);

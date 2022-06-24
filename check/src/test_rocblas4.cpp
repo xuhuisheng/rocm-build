@@ -76,7 +76,7 @@ int test_sgemm(float * a, float * b , float * c, float alpha, float beta)
     hipMemcpy(d_alpha + 1, guard, sizeof(float) * 8192, hipMemcpyHostToDevice);
     hipMemcpy(d_beta + 1, guard, sizeof(float) * 8192, hipMemcpyHostToDevice);
 
-    hipMemcpy(da, A, sizeof(float) * size_c, hipMemcpyHostToDevice);
+    hipMemcpy(da, A, sizeof(float) * size_a, hipMemcpyHostToDevice);
     hipMemcpy(db, B, sizeof(float) * size_b, hipMemcpyHostToDevice);
     hipMemcpy(dc, C, sizeof(float) * size_c, hipMemcpyHostToDevice);
     hipMemcpy(d_alpha, &alpha, sizeof(float), hipMemcpyHostToDevice);
