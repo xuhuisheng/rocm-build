@@ -1,7 +1,7 @@
 
 cmake_minimum_required( VERSION 3.16.3 )
 
-project( rocm-core )
+project( rocm-core LANGUAGES CXX )
 
 set( CMAKE_BUILD_TYPE Release )
 set( CMAKE_INSTALL_PREFIX /opt/rocm )
@@ -10,9 +10,13 @@ set( PROJECT_VERSION_MAJOR 5 )
 set( PROJECT_VERSION_MINOR 1 )
 set( PROJECT_VERSION_PATCH 3 )
 
-add_library(rocm_core_interface INTERFACE)
-target_include_directories(rocm_core_interface
-    INTERFACE ${PROJECT_SOURCE_DIR}/include/)
+install(FILES "${PROJECT_SOURCE_DIR}/include/rocm_version.h"
+  DESTINATION include
+  )
+
+install(FILES "${PROJECT_SOURCE_DIR}/.info/version"
+  DESTINATION .info
+  )
 
 set( CPACK_PACKAGE_VERSION_MAJOR 5 )
 set( CPACK_PACKAGE_VERSION_MINOR 1 )
