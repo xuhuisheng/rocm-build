@@ -30,6 +30,9 @@ sudo apt install -y gfortran python3-venv libtinfo-dev
 # 33.roctracer
 pip3 install cppheaderparser
 
+# 35.miopen
+sudo apt install -y pkg-config libsqlite3-dev libbz2-dev
+
 # 43.rocgdb
 sudo apt install -y bison flex gcc make ncurses-dev texinfo g++ zlib1g-dev \
                     libexpat-dev python3-dev liblzma-dev libbabeltrace-dev \
