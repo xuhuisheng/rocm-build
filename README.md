@@ -62,4 +62,5 @@ If you want to use other location, please modify `env.sh`.
 * [navi14](navi14) - Experiment scripts for building navi14 GPU.
 * [navi21](navi21) - Experiment scripts for building navi21 GPU.
 * [check](check) - Codes for check whether ROCm can run successfully.
+* [ubuntu2204](ubuntu2204) - Patches for ubuntu-22.04.
 
