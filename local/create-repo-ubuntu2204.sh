@@ -26,10 +26,10 @@ cp $ROCM_BUILD_DIR/rocm-compilersupport/comgr_*.deb pool/main/c/comgr/
 mkdir -p pool/main/h/half
 cp $ROCM_BUILD_DIR/half/half_*.deb pool/main/h/half
 mkdir -p pool/main/h/{hip-dev,hip-doc,hip-runtime-amd,hip-samples}
-cp $ROCM_BUILD_DIR/hip-dev/hip-dev_*.deb pool/main/h/hip-dev
-cp $ROCM_BUILD_DIR/hip-doc/hip-doc_*.deb pool/main/h/hip-doc
-cp $ROCM_BUILD_DIR/hip-runtime-amd/hip-runtime-amd_*.deb pool/main/h/hip-runtime-amd
-cp $ROCM_BUILD_DIR/hip-samples/hip-samples_*.deb pool/main/h/hip-samples
+cp $ROCM_BUILD_DIR/hip/hip-dev_*.deb pool/main/h/hip-dev
+cp $ROCM_BUILD_DIR/hip/hip-doc_*.deb pool/main/h/hip-doc
+cp $ROCM_BUILD_DIR/hip/hip-runtime-amd_*.deb pool/main/h/hip-runtime-amd
+cp $ROCM_BUILD_DIR/hip/hip-samples_*.deb pool/main/h/hip-samples
 mkdir -p pool/main/h/{hipblas,hipblas-dev}
 cp $ROCM_BUILD_DIR/hipblas/hipblas_*.deb pool/main/h/hipblas
 cp $ROCM_BUILD_DIR/hipblas/hipblas-dev_*.deb pool/main/h/hipblas-dev
