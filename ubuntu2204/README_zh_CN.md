@@ -18,14 +18,19 @@
 
 ---
 
+ubuntu-22.04补丁放在patch目录下，文件名中包含ubuntu2204。
+<../patch>
+
 ROCm-5.1.3 无法安装在ubuntu-22.04。需要一些补丁。
 一些补丁来自ROCm-5.2的开发分支。
 
 主要区别部分:
 
-* gcc-11
-* python-3.10
-* fmt-8
+|#|ubuntu-20.04|ubuntu-22.04|                   |
+|-|------------|------------|-------------------|
+|1|gcc-9       |gcc-11      |很多组件           |
+|2|python-3.8  |python-3.10 |tensorflow, pytorch|
+|3|fmt-6       |fmt-8       |rocSOLVER          |
 
 ## 18.hip
 

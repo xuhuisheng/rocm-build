@@ -18,14 +18,19 @@ Date: 2022-06-26
 
 ---
 
+The ubuntu-22.04 patches put in the patch directory, with ubuntu2204 in file name.
+<../patch>
+
 ROCm-5.1.3 cannot install properly on ubuntu-22.04. We need some patches.
 Some patches comes from ROCm-5.2 develop branch.
 
 The main different parts.
 
-* gcc-11
-* python-3.10
-* fmt-8
+|#|ubuntu-20.04|ubuntu-22.04|                   |
+|-|------------|------------|-------------------|
+|1|gcc-9       |gcc-11      |many components    |
+|2|python-3.8  |python-3.10 |tensorflow, pytorch|
+|3|fmt-6       |fmt-8       |rocSOLVER          |
 
 ## 18.hip
 
