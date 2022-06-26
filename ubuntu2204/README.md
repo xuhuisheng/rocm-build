@@ -19,7 +19,7 @@ Date: 2022-06-26
 ---
 
 The ubuntu-22.04 patches put in the patch directory, with ubuntu2204 in file name.
-<../patch>
+<https://github.com/xuhuisheng/rocm-build/blob/develop/patch>
 
 ROCm-5.1.3 cannot install properly on ubuntu-22.04. We need some patches.
 Some patches comes from ROCm-5.2 develop branch.

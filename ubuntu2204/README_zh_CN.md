@@ -19,7 +19,7 @@
 ---
 
 ubuntu-22.04补丁放在patch目录下，文件名中包含ubuntu2204。
-<../patch>
+<https://github.com/xuhuisheng/rocm-build/blob/develop/patch>
 
 ROCm-5.1.3 无法安装在ubuntu-22.04。需要一些补丁。
 一些补丁来自ROCm-5.2的开发分支。
