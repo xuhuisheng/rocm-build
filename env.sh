@@ -1,9 +1,9 @@
 #!/bin/bash
 
 export ROCM_INSTALL_DIR=/opt/rocm
-# export ROCM_PKGTYPE=DEB
-# export ROCM_LIBPATCH_VERSION=50103
-# xport CPACK_DEBIAN_PACKAGE_RELEASE=66
+export ROCM_PKGTYPE=DEB
+export ROCM_LIBPATCH_VERSION=50103
+export CPACK_DEBIAN_PACKAGE_RELEASE=66
 export ROCM_GIT_DIR=/home/work/ROCm
 export ROCM_BUILD_DIR=/home/work/rocm-build/build
 export ROCM_PATCH_DIR=/home/work/rocm-build/patch

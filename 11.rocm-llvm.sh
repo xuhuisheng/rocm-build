@@ -22,6 +22,8 @@ cmake \
     -DCPACK_GENERATOR=DEB \
     -DCPACK_DEBIAN_PACKAGE_MAINTAINER=amd \
     -DCPACK_PACKAGE_NAME=rocm-llvm \
+    -DPACKAGE_VERSION=14.0.0.22114.50103-66 \
+    -DCPACK_DEBIAN_FILE_NAME=DEB-DEFAULT \
     -G Ninja \
     $ROCM_GIT_DIR/llvm-project/llvm
 ninja

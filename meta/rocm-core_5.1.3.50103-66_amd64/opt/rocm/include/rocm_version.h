@@ -52,7 +52,7 @@ extern "C" {
 
 #define ROCM_VERSION_MAJOR   5
 #define ROCM_VERSION_MINOR   1
-#define ROCM_VERSION_PATCH   0
+#define ROCM_VERSION_PATCH   3
 
 
 typedef enum {

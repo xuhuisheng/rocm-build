@@ -4,7 +4,7 @@ index 35bcd16..00936d8 100644
 +++ b/.gitmodules
 @@ -1,4 +1,4 @@
  [submodule "hipRAND"]
-        path = hipRAND
--       url = ../../ROCmSoftwarePlatform/hipRAND.git
-+       url = https://github.com/ROCmSoftwarePlatform/hipRAND.git
-        branch = develop
+ 	path = hipRAND
+-	url = ../../ROCmSoftwarePlatform/hipRAND.git
++	url = https://github.com/ROCmSoftwarePlatform/hipRAND.git
+ 	branch = develop
