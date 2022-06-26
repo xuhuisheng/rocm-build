@@ -8,10 +8,12 @@ pushd .
 
 START_TIME=`date +%s`
 
-cp -R ../../meta/rocm-dev_5.1.3.50103-66_amd64 .
+# cp -R ../../meta/rocm-dev_5.1.3.50103-66_amd64 .
 
-dpkg -b rocm-dev_5.1.3.50103-66_amd64
+# dpkg -b rocm-dev_5.1.3.50103-66_amd64
 
+cmake $ROCM_BUILD_DIR/../src/rocm-dev
+make package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
