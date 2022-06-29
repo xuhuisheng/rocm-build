@@ -8,11 +8,14 @@ pushd .
 
 START_TIME=`date +%s`
 
-# cp -R ../../meta/rocm-utils_5.1.3.50103-66_amd64 .
-
-# dpkg -b rocm-utils_5.1.3.50103-66_amd64
-
-cmake $ROCM_BUILD_DIR/../src/rocm-utils
+cmake \
+  -DCMAKE_INSTALL_PREFIX=${ROCM_INSTALL_DIR} \
+  -DPROJECT_VERSION_MAJOR=${ROCM_MAJOR_VERSION} \
+  -DPROJECT_VERSION_MINOR=${ROCM_MINOR_VERSION} \
+  -DPROJECT_VERSION_PATCH=${ROCM_PATCH_VERSION} \
+  -DROCM_PATCH_VERSION=${ROCM_LIBPATCH_VERSION} \
+  -DROCM_BUILD_VERSION=${CPACK_DEBIAN_PACKAGE_RELEASE} \
+  $ROCM_BUILD_DIR/../src/rocm-utils
 make package
 sudo dpkg -i *.deb
 
