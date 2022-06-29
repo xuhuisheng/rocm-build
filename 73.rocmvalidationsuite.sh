@@ -15,7 +15,7 @@ cmake \
     -G Ninja \
     $ROCM_GIT_DIR/ROCmValidationSuite
 ninja
-ninja package
+sudo ninja package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

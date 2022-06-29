@@ -1,0 +1,15 @@
+diff --git a/src/solvers/multigrid/ruge_stueben_amg.hpp b/src/solvers/multigrid/ruge_stueben_amg.hpp
+index 24ee942..f8cae67 100644
+--- a/src/solvers/multigrid/ruge_stueben_amg.hpp
++++ b/src/solvers/multigrid/ruge_stueben_amg.hpp
+@@ -62,8 +62,8 @@ namespace rocalution
+         ROCALUTION_EXPORT
+ #if defined(WIN32) || defined(_WIN32) || defined(__WIN32)
+ #else
+-        [[deprecated("This function will be removed in a future release. Use "
+-                     "SetStrengthThreshold() instead")]]
++        //[[deprecated("This function will be removed in a future release. Use "
++        //             "SetStrengthThreshold() instead")]]
+ #endif
+         void SetCouplingStrength(ValueType eps);
+ 

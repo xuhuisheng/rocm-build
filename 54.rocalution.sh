@@ -8,6 +8,11 @@ pushd .
 
 START_TIME=`date +%s`
 
+cd $ROCM_GIT_DIR/rocALUTION
+git reset --hard
+git apply $ROCM_PATCH_DIR/54.rocalution-1.patch
+cd $ROCM_BUILD_DIR/rocalution
+
 CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
