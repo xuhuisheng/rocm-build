@@ -9,7 +9,7 @@
 |---------------|--------------|
 |OS             |Ubuntu-20.04.4|
 |Python         |3.8.10        |
-|ROCm           |5.1.3         |
+|ROCm           |5.2.0         |
 
 |硬件    |产品        |ISA              |CHIP IP|
 |--------|------------|-----------------|-------|
@@ -43,10 +43,12 @@ ROCm-5.1.3 无法安装在ubuntu-22.04。需要一些补丁。
 
 ## 33.roctracer
 
+* (ROCm-5.2.0已修复)
 * 把pthread_yield替换为sched_yield，因为更严格的检查
 
 ## 51.rocsolver
 
+* (ROCm-5.2.0已修复)
 * 对fmt8更新 <https://github.com/ROCmSoftwarePlatform/rocSOLVER/commit/2bbfb8976f6e4d667499c77e41a6433850063e88>
 
 ## 73.rocmvalidationsuite

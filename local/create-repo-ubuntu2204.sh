@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 mkdir -p build/rocm-ubuntu2204
 cd build/rocm-ubuntu2204
@@ -14,7 +14,7 @@ Origin: rocm-ubuntu2204
 Label: rocm-ubuntu2204
 Suite: jammy
 Codename: jammy
-Version: 5.1.3
+Version: 5.2.0
 Architectures: amd64
 Components: main
 Description: ROCm ubuntu2204 APT Repository

@@ -3,13 +3,13 @@
 
 [中文版](README_zh_CN.md)
 
-Date: 2022-06-26
+Date: 2022-07-01
 
 |software       |description   |
 |---------------|--------------|
 |OS             |Ubuntu-20.04.4|
 |Python         |3.8.10        |
-|ROCm           |5.1.3         |
+|ROCm           |5.2.0         |
 
 |hardware|Product Name|ISA              |CHIP IP|
 |--------|------------|-----------------|-------|
