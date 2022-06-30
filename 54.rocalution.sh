@@ -6,12 +6,12 @@ mkdir -p $ROCM_BUILD_DIR/rocalution
 cd $ROCM_BUILD_DIR/rocalution
 pushd .
 
-START_TIME=`date +%s`
-
 cd $ROCM_GIT_DIR/rocALUTION
 git reset --hard
-git apply $ROCM_PATCH_DIR/54.rocalution-1.patch
+git apply $ROCM_PATCH_DIR/54.rocalution-annotation-1.patch
 cd $ROCM_BUILD_DIR/rocalution
+
+START_TIME=`date +%s`
 
 CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \

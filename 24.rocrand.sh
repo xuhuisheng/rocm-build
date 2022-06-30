@@ -8,7 +8,7 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocRAND
 git reset --hard
-git apply $ROCM_PATCH_DIR/24.rocrand-1.patch
+git apply $ROCM_PATCH_DIR/24.rocrand-gitmodules-1.patch
 git submodule update --init
 cd $ROCM_BUILD_DIR/rocrand
 
