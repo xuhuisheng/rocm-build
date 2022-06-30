@@ -15,7 +15,7 @@ set( CPACK_GENERATOR DEB CACHE STRING "cpack generator" )
 
 configure_file( .info/version-dev.in .info/version-dev )
 
-install(FILES ".info/version-dev"
+install(FILES "${PROJECT_BINARY_DIR}/.info/version-dev"
   DESTINATION .info
   )
 

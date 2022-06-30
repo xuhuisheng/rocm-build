@@ -16,11 +16,11 @@ set( CPACK_GENERATOR DEB CACHE STRING "cpack generator" )
 configure_file( .info/version.in .info/version )
 configure_file( include/rocm_version.h.in include/rocm_version.h)
 
-install(FILES "include/rocm_version.h"
+install(FILES "${PROJECT_BINARY_DIR}/include/rocm_version.h"
   DESTINATION include
   )
 
-install(FILES ".info/version"
+install(FILES "${PROJECT_BINARY_DIR}/.info/version"
   DESTINATION .info
   )
 
