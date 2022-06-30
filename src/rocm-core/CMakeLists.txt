@@ -13,11 +13,14 @@ set( ROCM_PATCH_VERSION 50103 CACHE STRING "rocm patch version" )
 set( ROCM_BUILD_VERSION 66 CACHE STRING "rocm build version" )
 set( CPACK_GENERATOR DEB CACHE STRING "cpack generator" )
 
-install(FILES "${PROJECT_SOURCE_DIR}/include/rocm_version.h"
+configure_file( .info/version.in .info/version )
+configure_file( include/rocm_version.h.in include/rocm_version.h)
+
+install(FILES "include/rocm_version.h"
   DESTINATION include
   )
 
-install(FILES "${PROJECT_SOURCE_DIR}/.info/version"
+install(FILES ".info/version"
   DESTINATION .info
   )
 

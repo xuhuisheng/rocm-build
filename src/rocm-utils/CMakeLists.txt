@@ -13,7 +13,9 @@ set( ROCM_PATCH_VERSION 50103 CACHE STRING "rocm patch version" )
 set( ROCM_BUILD_VERSION 66 CACHE STRING "rocm build version" )
 set( CPACK_GENERATOR DEB CACHE STRING "cpack generator" )
 
-install(FILES "${PROJECT_SOURCE_DIR}/.info/version-utils"
+configure_file( .info/version-utils.in .info/version-utils )
+
+install(FILES ".info/version-utils"
   DESTINATION .info
   )
 
