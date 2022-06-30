@@ -6,11 +6,11 @@ pushd .
 
 source env.sh
 
-bash install-dependency.sh
+#bash install-dependency.sh
 
-bash local/prepare-cmake.sh
+#bash local/prepare-cmake.sh
 
-bash local/prepare-boost.sh
+#bash local/prepare-boost.sh
 
 bash 00.rocm-core.sh
 
