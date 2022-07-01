@@ -43,10 +43,12 @@ The main different parts.
 
 ## 33.roctracer
 
+* (ROCm-5.2.0 already fix this)
 * replace pthread_yield to sched_yield for strict check
 
 ## 51.rocsolver
 
+* (ROCm-5.2.0 already fix this)
 * update for fmt8 <https://github.com/ROCmSoftwarePlatform/rocSOLVER/commit/2bbfb8976f6e4d667499c77e41a6433850063e88>
 
 ## 73.rocmvalidationsuite
