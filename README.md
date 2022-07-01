@@ -60,7 +60,6 @@ If you want to use other location, please modify `env.sh`.
 * [gfx803](gfx803) - AMD drop gfx803 offical support on ROCm-4.0, since gfx803 is my only GPU, I need find a way to let it work longer.
 * [navi10](navi10) - Experiment scripts for building navi10 GPU.
 * [navi14](navi14) - Experiment scripts for building navi14 GPU.
-* [navi21](navi21) - Experiment scripts for building navi21 GPU.
 * [check](check) - Codes for check whether ROCm can run successfully.
 * [ubuntu2204](ubuntu2204) - Patches for ubuntu-22.04.
 
