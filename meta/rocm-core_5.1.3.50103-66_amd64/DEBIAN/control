@@ -1,0 +1,10 @@
+Architecture: amd64
+Depends: 
+Description: Radeon Open Compute (ROCm) Runtime software stack
+Homepage: https://github.com/RadeonOpenCompute/ROCm
+Maintainer: Advanced Micro Devices, Inc.
+Package: rocm-core
+Priority: optional
+Section: devel
+Version: 5.1.3.50103-66
+Installed-Size: 13

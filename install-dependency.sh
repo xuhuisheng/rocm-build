@@ -25,10 +25,13 @@ sudo apt install -y mesa-common-dev \
 sudo apt install -y python3-dev
 
 # 22.rocblas
-sudo apt install -y gfortran python3-venv libtinfo-dev
+sudo apt install -y gfortran python3-venv libtinfo-dev libmsgpack-dev
 
 # 33.roctracer
 pip3 install cppheaderparser
+
+# 35.miopen
+sudo apt install -y pkg-config libsqlite3-dev libbz2-dev
 
 # 43.rocgdb
 sudo apt install -y bison flex gcc make ncurses-dev texinfo g++ zlib1g-dev \

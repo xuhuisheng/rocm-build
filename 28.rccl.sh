@@ -2,6 +2,10 @@
 
 set -e
 
+echo "|====|"
+echo "|SLOW|"
+echo "|====|"
+
 mkdir -p $ROCM_BUILD_DIR/rccl
 cd $ROCM_BUILD_DIR/rccl
 pushd .

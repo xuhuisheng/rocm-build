@@ -1,4 +1,4 @@
-# rocm-build 5.1
+# rocm-build 5.2
 
 [English Version](README.md)
 
@@ -10,7 +10,7 @@
 
 ### 开始
 
-我的构建环境是 Ubuntu-20.04.3 。
+我的构建环境是 Ubuntu-20.04.4 。
 
 首先使用 repo 下载项目源码 <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>，
 然后根据你当前的环境修改 `env.sh` 里的路径。
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.1.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.2.x
 repo sync
 ```
 
@@ -60,6 +60,6 @@ export PATH=~/bin:$PATH
 * [gfx803](gfx803/README_zh_CN.md) - ROCm-4.0不再支持gfx803显卡，我只有一块RX580，要研究怎么让gfx803苟延残喘。
 * [navi10](navi10/README_zh_CN.md) - 构建navi10的试验脚本。
 * [navi14](navi14/README_zh_CN.md) - 构建navi14的试验脚本。
-* [navi21](navi21/README_zh_CN.md) - 构建navi21的试验脚本。
 * [check](check/README_zh_CN.md) - 检查ROCm能否正常运行的一些代码。
+* [ubuntu2204](ubuntu2204/README_zh_CN.md) - ubuntu-22.04补丁。
 
