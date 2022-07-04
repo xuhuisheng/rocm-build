@@ -2,15 +2,23 @@
 
 [中文版](README_zh_CN.md)
 
+Date: 2022-07-05
+
+So long for the community asking support navi10 - RX5700XT on ROCm.
+
+And thanks the falling of bitcoin, I have a chance to buy a RX5700XT by lessing 2000 RMB.
+
+Finally, let's end this issue which continued about 2 years for me. Anyone who are interesting with the background can watch this link <https://github.com/RadeonOpenCompute/ROCm/issues/887> .
+
+---
+
 This is experimental scripts for building navi10 GPU, aka RX5700XT.
 
 **This is NOT offical supporting, Cannot guarantee RX5700XT could run successfully on ROCm, even compiling success.**
 
-No, I didnot have a navi10 GPU yet, So I cannot test it. Currently I can just confirm there is no compiling problems. Anybody who had navi10 GPU can have a try. Appreciate for any feedback.
-
 ---
 
-The codes based on ROCm-4.3.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.2.
+The codes based on ROCm-5.2.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.4.
 
 OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
 This caused compiling even more slower, but it wont break.
@@ -48,31 +56,24 @@ Then execute `bash navi10/22.rocblas.sh` to compile rocBLAS, there will use a pa
 Please make sure `Tensile_TEST_LOCAL_PATH` in `navi10/22.rocblas.sh` matches `Tensile` directory.
 
 Other components is more simple, just execute the script to compile and install.
+We need 4 components to re-build for navi10.
 
 1. execute `bash 21.rocfft.sh` to compile rocFFT. (Extremely slow)
-2. execute `bash 23.rocprim.sh` to compile rocPRIM. (Very fast)
-3. execute `bash 24.rocrand.sh` to compile rocRAND. (Fast)
-4. execute `bash navi10/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
-5. execute `bash 26.hipsparse.sh` to compile hipSPARSE. (Fast)
-6. execute `bash 27.rccl.sh` to compile rccl. (Slow)
-7. execute `bash 28.hipfft.sh` to compile hipfft. (Very fast)
-8. execute `bash 34.miopen.sh` to compile MIOpen. (Slow)
-9. execute `bash 52.rocthrust.sh` to compile rocThrust. (Very fast)
-10. execute `bash 55.hipcub.sh` to compile hipCUB. (Very fast)
+2. execute `bash 24.rocrand.sh` to compile rocRAND. (Fast)
+3. execute `bash navi10/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
+4. execute `bash 27.rccl.sh` to compile rccl. (Slow)
 
-Final step is Pytorch-1.9.0 (Extremely Slow)
+Final step is Pytorch-1.12.0 (Extremely Slow)
 
 ```
 sudo ln -f -s /usr/bin/python3 /usr/bin/python
 
-git clone https://github.com/pytorch/pytorch
+git clone https://github.com/ROCmSoftwarePlatform/pytorch
 cd pytorch
-git checkout v1.9.0
+git checkout release/1.12
 git submodule update --init --recursive
 
-git apply /home/work/rocm-build/patch/pytorch-rocm43-1.patch
-
-sudo apt install -y libopencv-highgui4.2 libopenblas-dev python3-dev python3-pip
+sudo apt install -y libopencv-highgui-dev libopenblas-dev python3-dev python3-pip cmake ninja-build git
 pip3 install -r requirements.txt
 export PATH=/opt/rocm/bin:$PATH \
     ROCM_PATH=/opt/rocm \
@@ -81,17 +82,15 @@ export PYTORCH_ROCM_ARCH=gfx1010
 python3 tools/amd_build/build_amd.py
 USE_ROCM=1 USE_NINJA=1 python3 setup.py bdist_wheel
 
-pip3 install dist/torch-1.9.0a0+gitd69c22d-cp38-cp38-linux_x86_64.whl
+pip3 install dist/torch-1.12.0a0+git67ece03-cp38-cp38-linux_x86_64.whl
 
 ```
 
-Finally we got a pytorch-1.9.0 only can run on navi10.
-
-Again, no GPU to test. At least there is no compile errors. Any feedback will be appreciate.
+Finally we got a pytorch-1.12.0 only can run on navi10.
 
 ---
 
-2020-12-27
-spacefish had test ROCm-4.0 on RX 5700, and find there is an 'unchange loss' problem.
-<https://github.com/RadeonOpenCompute/ROCm/issues/1306#issuecomment-751414407>
+The mnist run properly on my RX5700XT.
+
+Good Luck.
 
