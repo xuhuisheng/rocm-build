@@ -13,7 +13,7 @@ hipcc -D__HIP_PLATFORM_HCC__ -lrocblas -L/opt/rocm/lib src/hello_rocblas.cpp -o 
 hipcc -D__HIP_PLATFORM_HCC__ -lrocfft -L/opt/rocm/lib src/hello_rocfft.cpp -o build/hello_rocfft
 ./build/hello_rocfft
 
-hipcc -D__HIP_PLATFORM_HCC__ src/hello_rocprim.cpp -o build/hello_rocprim
+hipcc -std=c++14 -D__HIP_PLATFORM_HCC__ src/hello_rocprim.cpp -o build/hello_rocprim
 ./build/hello_rocprim
 
 hipcc -D__HIP_PLATFORM_HCC__ -lrocrand -L/opt/rocm/lib src/hello_rocrand.cpp -o build/hello_rocrand
