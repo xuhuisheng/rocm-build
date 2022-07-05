@@ -56,7 +56,7 @@ source env.sh
 要确认`navi10/22.rocblas.sh`里的`Tensile_TEST_LOCAL_PATH`与Tensile的目录位置一致。
 
 其他组件就比较简单了。直接执行脚本进行编译和安装。
-需要为navi10重新编译4个组件。
+除了rocBLAS，还需要为navi10重新编译另外4个组件。
 
 1. 执行 `bash 21.rocfft.sh` 编译 rocFFT。 (超级超级慢)
 2. 执行 `bash 24.rocrand.sh` 编译 rocRAND。 (很快)
