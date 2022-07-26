@@ -25,10 +25,17 @@ cmake \
     -DPACKAGE_VERSION=14.0.0.22204.${ROCM_LIBPATCH_VERSION}-${CPACK_DEBIAN_PACKAGE_RELEASE} \
     -DCPACK_DEBIAN_FILE_NAME=DEB-DEFAULT \
     -G Ninja \
+    -B build \
     $ROCM_GIT_DIR/llvm-project/llvm
-ninja
-ninja package
-sudo dpkg -i *.deb
+
+if [[ $1 = "--cmake-install" ]]; then
+  echo "Cmake install into ${ROCM_INSTALL_DIR}"
+  cmake --build build --target install
+else
+  echo "deb package install"
+  cmake --build build --target package
+  sudo dpkg -i *.deb
+fi
 
 END_TIME=`date +%s`
 EXECUTING_TIME=`expr $END_TIME - $START_TIME`

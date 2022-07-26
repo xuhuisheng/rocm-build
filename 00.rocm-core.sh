@@ -15,9 +15,17 @@ cmake \
   -DPROJECT_VERSION_PATCH=${ROCM_PATCH_VERSION} \
   -DROCM_PATCH_VERSION=${ROCM_LIBPATCH_VERSION} \
   -DROCM_BUILD_VERSION=${CPACK_DEBIAN_PACKAGE_RELEASE} \
+  -B build \
   $ROCM_BUILD_DIR/../src/rocm-core
-make package
-sudo dpkg -i *.deb
+
+if [[ $1 = "--cmake-install" ]]; then
+  echo "Cmake install into ${ROCM_INSTALL_DIR}"
+  cmake --build build --target install
+else
+  echo "deb package install"
+  cmake --build build --target package
+  sudo dpkg -i *.deb
+fi
 
 END_TIME=`date +%s`
 EXECUTING_TIME=`expr $END_TIME - $START_TIME`
