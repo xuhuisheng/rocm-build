@@ -2,6 +2,13 @@
 
 [English Version](README.md)
 
+最简单的办法是设置一个环境变量，把hsa版本覆盖为gfx1030。
+ROCm会使用gfx1030的二进制在gfx1010上运行，不需要重新编译。
+
+```
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
+```
+
 Date: 2022-07-05
 
 社区希望ROCm支持navi10 - RX5700XT好长时间了。
@@ -18,7 +25,7 @@ Date: 2022-07-05
 
 ---
 
-代码基于 ROCm-5.2.0，请参考 <https://github.com/xuhuisheng/rocm-build/blob/master/README_zh_CN.md> 准备构建环境，OS是 Ubuntu-20.04.3。
+代码基于 ROCm-5.2.0，请参考 <https://github.com/xuhuisheng/rocm-build/blob/master/README_zh_CN.md> 准备构建环境，OS是 Ubuntu-20.04.4。
 
 提前说一句，构建ROCm很花时间，而且需要大内存。如果内存小于32G，建议使用swap交换内存，避免内存不足。
 虽然swap交换内存会让构建花费更长时间，但是至少不会崩。

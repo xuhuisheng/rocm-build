@@ -2,6 +2,13 @@
 
 [中文版](README_zh_CN.md)
 
+The easist way to run mnist on navi10 is set an environment variable to override hsa version to gfx1030.
+Then ROCm will use gfx1030 fatbin to run on gfx1010, which needn't re-compile.
+
+```
+export HSA_OVERRIDE_GFX_VERSION=10.3.0
+```
+
 Date: 2022-07-05
 
 So long for the community asking support navi10 - RX5700XT on ROCm.
