@@ -14,10 +14,17 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
+    -B build \
     $ROCM_GIT_DIR/ROCR-Runtime/src
-ninja
-ninja package
-sudo dpkg -i *.deb
+
+if [[ $1 = "--cmake-install" ]]; then
+  echo "Cmake install into ${ROCM_INSTALL_DIR}"
+  cmake --build build --target install
+else
+  echo "deb package install"
+  cmake --build build --target package
+  sudo dpkg -i *.deb
+fi
 
 END_TIME=`date +%s`
 EXECUTING_TIME=`expr $END_TIME - $START_TIME`
