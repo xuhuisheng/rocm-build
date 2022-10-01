@@ -25,10 +25,8 @@ cmake \
     -G Ninja \
     $ROCM_GIT_DIR/hipamd
 
-ninja
-# sudo ninja install
-ninja package
-# sudo dpkg -i *.deb
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i hip-dev*.deb hip-doc*.deb hip-runtime-amd*.deb hip-samples*.deb
 
 END_TIME=`date +%s`

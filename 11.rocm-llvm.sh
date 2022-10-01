@@ -22,12 +22,13 @@ cmake \
     -DCPACK_GENERATOR=DEB \
     -DCPACK_DEBIAN_PACKAGE_MAINTAINER=amd \
     -DCPACK_PACKAGE_NAME=rocm-llvm \
-    -DPACKAGE_VERSION=14.0.0.22204.${ROCM_LIBPATCH_VERSION}-${CPACK_DEBIAN_PACKAGE_RELEASE} \
+    -DPACKAGE_VERSION=15.0.0.22362.${ROCM_LIBPATCH_VERSION}-${CPACK_DEBIAN_PACKAGE_RELEASE} \
     -DCPACK_DEBIAN_FILE_NAME=DEB-DEFAULT \
     -G Ninja \
     $ROCM_GIT_DIR/llvm-project/llvm
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
