@@ -31,8 +31,9 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DCPACK_GENERATOR=DEB \
     -G "Unix Makefiles" \
     $ROCM_GIT_DIR/rocBLAS
-make -j
-make package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

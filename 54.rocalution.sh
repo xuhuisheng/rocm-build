@@ -23,8 +23,9 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_INSTALL_PREFIX=rocalution-install \
     -G Ninja \
     $ROCM_GIT_DIR/rocALUTION
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

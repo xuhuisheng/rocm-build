@@ -20,8 +20,9 @@ cmake \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR/opencl \
     -G Ninja \
     $ROCM_GIT_DIR/ROCm-OpenCL-Runtime
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

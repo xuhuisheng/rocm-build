@@ -33,8 +33,8 @@ cmake \
     -G Ninja \
     $ROCTRACER_ROOT
 
-ninja
-ninja package
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

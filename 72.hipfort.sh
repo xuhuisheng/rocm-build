@@ -15,8 +15,9 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_INSTALL_PREFIX=hipfort-install \
     -G "Unix Makefiles" \
     $ROCM_GIT_DIR/hipfort
-make -j${nproc}
-make package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

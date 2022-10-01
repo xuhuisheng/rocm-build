@@ -16,9 +16,13 @@ cmake \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
     $ROCM_GIT_DIR/HIPIFY
-ninja
-sudo ninja install
-ninja package_hipify-clang
+
+cmake --build .
+cmake --build . --target install
+cmake --build . --target package_hipify-clang
+#ninja
+#sudo ninja install
+#ninja package_hipify-clang
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

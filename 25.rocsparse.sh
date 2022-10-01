@@ -23,8 +23,9 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
     -G Ninja \
     $ROCM_GIT_DIR/rocSPARSE
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

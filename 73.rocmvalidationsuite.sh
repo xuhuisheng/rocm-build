@@ -14,8 +14,9 @@ cmake \
     -DCMAKE_INSTALL_PREFIX=rocmvalidationsuite-install \
     -G Ninja \
     $ROCM_GIT_DIR/ROCmValidationSuite
-ninja
-sudo ninja package
+
+cmake --build .
+sudo cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
