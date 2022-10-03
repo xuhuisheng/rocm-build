@@ -1,4 +1,4 @@
-# rocm-build 5.2
+# rocm-build 5.3
 
 [中文版](README_zh_CN.md)
 
@@ -10,7 +10,7 @@ Thanks [jlgreathouse](https://github.com/jlgreathouse) providing <https://github
 
 ### Start
 
-My environment is Ubuntu-20.04.4.
+My environment is Ubuntu-20.04.5.
 
 Please download sources using repo <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>,
 and change the path of source in `env.sh`.
