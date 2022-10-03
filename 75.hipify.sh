@@ -18,7 +18,7 @@ cmake \
     $ROCM_GIT_DIR/HIPIFY
 
 cmake --build .
-cmake --build . --target install
+sudo cmake --build . --target install
 cmake --build . --target package_hipify-clang
 #ninja
 #sudo ninja install
