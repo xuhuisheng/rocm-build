@@ -4,7 +4,7 @@
 # sudo apt install -y python-is-python3
 
 # basic
-sudo apt install -y build-essential git cmake ninja-build libnuma-dev python3 python3-pip
+sudo apt install -y build-essential git git-lfs cmake ninja-build libnuma-dev python3 python3-pip
 
 # 12.roct-thunk-interface
 sudo apt install -y libdrm-dev zlib1g-dev libudev-dev
