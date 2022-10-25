@@ -2,8 +2,11 @@
 
 [中文版](README_zh_CN.md)
 
+Date: 2022-10-17
+
 The easist way to run mnist on navi10 is set an environment variable to override hsa version to gfx1030.
-Then ROCm will use gfx1030 fatbin to run on gfx1010, which needn't re-compile.
+Then ROCm will use gfx1030 fatbin to run on gfx1010 and ROCm-5.2.3, which needn't re-compile.
+(ROCm-5.3.0 had break this hack way.)
 
 ```
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
@@ -25,7 +28,7 @@ This is experimental scripts for building navi10 GPU, aka RX5700XT.
 
 ---
 
-The codes based on ROCm-5.2.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.4.
+The codes based on ROCm-5.3.0, please refer <https://github.com/xuhuisheng/rocm-build/blob/master/README.md> for preparing build environment. OS is Ubuntu-20.04.5.
 
 OK. One thing must clarify that building ROCm will cost lots of time, and huge memory. If your memory less then 32G, please using swap to prevent Out-Of-Memory.
 This caused compiling even more slower, but it wont break.
@@ -67,7 +70,7 @@ Beside rocBLAS, We need 4 more components to re-build for navi10.
 
 1. execute `bash 21.rocfft.sh` to compile rocFFT. (Extremely slow)
 2. execute `bash 24.rocrand.sh` to compile rocRAND. (Fast)
-3. execute `bash navi10/25.rocsparse.sh` to compile rocSPARSE, there will use a patch for prevent compiling problems. (Slow)
+3. execute `bash 25.rocsparse.sh` to compile rocSPARSE. (Slow)
 4. execute `bash 27.rccl.sh` to compile rccl. (Slow)
 
 Final step is Pytorch-1.12.0 (Extremely Slow)
