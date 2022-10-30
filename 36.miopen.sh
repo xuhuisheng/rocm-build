@@ -2,6 +2,8 @@
 
 set -e
 
+sudo cmake -P $ROCM_GIT_DIR/MIOpen/install_deps.cmake --prefix /usr/local
+
 mkdir -p $ROCM_BUILD_DIR/miopen
 cd $ROCM_BUILD_DIR/miopen
 pushd .
@@ -17,8 +19,9 @@ CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -G Ninja \
     $ROCM_GIT_DIR/MIOpen
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

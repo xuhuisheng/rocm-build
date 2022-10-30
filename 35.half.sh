@@ -17,7 +17,7 @@ START_TIME=`date +%s`
 # dpkg -b half_1.12.0_amd64
 
 cmake $ROCM_GIT_DIR/half
-make package
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

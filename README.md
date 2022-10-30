@@ -1,4 +1,4 @@
-# rocm-build 5.2
+# rocm-build 5.3
 
 [中文版](README_zh_CN.md)
 
@@ -10,7 +10,7 @@ Thanks [jlgreathouse](https://github.com/jlgreathouse) providing <https://github
 
 ### Start
 
-My environment is Ubuntu-20.04.4.
+My environment is Ubuntu-20.04.5.
 
 Please download sources using repo <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>,
 and change the path of source in `env.sh`.
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.2.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.3.x
 repo sync
 ```
 
@@ -50,8 +50,8 @@ export PATH=~/bin:$PATH
 
 ### cmake version
 
-**Note**: rocBLAS need cmake-3.16.8 from ROCm-4.2. The version of default cmake from ubuntu-20.04 is cmake-3.16.3.
-We have to download <https://cmake.org/files/v3.16/cmake-3.16.8-Linux-x86_64.tar.gz> and unpack it to `/home/work/local`,
+**Note**: rocBLAS need cmake-3.18.6 from ROCm-5.3. The version of default cmake from ubuntu-20.04 is cmake-3.16.3.
+We have to download <https://cmake.org/files/v3.18/cmake-3.18.6-Linux-x86_64.tar.gz> and unpack it to `/home/work/local`,
 and execute `source env.sh` to add custom cmake to PATH environment variables.
 If you want to use other location, please modify `env.sh`.
 

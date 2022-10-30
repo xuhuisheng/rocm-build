@@ -1,4 +1,4 @@
-# rocm-build 5.2
+# rocm-build 5.3
 
 [English Version](README.md)
 
@@ -10,7 +10,7 @@
 
 ### 开始
 
-我的构建环境是 Ubuntu-20.04.4 。
+我的构建环境是 Ubuntu-20.04.5 。
 
 首先使用 repo 下载项目源码 <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html#getting-the-rocm-source-code>，
 然后根据你当前的环境修改 `env.sh` 里的路径。
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.2.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.3.x
 repo sync
 ```
 
@@ -50,8 +50,8 @@ export PATH=~/bin:$PATH
 
 ### cmake版本
 
-**注意**：从ROCm-4.2开始，编译rocBLAS需要cmake-3.16.8。ubuntu-20.04默认的cmake版本是cmake-3.16.3。
-需要下载<https://cmake.org/files/v3.16/cmake-3.16.8-Linux-x86_64.tar.gz>，解压到`/home/work/local`目录，
+**注意**：从ROCm-5.3开始，编译rocBLAS需要cmake-3.18.6。ubuntu-20.04默认的cmake版本是cmake-3.16.3。
+需要下载<https://cmake.org/files/v3.18/cmake-3.18.6-Linux-x86_64.tar.gz>，解压到`/home/work/local`目录，
 再执行`source env.sh`将这个cmake加入PATH环境变量。
 如果想要使用其他路径，可以修改`env.sh`。
 

@@ -4,8 +4,8 @@ set -e
 
 pushd .
 
-scp meicai@192.168.31.185:/media/meicai/hgst1/backup-1000/ai/boost_1_72_0.tar.bz2 /home/work/local
-scp meicai@192.168.31.185:/media/meicai/hgst1/backup-1000/ai/boost.cmake /home/work/local
+scp work@192.168.31.185:/media/work/hgst1/backup-1000/ai/boost_1_72_0.tar.bz2 /home/work/local
+scp work@192.168.31.185:/media/work/hgst1/backup-1000/ai/boost.cmake /home/work/local
 
 tar xf /home/work/local/boost_1_72_0.tar.bz2 -C /home/work/local/
 

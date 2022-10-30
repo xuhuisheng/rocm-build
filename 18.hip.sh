@@ -13,7 +13,7 @@ HIP_DIR=$ROCM_GIT_DIR/HIP
 START_TIME=`date +%s`
 
 cmake \
-    -DOFFLOAD_ARCH_STR="$AMDGPU_TARGETS" \
+    -DOFFLOAD_ARCH_STR="--offload-arch=$AMDGPU_TARGETS" \
     -DHIP_COMMON_DIR="$HIP_DIR" \
     -DAMD_OPENCL_PATH="$OPENCL_DIR" \
     -DROCCLR_PATH="$ROCCLR_DIR" \
@@ -25,10 +25,8 @@ cmake \
     -G Ninja \
     $ROCM_GIT_DIR/hipamd
 
-ninja
-# sudo ninja install
-ninja package
-# sudo dpkg -i *.deb
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i hip-dev*.deb hip-doc*.deb hip-runtime-amd*.deb hip-samples*.deb
 
 END_TIME=`date +%s`

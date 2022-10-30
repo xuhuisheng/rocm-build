@@ -43,8 +43,9 @@ CXX=$ROCM_INSTALL_DIR/bin/hipcc cmake \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
     $ROCM_GIT_DIR/rocBLAS
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

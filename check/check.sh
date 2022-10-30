@@ -37,7 +37,7 @@ hipcc -D__HIP_PLATFORM_HCC__ src/hello_rocthrust.cpp -o build/hello_rocthrust
 hipcc -D__HIP_PLATFORM_HCC__ src/hello_rocalution.cpp -o build/hello_rocalution
 ./build/hello_rocalution
 
-hipcc -D__HIP_PLATFORM_HCC__ src/hello_hipcub.cpp -o build/hello_hipcub
+hipcc -D__HIP_PLATFORM_HCC__ -std=c++14 src/hello_hipcub.cpp -o build/hello_hipcub
 ./build/hello_hipcub
 
 hipcc -D__HIP_PLATFORM_HCC__ -lhipblas -L/opt/rocm/lib src/hello_hipblas.cpp -o build/hello_hipblas

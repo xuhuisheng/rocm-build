@@ -6,11 +6,6 @@ mkdir -p $ROCM_BUILD_DIR/rocalution
 cd $ROCM_BUILD_DIR/rocalution
 pushd .
 
-cd $ROCM_GIT_DIR/rocALUTION
-git reset --hard
-git apply $ROCM_PATCH_DIR/54.rocalution-annotation-1.patch
-cd $ROCM_BUILD_DIR/rocalution
-
 START_TIME=`date +%s`
 
 CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
@@ -23,8 +18,9 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_INSTALL_PREFIX=rocalution-install \
     -G Ninja \
     $ROCM_GIT_DIR/rocALUTION
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

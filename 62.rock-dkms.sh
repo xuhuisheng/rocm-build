@@ -1,7 +1,7 @@
 
 set -e
 
-TARGET_DIR=$ROCM_BUILD_DIR/rock-dkms/usr/src/amdgpu-5.1-36
+TARGET_DIR=$ROCM_BUILD_DIR/rock-dkms/usr/src/amdgpu-5.3-63
 
 mkdir -p $TARGET_DIR
 
@@ -49,8 +49,8 @@ bash autogen.sh
 cd ../..
 
 cd ../../..
-cp ../../meta/rock-dkms_5.1-36_all . -R
-cp -R usr rock-dkms_5.1-36_all/
+cp ../../meta/rock-dkms_5.3-63_all . -R
+cp -R usr rock-dkms_5.3-63_all/
 
-dpkg -b rock-dkms_5.1-36_all
+dpkg -b rock-dkms_5.3-63_all
 

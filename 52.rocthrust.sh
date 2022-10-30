@@ -16,8 +16,9 @@ CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
     -DCMAKE_INSTALL_PREFIX=rocthrust-install \
     -G Ninja \
     $ROCM_GIT_DIR/rocThrust
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`

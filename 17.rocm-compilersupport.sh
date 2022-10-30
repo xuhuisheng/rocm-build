@@ -6,11 +6,6 @@ mkdir -p $ROCM_BUILD_DIR/rocm-compilersupport
 cd $ROCM_BUILD_DIR/rocm-compilersupport
 pushd .
 
-cd $ROCM_GIT_DIR/ROCm-CompilerSupport
-git reset --hard
-git apply $ROCM_PATCH_DIR/17.rocm-compilersupport-ubuntu2004-1.patch
-cd $ROCM_BUILD_DIR/rocm-compilersupport
-
 START_TIME=`date +%s`
 
 cmake \
@@ -20,8 +15,9 @@ cmake \
     -DCPACK_GENERATOR=DEB \
     -G Ninja \
     $ROCM_GIT_DIR/ROCm-CompilerSupport/lib/comgr
-ninja
-ninja package
+
+cmake --build .
+cmake --build . --target package
 sudo dpkg -i *.deb
 
 END_TIME=`date +%s`
