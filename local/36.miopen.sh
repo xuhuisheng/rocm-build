@@ -9,6 +9,7 @@ pushd .
 START_TIME=`date +%s`
 
 CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \
+    -DMIOPEN_USE_COMPOSABLEKERNEL=OFF \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
     -DMIOPEN_USE_MLIR=0 \
