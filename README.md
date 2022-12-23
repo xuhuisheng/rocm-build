@@ -1,4 +1,4 @@
-# rocm-build 5.3
+# rocm-build 5.4
 
 [中文版](README_zh_CN.md)
 
@@ -32,7 +32,7 @@ sudo apt install -y repo
 
 mkdir -p ~/ROCm/
 cd ~/ROCm/
-repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.3.x
+repo init -u https://github.com/RadeonOpenCompute/ROCm.git -b roc-5.4.x
 repo sync
 ```
 
