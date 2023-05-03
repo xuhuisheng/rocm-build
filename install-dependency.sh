@@ -27,7 +27,10 @@ sudo apt install -y python3-dev
 # 22.rocblas
 sudo apt install -y gfortran python3-venv libtinfo-dev libmsgpack-dev
 
-# 33.roctracer
+# 33.rocprofiler
+pip3 install lxml
+
+# 34.roctracer
 pip3 install cppheaderparser
 
 # 35.miopen

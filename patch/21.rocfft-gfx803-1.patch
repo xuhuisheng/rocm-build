@@ -1,0 +1,13 @@
+diff --git a/library/src/CMakeLists.txt b/library/src/CMakeLists.txt
+index 8aec335..90e3f23 100644
+--- a/library/src/CMakeLists.txt
++++ b/library/src/CMakeLists.txt
+@@ -396,7 +396,7 @@ endif()
+ # architectures.  Less common architectures are filtered out from the
+ # list and kernels for them are built at runtime instead.
+ set( AMDGPU_TARGETS_AOT ${AMDGPU_TARGETS} )
+-list( REMOVE_ITEM AMDGPU_TARGETS_AOT gfx803 )
++# list( REMOVE_ITEM AMDGPU_TARGETS_AOT gfx803 )
+ list( REMOVE_ITEM AMDGPU_TARGETS_AOT gfx900 )
+ add_custom_command(
+   OUTPUT rocfft_kernel_cache.db

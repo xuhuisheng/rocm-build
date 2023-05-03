@@ -8,7 +8,7 @@ pushd .
 
 cd $ROCM_GIT_DIR/rocprofiler
 git reset --hard
-git apply $ROCM_PATCH_DIR/33.rocprofile-aql.patch
+git apply $ROCM_PATCH_DIR/33.rocprofile-aql-1.patch
 cd $ROCM_BUILD_DIR/rocprofiler
 
 START_TIME=`date +%s`
