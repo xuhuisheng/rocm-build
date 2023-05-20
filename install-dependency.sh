@@ -28,6 +28,7 @@ sudo apt install -y python3-dev
 sudo apt install -y gfortran python3-venv libtinfo-dev libmsgpack-dev
 
 # 33.rocprofiler
+sudo apt install -y python3-barectl
 pip3 install lxml
 
 # 34.roctracer

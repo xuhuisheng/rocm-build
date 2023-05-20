@@ -10,7 +10,7 @@ index 6647578..194ca38 100644
 +	#  message ( FATAL_ERROR "AQL_PROFILE not installed. Please install AQL_PROFILE" )
  endif()
 diff --git a/src/api/CMakeLists.txt b/src/api/CMakeLists.txt
-index 822ee41..fd2ae4b 100644
+index 822ee41..f545f17 100644
 --- a/src/api/CMakeLists.txt
 +++ b/src/api/CMakeLists.txt
 @@ -40,7 +40,7 @@ get_filename_component(HSA_RUNTIME_INC_PATH ${HSA_H} DIRECTORY)
@@ -22,8 +22,21 @@ index 822ee41..fd2ae4b 100644
  endif()
  
  # ############################################################################################################################################
+@@ -238,10 +238,10 @@ target_include_directories(${ROCPROFILER_TARGET}
+ if(ASAN)
+   target_compile_options(${ROCPROFILER_TARGET} PRIVATE -fsanitize=address)
+   target_link_options(${ROCPROFILER_TARGET} PRIVATE -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap -Wl,--no-undefined,-fsanitize=address)
+-  target_link_libraries(${ROCPROFILER_TARGET} PRIVATE ${AQLPROFILE_LIB} hsa-runtime64::hsa-runtime64 Threads::Threads atomic asan dl c stdc++ stdc++fs amd_comgr ${PCIACCESS_LIBRARIES})
++  target_link_libraries(${ROCPROFILER_TARGET} PRIVATE hsa-runtime64::hsa-runtime64 Threads::Threads atomic asan dl c stdc++ stdc++fs amd_comgr ${PCIACCESS_LIBRARIES})
+ else()
+   target_link_options(${ROCPROFILER_TARGET} PRIVATE -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/exportmap -Wl,--no-undefined)
+-  target_link_libraries(${ROCPROFILER_TARGET} PRIVATE ${AQLPROFILE_LIB} hsa-runtime64::hsa-runtime64 Threads::Threads atomic dl c stdc++ stdc++fs amd_comgr ${PCIACCESS_LIBRARIES})
++  target_link_libraries(${ROCPROFILER_TARGET} PRIVATE hsa-runtime64::hsa-runtime64 Threads::Threads atomic dl c stdc++ stdc++fs amd_comgr ${PCIACCESS_LIBRARIES})
+ endif()
+ 
+ ## Install libraries: Non versioned lib file in dev package
 diff --git a/src/tools/rocprofv2/CMakeLists.txt b/src/tools/rocprofv2/CMakeLists.txt
-index b2dc968..75becfa 100644
+index b2dc968..b5f7e09 100644
 --- a/src/tools/rocprofv2/CMakeLists.txt
 +++ b/src/tools/rocprofv2/CMakeLists.txt
 @@ -6,7 +6,7 @@ get_property(HSA_RUNTIME_INCLUDE_DIRECTORIES TARGET hsa-runtime64::hsa-runtime64
@@ -35,10 +48,40 @@ index b2dc968..75becfa 100644
  endif()
  
  file(GLOB ROCPROFV2_SRC_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-@@ -26,4 +26,4 @@ target_include_directories(rocprofv2
- target_link_libraries(rocprofv2 PRIVATE ${AQLPROFILE_LIB} hsa-runtime64::hsa-runtime64 stdc++fs Threads::Threads atomic -ldl)
+@@ -23,7 +23,7 @@ target_include_directories(rocprofv2
+   PRIVATE
+     ${PROJECT_SOURCE_DIR}
+     ${PROJECT_SOURCE_DIR}/inc)
+-target_link_libraries(rocprofv2 PRIVATE ${AQLPROFILE_LIB} hsa-runtime64::hsa-runtime64 stdc++fs Threads::Threads atomic -ldl)
++target_link_libraries(rocprofv2 PRIVATE hsa-runtime64::hsa-runtime64 stdc++fs Threads::Threads atomic -ldl)
  # install(TARGETS rocprofv2 RUNTIME
  #   DESTINATION ${CMAKE_INSTALL_BINDIR}
 -#   COMPONENT runtime)
 \ No newline at end of file
 +#   COMPONENT runtime)
+diff --git a/tests/unittests/core/CMakeLists.txt b/tests/unittests/core/CMakeLists.txt
+index 5efc625..c7b7d96 100644
+--- a/tests/unittests/core/CMakeLists.txt
++++ b/tests/unittests/core/CMakeLists.txt
+@@ -98,7 +98,7 @@ target_compile_definitions(runCoreUnitTests
+   PRIVATE PROF_API_IMPL HIP_PROF_HIP_API_STRING=1 __HIP_PLATFORM_AMD__=1)
+ 
+ # Link test executable against gtest & gtest_main
+-target_link_libraries(runCoreUnitTests PRIVATE ${ROCPROFILER_TARGET} ${AQLPROFILE_LIB}
++target_link_libraries(runCoreUnitTests PRIVATE ${ROCPROFILER_TARGET} 
+   hsa-runtime64::hsa-runtime64 c stdc++
+   GTest::gtest GTest::gtest_main stdc++fs dl ${PCIACCESS_LIBRARIES})
+ 
+diff --git a/tests/unittests/profiler/CMakeLists.txt b/tests/unittests/profiler/CMakeLists.txt
+index 7e08ace..d3dac3d 100644
+--- a/tests/unittests/profiler/CMakeLists.txt
++++ b/tests/unittests/profiler/CMakeLists.txt
+@@ -84,7 +84,7 @@ target_compile_definitions(runProfilerUnitTests
+   PUBLIC AMD_INTERNAL_BUILD
+   PRIVATE PROF_API_IMPL HIP_PROF_HIP_API_STRING=1 __HIP_PLATFORM_AMD__=1)
+ 
+-target_link_libraries(runProfilerUnitTests PRIVATE rocprofiler_tool ${AQLPROFILE_LIB}
++target_link_libraries(runProfilerUnitTests PRIVATE rocprofiler_tool
+   hsa-runtime64::hsa-runtime64
+   GTest::gtest GTest::gtest_main stdc++fs
+   ${PCIACCESS_LIBRARIES})

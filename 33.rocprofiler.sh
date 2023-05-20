@@ -13,8 +13,10 @@ cd $ROCM_BUILD_DIR/rocprofiler
 
 START_TIME=`date +%s`
 
+#CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \
 cmake \
     -DPROF_API_HEADER_PATH=$ROCM_GIT_DIR/roctracer/inc/ext/ \
+    -DHIP_ROOT_DIR=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \

@@ -2,25 +2,22 @@
 
 set -e
 
-echo "|====|"
-echo "|SLOW|"
-echo "|====|"
-
-mkdir -p $ROCM_BUILD_DIR/rocsolver
-cd $ROCM_BUILD_DIR/rocsolver
+mkdir -p $ROCM_BUILD_DIR/miopen
+cd $ROCM_BUILD_DIR/miopen
 pushd .
 
 START_TIME=`date +%s`
 
-CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
+cmake \
+    -DMIOPEN_USE_COMPOSABLEKERNEL=OFF \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
+    -DMIOPEN_USE_MLIR=0 \
     -DCPACK_SET_DESTDIR=OFF \
-    -DCMAKE_SHARED_LINKER_FLAGS= \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
-    -DCMAKE_INSTALL_PREFIX=rocsolver-install \
+    -DCMAKE_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -G Ninja \
-    $ROCM_GIT_DIR/rocSOLVER
+    $ROCM_GIT_DIR/MIOpen
 
 cmake --build .
 cmake --build . --target package

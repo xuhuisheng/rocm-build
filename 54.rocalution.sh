@@ -8,11 +8,13 @@ pushd .
 
 START_TIME=`date +%s`
 
-CXX=$ROCM_INSTALL_DIR/hip/bin/hipcc cmake \
+# CXX=$ROCM_INSTALL_DIR/llvm/bin/clang++ cmake \
+cmake \
     -DAMDGPU_TARGETS=$AMDGPU_TARGETS \
     -DCMAKE_BUILD_TYPE=Release \
     -DSUPPORT_HIP=ON \
     -DROCM_PATH=$ROCM_INSTALL_DIR \
+    -DHIP_ROOT_DIR=$ROCM_INSTALL_DIR \
     -DCPACK_SET_DESTDIR=OFF \
     -DCPACK_PACKAGING_INSTALL_PREFIX=$ROCM_INSTALL_DIR \
     -DCMAKE_INSTALL_PREFIX=rocalution-install \
