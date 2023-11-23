@@ -1,18 +1,11 @@
 #!/bin/bash
 
-export ROCM_INSTALL_DIR=/opt/rocm-5.5.0
+export ROCM_INSTALL_DIR=/opt/rocm-5.7.2
 export ROCM_MAJOR_VERSION=5
-<<<<<<< Updated upstream
-export ROCM_MINOR_VERSION=5
-export ROCM_PATCH_VERSION=0
-export ROCM_LIBPATCH_VERSION=50500
-export CPACK_DEBIAN_PACKAGE_RELEASE=63~20.04
-=======
 export ROCM_MINOR_VERSION=7
 export ROCM_PATCH_VERSION=2
 export ROCM_LIBPATCH_VERSION=50702
 export CPACK_DEBIAN_PACKAGE_RELEASE=110~22.04
->>>>>>> Stashed changes
 export ROCM_PKGTYPE=DEB
 export ROCM_GIT_DIR=/home/work/ROCm
 export ROCM_BUILD_DIR=/home/work/rocm-build/build
