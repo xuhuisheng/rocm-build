@@ -20,7 +20,7 @@ cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCPACK_GENERATOR=DEB \
     -DCMAKE_INSTALL_PREFIX=$ROCM_BUILD_DIR/hip/install \
-    -DHIPCC_BIN_DIR="$ROCM_GIT_DIR/HIPCC/build" \
+    -DHIPCC_BIN_DIR="$ROCM_BUILD_DIR/hipcc" \
     -G Ninja \
     $ROCM_GIT_DIR/clr
 

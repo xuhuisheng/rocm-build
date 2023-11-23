@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 90743ab..5cd768f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -55,7 +55,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+ 
+ # Debian-specific packaging variables.
+ set(CPACK_DEBIAN_FILE_NAME "DEB-DEFAULT")
+-set(CPACK_DEBIAN_PACKAGE_DEPENDS "perl (>= 5.0), libfile-basedir-perl, hip-dev, rocm-core, rocm-llvm")
++set(CPACK_DEBIAN_PACKAGE_DEPENDS "perl (>= 5.0), libfile-basedir-perl, rocm-core, rocm-llvm")
+ set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/ROCm-Developer-Tools/HIPCC")
+ if(DEFINED ENV{CPACK_DEBIAN_PACKAGE_RELEASE})
+   set(CPACK_DEBIAN_PACKAGE_RELEASE $ENV{CPACK_DEBIAN_PACKAGE_RELEASE})
