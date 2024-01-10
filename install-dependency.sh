@@ -26,6 +26,7 @@ sudo apt install -y python3-dev
 
 # 22.rocblas
 sudo apt install -y gfortran python3-venv libtinfo-dev libmsgpack-dev
+pip3 install joblib
 
 # 33.rocprofiler
 sudo apt install -y python3-barectl
